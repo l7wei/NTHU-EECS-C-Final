@@ -1,6 +1,12 @@
 # Log
 allegro.log
 
+#CodeBlock
+final_project.cbp
+final_project.layout
+final_project.depend
+
+
 # Prerequisites
 *.d
 
