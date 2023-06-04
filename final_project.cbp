@@ -17,7 +17,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="allegro/lib/liballegro_monolith-debug.dll.a" />
+					<Add library="lib/allegro/lib/liballegro_monolith-debug.dll.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -31,7 +31,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="allegro/lib/liballegro_monolith.dll.a" />
+					<Add library="lib/allegro/lib/liballegro_monolith.dll.a" />
 				</Linker>
 			</Target>
 		</Build>
@@ -41,25 +41,25 @@
 			<Add option="-fexceptions" />
 			<Add directory="allegro/include" />
 		</Compiler>
-		<Unit filename="GameWindow.c">
+		<Unit filename="src/GameWindow.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="GameWindow.h" />
-		<Unit filename="charater.c">
+		<Unit filename="src/GameWindow.h" />
+		<Unit filename="src/charater.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="charater.h" />
-		<Unit filename="global.c">
+		<Unit filename="src/charater.h" />
+		<Unit filename="src/global.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="global.h" />
-		<Unit filename="main.c">
+		<Unit filename="src/global.h" />
+		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="scene.c">
+		<Unit filename="src/scene.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="scene.h" />
+		<Unit filename="src/scene.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

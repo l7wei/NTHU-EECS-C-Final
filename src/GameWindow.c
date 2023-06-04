@@ -54,13 +54,13 @@ void game_init() {
     fps  = al_create_timer( 1.0 / FPS );
     al_register_event_source(event_queue, al_get_timer_event_source( fps )) ;
     // initialize the icon on the display
-    ALLEGRO_BITMAP *icon = al_load_bitmap("./image/icon.jpg");
+    ALLEGRO_BITMAP *icon = al_load_bitmap("./assets/image/icon.jpg");
     al_set_display_icon(display, icon);
 }
 
 void game_begin() {
     // Load sound
-    song = al_load_sample("./sound/hello.wav");
+    song = al_load_sample("./assets/sound/hello.wav");
     al_reserve_samples(20);
     sample_instance = al_create_sample_instance(song);
     // Loop the song until the display closes

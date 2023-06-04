@@ -5,7 +5,7 @@ ALLEGRO_BITMAP *background = NULL;
 
 // function of menu
 void menu_init(){
-    font = al_load_ttf_font("./font/pirulen.ttf",12,0);
+    font = al_load_ttf_font("./assets/font/pirulen.ttf",12,0);
 }
 void menu_process(ALLEGRO_EVENT event){
     if( event.type == ALLEGRO_EVENT_KEY_UP )
@@ -24,7 +24,7 @@ void menu_destroy(){
 // function of game_scene
 void game_scene_init(){
     character_init();
-    background = al_load_bitmap("./image/stage.jpg");
+    background = al_load_bitmap("./assets/image/stage.jpg");
 }
 void game_scene_draw(){
     al_draw_bitmap(background, 0, 0, 0);

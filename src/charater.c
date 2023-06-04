@@ -20,16 +20,16 @@ void character_init(){
     // load character images
     for(int i = 1 ; i <= 2 ; i++){
         char temp[50];
-        sprintf( temp, "./image/char_move%d.png", i );
+        sprintf( temp, "./assets/image/char_move%d.png", i );
         chara.img_move[i-1] = al_load_bitmap(temp);
     }
     for(int i = 1 ; i <= 2 ; i++){
         char temp[50];
-        sprintf( temp, "./image/char_atk%d.png", i );
+        sprintf( temp, "./assets/image/char_atk%d.png", i );
         chara.img_atk[i-1] = al_load_bitmap(temp);
     }
     // load effective sound
-    sample = al_load_sample("./sound/atk_sound.wav");
+    sample = al_load_sample("./assets/sound/atk_sound.wav");
     chara.atk_Sound  = al_create_sample_instance(sample);
     al_set_sample_instance_playmode(chara.atk_Sound, ALLEGRO_PLAYMODE_ONCE);
     al_attach_sample_instance_to_mixer(chara.atk_Sound, al_get_default_mixer());

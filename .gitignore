@@ -1,10 +1,8 @@
 # Log
 allegro.log
 
-#CodeBlock
-final_project.cbp
-final_project.layout
-final_project.depend
+obj/
+bin/
 
 
 # Prerequisites
@@ -32,7 +30,6 @@ final_project.depend
 *.lo
 
 # Shared objects (inc. Windows DLLs)
-*.dll
 *.so
 *.so.*
 *.dylib
