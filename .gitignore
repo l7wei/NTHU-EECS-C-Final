@@ -4,6 +4,9 @@ obj/
 *.log
 *.exe
 
+# codeblocks project files
+*.cbp
+
 # codeblocks
 *.depend
 *.layout
