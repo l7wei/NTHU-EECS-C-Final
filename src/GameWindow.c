@@ -4,46 +4,10 @@
 
 #include "GameWindow.h"
 
-#define MAP_SIZE 20
-#define MAX_EVENT 5
-
-#define SYSTEM_MESSAGE "[系統訊息]"
-#define PLAYER_MESSAGE "[玩家訊息]"
-
 const char *title = "Final Project CatOtter";
 
-typedef struct Player
-{
-    int position;
-    int money;
-} Player;
-
-typedef struct Event
-{
-    const char *description;
-    int moneyChange;
-} Event;
-
-Event events[MAX_EVENT] = {
-    {"你找到了一筆錢，獲得$100!", 100}, {"你被罰款$50!", -50}, {"你被罰款$100!", -100},
-    {"你找到了一筆錢，獲得$50!", 50},   {"沒有事件發生", 0},
-};
-
-void initializePlayer(Player *player)
-{
-    player->position = 0;
-    player->money = 1000;
-}
-
-int rollDice()
-{
-    return rand() % 6 + 1;
-}
-
-Event getEvent()
-{
-    return events[rand() % MAX_EVENT];
-}
+#define MAP_SIZE 20
+#define MAX_EVENT 5
 
 bool draw = false;
 int window = 1;
@@ -84,7 +48,7 @@ void game_init()
     al_install_audio();
     al_init_acodec_addon();
     // 初始化 display
-    display = al_create_display(1000, 800);
+    display = al_create_display(WIDTH, HEIGHT);
     if (!display)
     {
         fprintf(stderr, "failed to create display!\n");
@@ -145,6 +109,42 @@ void game_begin()
     al_set_sample_instance_gain(sample_instance, 1);
     al_play_sample_instance(sample_instance);
     al_start_timer(fps);
+}
+
+#define SYSTEM_MESSAGE "[系統訊息]"
+#define PLAYER_MESSAGE "[玩家訊息]"
+
+typedef struct Player
+{
+    int position;
+    int money;
+} Player;
+
+typedef struct Event
+{
+    const char *description;
+    int moneyChange;
+} Event;
+
+Event events[MAX_EVENT] = {
+    {"你找到了一筆錢，獲得$100!", 100}, {"你被罰款$50!", -50}, {"你被罰款$100!", -100},
+    {"你找到了一筆錢，獲得$50!", 50},   {"沒有事件發生", 0},
+};
+
+void initializePlayer(Player *player)
+{
+    player->position = 0;
+    player->money = 1000;
+}
+
+int rollDice()
+{
+    return rand() % 6 + 1;
+}
+
+Event getEvent()
+{
+    return events[rand() % MAX_EVENT];
 }
 
 int game_run()
