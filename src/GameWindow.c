@@ -20,6 +20,7 @@ ALLEGRO_SAMPLE_INSTANCE *sample_instance;
 ALLEGRO_FONT *font = NULL;
 
 int Game_establish()
+// 建立遊戲
 {
     int msg = 0;
 
@@ -36,24 +37,18 @@ int Game_establish()
 }
 
 void game_init()
+// 初始化遊戲
 {
     // 初始化 Allegro
     printf("Game Initializing...\n");
-    if (!al_init())
-    {
-        fprintf(stderr, "failed to initialize allegro!\n");
-        exit(-1);
-    }
+    al_init();
+
     // 初始化 audio
     al_install_audio();
     al_init_acodec_addon();
-    // 初始化 display
+
+    // Create display
     display = al_create_display(WIDTH, HEIGHT);
-    if (!display)
-    {
-        fprintf(stderr, "failed to create display!\n");
-        exit(-1);
-    }
 
     // create event queue
     event_queue = al_create_event_queue();
@@ -95,7 +90,9 @@ void game_init()
 }
 
 void game_begin()
+// 遊戲（視窗）開始時
 {
+    printf("Game Starting...\n");
     // Game Window
     // Load sound
     song = al_load_sample("./assets/sound/hello.mp3");
@@ -148,7 +145,9 @@ Event getEvent()
 }
 
 int game_run()
+// 遊戲執行中
 {
+    printf("Game Running...\n");
     Player player;
     initializePlayer(&player);
     while (player.position < MAP_SIZE)
@@ -197,14 +196,10 @@ int game_run()
 }
 
 void game_destroy()
+// 遊戲結束時
 {
+    printf("Game Closing...\n");
     al_rest(5.0);                // 等待10秒
     al_destroy_display(display); // 清理並關閉顯示視窗
     al_destroy_font(font);       // 銷毀字體
-}
-
-int main()
-{
-    Game_establish();
-    return 0;
 }

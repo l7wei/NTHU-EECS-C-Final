@@ -41,6 +41,9 @@
 			<Add option="-fexceptions" />
 			<Add directory="allegro/include" />
 		</Compiler>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/GameWindow.c">
 			<Option compilerVar="CC" />
 		</Unit>
