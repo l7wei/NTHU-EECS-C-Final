@@ -45,6 +45,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/GameWindow.h" />
+		<Unit filename="src/global.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/global.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

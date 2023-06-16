@@ -1,18 +1,16 @@
-#include <allegro5/allegro.h>
-
-#include <allegro5/allegro_audio.h> //使用 Allegro 的音效功能
-#include <allegro5/allegro_font.h>  //使用 Allegro 的字體和文本功能
-#include <allegro5/allegro_ttf.h>   //支援TrueType字體
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include "GameWindow.h"
 
 #define MAP_SIZE 20
 #define MAX_EVENT 5
 
 #define SYSTEM_MESSAGE "[系統訊息]"
 #define PLAYER_MESSAGE "[玩家訊息]"
+
+const char *title = "Final Project CatOtter";
 
 typedef struct Player
 {
@@ -47,17 +45,30 @@ Event getEvent()
     return events[rand() % MAX_EVENT];
 }
 
+bool draw = false;
+int window = 1;
+
+// ALLEGRO Variables
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_SAMPLE *song = NULL;
 ALLEGRO_SAMPLE_INSTANCE *sample_instance;
 
 ALLEGRO_FONT *font = NULL;
 
-void Game_establish()
+int Game_establish()
 {
+    int msg = 0;
+
     game_init();
-    game_scene();
+    game_begin();
+    while (msg != GAME_TERMINATE)
+    {
+        msg = game_run();
+        if (msg == GAME_TERMINATE)
+            printf("Game Over\n");
+    }
     game_destroy();
+    return 0;
 }
 
 void game_init()
@@ -69,14 +80,42 @@ void game_init()
         fprintf(stderr, "failed to initialize allegro!\n");
         exit(-1);
     }
-
-    al_set_new_display_flags(ALLEGRO_RESIZABLE); // 讓視窗可以調整大小
-    display = al_create_display(1000, 800);      // 創建一個800x600的視窗
+    // 初始化 audio
+    al_install_audio();
+    al_init_acodec_addon();
+    // 初始化 display
+    display = al_create_display(1000, 800);
     if (!display)
     {
         fprintf(stderr, "failed to create display!\n");
         exit(-1);
     }
+
+    // create event queue
+    event_queue = al_create_event_queue();
+
+    // Initialize Allegro settings
+    al_set_window_position(display, 0, 0);
+    al_set_window_title(display, title);
+    al_init_primitives_addon();
+    al_init_font_addon();   // initialize the font addon
+    al_init_ttf_addon();    // initialize the ttf (True Type Font) addon
+    al_init_image_addon();  // initialize the image addon
+    al_init_acodec_addon(); // initialize acodec addon
+    al_install_keyboard();  // install keyboard event
+    al_install_mouse();     // install mouse event
+    al_install_audio();     // install audio event
+
+    // Register event
+    al_register_event_source(event_queue, al_get_display_event_source(display));
+    al_register_event_source(event_queue, al_get_keyboard_event_source());
+    al_register_event_source(event_queue, al_get_mouse_event_source());
+    fps = al_create_timer(1.0 / FPS);
+    al_register_event_source(event_queue, al_get_timer_event_source(fps));
+
+    // initialize the icon on the display
+    ALLEGRO_BITMAP *icon = al_load_bitmap("./assets/image/icon.jpg");
+    al_set_display_icon(display, icon);
 
     al_init_font_addon(); // 初始化字體插件
     al_init_ttf_addon();  // 初始化 TTF (True Type Font) 插件
@@ -105,9 +144,10 @@ void game_begin()
     // set the volume of instance
     al_set_sample_instance_gain(sample_instance, 1);
     al_play_sample_instance(sample_instance);
+    al_start_timer(fps);
 }
 
-void game_scene()
+int game_run()
 {
     Player player;
     initializePlayer(&player);
@@ -153,6 +193,7 @@ void game_scene()
             break;
         }
     }
+    return -1;
 }
 
 void game_destroy()
