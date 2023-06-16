@@ -1,91 +1,109 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include "game.h"
 
-// 遊戲設定
-#define MAP_SIZE 20
-#define MAX_EVENT 5
+const char *title = "Final Project CatOtter";
 
-// 訊息
-#define SYSTEM_MESSAGE "[系統訊息]"
-#define PLAYER_MESSAGE "[玩家訊息]"
+bool draw = false;
+int window = 1;
 
-// 玩家
-typedef struct Player
+// ALLEGRO Variables
+ALLEGRO_DISPLAY *display = NULL;
+ALLEGRO_SAMPLE *song = NULL;
+ALLEGRO_SAMPLE_INSTANCE *sample_instance;
+
+int Game_establish()
+// 建立遊戲
 {
-    int position;
-    int money;
-} Player;
+    int msg = 0;
 
-// 事件
-typedef struct Event
-{
-    const char *description;
-    int moneyChange;
-} Event;
-
-// 事件列表
-Event events[MAX_EVENT] = {
-    {"你找到了一筆錢，獲得$100!", 100}, {"你被罰款$50!", -50}, {"你被罰款$100!", -100},
-    {"你找到了一筆錢，獲得$50!", 50},   {"沒有事件發生", 0},
-};
-
-// 初始化玩家
-void initializePlayer(Player *player)
-{
-    player->position = 0;
-    player->money = 1000;
-}
-
-// 擲骰子
-int rollDice()
-{
-    return rand() % 6 + 1;
-}
-
-// 隨機取得事件
-Event getEvent()
-{
-    return events[rand() % MAX_EVENT];
-}
-
-// 主程式
-int main()
-{
-    printf("這場遊戲有%d個區塊\n", MAP_SIZE);
-
-    srand(time(0));
-
-    Player player;
-    initializePlayer(&player);
-
-    while (player.position < MAP_SIZE)
+    game_init();
+    game_begin();
+    while (msg != GAME_TERMINATE)
     {
-        printf("%s你現在在%d位置，有%d的金錢。\n", SYSTEM_MESSAGE, player.position, player.money);
-        printf("%s按Enter擲骰子...\n", SYSTEM_MESSAGE);
-        getchar();
-        printf("\n");
-        int dice = rollDice();
-        printf("%s你擲出了%d。\n", SYSTEM_MESSAGE, dice);
-        printf("%s距離終點還有%d格。\n", SYSTEM_MESSAGE, MAP_SIZE - player.position);
-        player.position += dice;
-
-        if (player.position >= MAP_SIZE)
-        {
-            printf("\n恭喜，你已經達到終點，遊戲結束!\n");
-            break;
-        }
-
-        Event event = getEvent();
-        printf("%s%s\n", PLAYER_MESSAGE, event.description);
-        player.money += event.moneyChange;
-
-        if (player.money <= 0)
-        {
-            printf("你的錢已經用完，遊戲結束!\n");
-            break;
-        }
+        msg = game_run();
+        if (msg == GAME_TERMINATE)
+            printf("Game Over\n");
     }
-
+    game_destroy();
     return 0;
+}
+
+void game_init()
+// 初始化遊戲
+{
+    // 初始化 Allegro
+    printf("Game Initializing...\n");
+    al_init();
+
+    // 初始化 audio
+    al_install_audio();
+    al_init_acodec_addon();
+
+    // Create display
+    display = al_create_display(WIDTH, HEIGHT);
+
+    // create event queue
+    event_queue = al_create_event_queue();
+
+    // Initialize Allegro settings
+    al_set_window_position(display, 0, 0);
+    al_set_window_title(display, title);
+    al_init_primitives_addon();
+    al_init_font_addon();   // initialize the font addon
+    al_init_ttf_addon();    // initialize the ttf (True Type Font) addon
+    al_init_image_addon();  // initialize the image addon
+    al_init_acodec_addon(); // initialize acodec addon
+    al_install_keyboard();  // install keyboard event
+    al_install_mouse();     // install mouse event
+    al_install_audio();     // install audio event
+
+    // Register event
+    al_register_event_source(event_queue, al_get_display_event_source(display));
+    al_register_event_source(event_queue, al_get_keyboard_event_source());
+    al_register_event_source(event_queue, al_get_mouse_event_source());
+    fps = al_create_timer(1.0 / FPS);
+    al_register_event_source(event_queue, al_get_timer_event_source(fps));
+
+    // initialize the icon on the display
+    ALLEGRO_BITMAP *icon = al_load_bitmap("./assets/image/icon.jpg");
+    al_set_display_icon(display, icon);
+
+    al_init_font_addon(); // 初始化字體插件
+    al_init_ttf_addon();  // 初始化 TTF (True Type Font) 插件
+
+    font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
+
+    if (!font)
+    {
+        fprintf(stderr, "Could not load 'write.ttf'.\n");
+        exit(-1);
+    }
+    srand(time(0));
+}
+
+void game_begin()
+// 遊戲（視窗）開始時
+{
+    printf("Game Starting...\n");
+    // Game Window
+    // Load sound
+    song = al_load_sample("./assets/sound/hello.mp3");
+    al_reserve_samples(20);
+    sample_instance = al_create_sample_instance(song);
+    // Loop the song until the display closes
+    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
+    al_restore_default_mixer();
+    al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
+    // set the volume of instance
+    al_set_sample_instance_gain(sample_instance, 1);
+    al_play_sample_instance(sample_instance);
+    al_start_timer(fps);
+}
+
+void game_destroy()
+// 遊戲結束時
+{
+    printf("Game Closing...\n");
+    al_rest(1.0);                // 等待10秒
+    al_destroy_display(display); // 清理並關閉顯示視窗
+    al_destroy_font(font);       // 銷毀字體
 }
