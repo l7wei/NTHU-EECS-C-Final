@@ -1,8 +1,8 @@
 #include "about.h"
-#include "story.h"
 #include "event.h"
 #include "menu.h"
 #include "resource.h"
+#include "story.h"
 
 int about_button_index = 0;
 
@@ -34,9 +34,12 @@ int about_process(ALLEGRO_EVENT event)
             {
                 return MSG_GAME_OVER;
             }
-        } else if (event.keyboard.keycode == ALLEGRO_KEY_UP) {
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_UP)
+        {
             about_button_index--;
-            if (about_button_index < 0) {
+            if (about_button_index < 0)
+            {
                 about_button_index = 0;
             }
         }
