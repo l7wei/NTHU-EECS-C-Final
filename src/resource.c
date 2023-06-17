@@ -44,7 +44,7 @@ void load_resource()
     start_menu_all = al_load_bitmap("./assets/image/start_menu/all.png");
     start_menu_start = al_load_bitmap("./assets/image/start_menu/start.png");
     start_menu_story = al_load_bitmap("./assets/image/start_menu/story.png"); // Game basic Interface
-    start_menu_about = al_load_bitmap("./assets/image/start_menu/about.png");
+    start_menu_about = al_load_bitmap("./assets/image/start_menu/sm_about.png");
     start_menu_exit = al_load_bitmap("./assets/image/start_menu/exit.png");
     // Role Select Menu
     role_menu_all = al_load_bitmap("./assets/image/role_select/all_detailed.png");
