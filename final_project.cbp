@@ -55,11 +55,6 @@
 		</Unit>
 		<Unit filename="src/game.h" />
 
-		<Unit filename="src/scene.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/scene.h" />
-
 		<Unit filename="src/player.c">
 			<Option compilerVar="CC" />
 		</Unit>

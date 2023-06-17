@@ -1,3 +1,3 @@
 #include "global.h"
 
-int Game_establish();
+int game_run();
