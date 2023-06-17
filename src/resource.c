@@ -82,7 +82,8 @@ void load_resource()
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
     // Pause Menu
     pause_menu_all = al_load_bitmap("./assets/image/pause_menu/all.png");
-    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");    pause_menu_continue = al_load_bitmap("./assets/image/pause_menu/continue.png");
+    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");   
+    pause_menu_continue = al_load_bitmap("./assets/image/pause_menu/continue.png");
     pause_menu_finish = al_load_bitmap("./assets/image/pause_menu/finish.png");
     //story
     sm_story_1 = al_load_bitmap("./assets/image/sm_story&about/sm_story_1.png");
