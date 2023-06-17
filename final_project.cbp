@@ -64,6 +64,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/player.h" />
+		<Unit filename="src/interface.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/interface.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

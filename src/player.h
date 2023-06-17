@@ -10,6 +10,4 @@ typedef struct Player
     int money;
 } Player;
 
-void charater_process();
-
 #endif

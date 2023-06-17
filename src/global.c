@@ -10,3 +10,5 @@ bool key_state[ALLEGRO_KEY_MAX] = {false};
 bool judge_next_window = false;
 
 ALLEGRO_FONT *font = NULL;
+
+ALLEGRO_EVENT event;

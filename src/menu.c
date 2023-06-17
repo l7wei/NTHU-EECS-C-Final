@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "interface.h"
 
 #define MENU_ITEM_COUNT 3
 #define FONT_SIZE 32
@@ -14,7 +15,6 @@ const char *menu_items[MENU_ITEM_COUNT] = {"難度", "主選單", "退出遊戲"
 
 void menu_init()
 {
-    ALLEGRO_EVENT event;
 
     bool done = false, redraw = true;
     int selected_item = 0;
@@ -22,48 +22,45 @@ void menu_init()
     while (!done)
     {
         al_wait_for_event(event_queue, &event);
-
-        switch (event.type)
+        button_process(event);
+        if (key_state[ALLEGRO_KEY_ESCAPE])
         {
-        case ALLEGRO_EVENT_KEY_CHAR:
-            switch (event.keyboard.keycode)
+            done = true;
+        }
+        else if (key_state[ALLEGRO_KEY_UP])
+        {
+            if (selected_item > 0)
             {
-            case ALLEGRO_KEY_ESCAPE:
+                selected_item--;
+                redraw = true;
+            }
+        }
+        else if (key_state[ALLEGRO_KEY_DOWN])
+        {
+            if (selected_item < MENU_ITEM_COUNT - 1)
+            {
+                selected_item++;
+                redraw = true;
+            }
+        }
+        else if (key_state[ALLEGRO_KEY_ENTER])
+        {
+            printf("你選擇了選單項目: %s\n", menu_items[selected_item]);
+            switch (selected_item)
+            {
+            case 0:
+                printf("改變難度\n");
+                // 在這裡調整遊戲的難度
+                break;
+            case 1:
+                printf("返回主選單\n");
+                // 在這裡返回遊戲的主選單
+                break;
+            case 2:
+                printf("退出遊戲\n");
                 done = true;
                 break;
-            case ALLEGRO_KEY_UP:
-                if (selected_item > 0)
-                    selected_item--;
-                redraw = true;
-                break;
-            case ALLEGRO_KEY_DOWN:
-                if (selected_item < MENU_ITEM_COUNT - 1)
-                    selected_item++;
-                redraw = true;
-                break;
-            case ALLEGRO_KEY_ENTER:
-                printf("你選擇了選單項目: %s\n", menu_items[selected_item]);
-                switch (selected_item)
-                {
-                case ITEM_DIFFICULTY:
-                    printf("改變難度\n");
-                    // 在這裡調整遊戲的難度
-                    break;
-                case ITEM_MAIN_MENU:
-                    printf("返回主選單\n");
-                    // 在這裡返回遊戲的主選單
-                    break;
-                case ITEM_EXIT:
-                    printf("退出遊戲\n");
-                    done = true;
-                    break;
-                }
-                break;
             }
-            break;
-        case ALLEGRO_EVENT_DISPLAY_CLOSE:
-            done = true;
-            break;
         }
 
         if (redraw && al_is_event_queue_empty(event_queue))

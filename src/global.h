@@ -33,4 +33,6 @@ extern ALLEGRO_EVENT_QUEUE *event_queue;
 extern ALLEGRO_TIMER *fps;
 
 extern ALLEGRO_FONT *font;
+extern ALLEGRO_EVENT event;
+
 #endif

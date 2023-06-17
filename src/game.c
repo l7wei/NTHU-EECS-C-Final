@@ -1,5 +1,6 @@
 #include "game.h"
 #include "event.h"
+#include "interface.h"
 #include "menu.h"
 #include "player.h"
 
@@ -24,12 +25,11 @@ int game_run()
 {
     printf("Game Running...\n");
     initializePlayer(&player);
-    ALLEGRO_EVENT event;
     while (player.position < MAP_SIZE)
     {
         al_clear_to_color(al_map_rgb(0, 0, 0)); // 清除畫布
         al_wait_for_event(event_queue, &event);
-        charater_process(event);
+        button_process(event);
         // use the idea of finite state machine to deal with different state
         if (key_state[ALLEGRO_KEY_ENTER])
         {
