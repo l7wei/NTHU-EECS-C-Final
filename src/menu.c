@@ -14,7 +14,7 @@ enum MenuItem
 
 const char *menu_items[MENU_ITEM_COUNT] = {"難度", "主選單", "退出遊戲"};
 
-int main()
+int hello()
 {
     ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_FONT *font = NULL;
