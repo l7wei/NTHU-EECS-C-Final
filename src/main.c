@@ -7,8 +7,7 @@ int main()
     scene_init();
     scene_begin();
     // 建立遊戲
-    int msg = 0;
-    while ((msg = scene_run()) != MSG_TERMINATE)
+    while ((scene_run()) != MSG_TERMINATE)
     {
         ;
     }

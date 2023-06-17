@@ -1,7 +1,6 @@
 #include "game.h"
 #include "event.h"
 #include "menu.h"
-#include "player.h"
 #include "resource.h"
 
 #define SYSTEM_MESSAGE "[系統訊息]"
@@ -12,7 +11,17 @@ int rollDice()
     return rand() % 6 + 1;
 }
 
+typedef struct Player
+{
+    int position;
+    int money;
+    char last_event[256];
+} Player;
+
 Player player;
+Game_event game_event;
+
+int dice;
 
 int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
@@ -26,63 +35,31 @@ int game_process(ALLEGRO_EVENT event)
         {
             if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
-                // 地板
-                ALLEGRO_BITMAP *floor = al_load_bitmap("./assets/image/road.png");
-                al_draw_bitmap(floor, 0, SCREEN_HEIGHT - 66, 0);
-                if (!floor)
-                {
-                    fprintf(stderr, "Could not load 'road.png'.\n");
-                }
-
-                char status_buffer[256];
-                sprintf(status_buffer, "Position:%d Money:%d", player.position, player.money);
-                al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, status_buffer);
-
-                char dice_buffer[256];
-                int dice = rollDice();
-                sprintf(dice_buffer, "Dice: %d", dice);
-                al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
+                dice = rollDice();
                 player.position += dice;
 
                 if (player.position >= MAP_SIZE)
                 {
-                    al_clear_to_color(al_map_rgb(0, 0, 0));
-                    al_draw_text(write_font, al_map_rgb(255, 255, 255), 400, 300, ALLEGRO_ALIGN_CENTRE,
-                                 "恭喜，你已經達到終點，遊戲結束!");
-                    al_flip_display();
-                    getchar();
+                    return MSG_GAME_OVER;
                 }
 
-                char event_buffer[256];
-                Game_event game_event = getEvent();
-                sprintf(event_buffer, "Event: %s", game_event.description);
-                al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
+                game_event = getEvent();
+
                 player.money += game_event.moneyChange;
 
                 if (player.money <= 0)
                 {
-                    al_clear_to_color(al_map_rgb(0, 0, 0));
-                    al_draw_text(write_font, al_map_rgb(255, 255, 255), 400, 300, ALLEGRO_ALIGN_CENTRE,
-                                 "你的錢已經用完，遊戲結束!");
-                    al_flip_display();
-                    getchar();
+                    return MSG_GAME_OVER;
                 }
-
-                al_flip_display();
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
                 printf("Game Pause\n");
-                while (1)
-                {
-                    menu_draw();
-                    menu_process(event);
-                }
                 // 按下 ESC 時暫停遊戲
             }
         }
     }
-    return -1;
+    return MSG_NOPE;
 }
 
 void game_init()
@@ -104,4 +81,15 @@ void game_destroy()
 
 void game_draw()
 {
+    char status_buffer[256];
+    sprintf(status_buffer, "Position:%d Money:%d", player.position, player.money);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, status_buffer);
+
+    char dice_buffer[256];
+    sprintf(dice_buffer, "Dice: %d", dice);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
+
+    char event_buffer[256];
+    sprintf(event_buffer, "Event: %s", game_event.description);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
 }
