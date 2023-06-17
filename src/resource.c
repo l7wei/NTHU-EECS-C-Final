@@ -28,6 +28,9 @@ ALLEGRO_BITMAP *pause_menu_restart;
 ALLEGRO_BITMAP *pause_menu_continue;
 ALLEGRO_BITMAP *pause_menu_finish;
 
+// Game Background
+ALLEGRO_BITMAP *game_background;
+
 // Font
 ALLEGRO_FONT *write_font;
 
@@ -62,7 +65,8 @@ void load_resource()
     role_menu_otter = al_load_bitmap("./assets/image/role_select/3_otter.png");
     // Credit Menu
     credit_menu_all = al_load_bitmap("./assets/image/credits/credits_all.png");
-    // Select Level
+    // Game Background
+    game_background = al_load_bitmap("./assets/image/game/background.png");
     // Font
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
     // Pause Menu

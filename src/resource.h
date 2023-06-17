@@ -29,6 +29,9 @@ extern ALLEGRO_BITMAP *pause_menu_restart;
 extern ALLEGRO_BITMAP *pause_menu_starting;
 extern ALLEGRO_BITMAP *pause_menu_ending;
 
+// Game Background
+extern ALLEGRO_BITMAP *game_background;
+
 // Font
 extern ALLEGRO_FONT *write_font;
 

@@ -124,6 +124,8 @@ void game_destroy()
 
 void draw_game()
 {
+    // 繪製背景
+    al_draw_bitmap(game_background, 0, 0, 0);
     // 繪製遊戲介面
     char status_buffer[256];
     sprintf(status_buffer, "Position:%d Money:%d", player.position, player.money);
@@ -150,36 +152,38 @@ int select_role_process(ALLEGRO_EVENT event)
     {
         if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
-            if (role_button_index <= 2)
+            role_button_index++;
+            if (role_button_index > 3)
             {
-                role_button_index++;
+                role_button_index = 1;
             }
         }
         if (event.keyboard.keycode == ALLEGRO_KEY_UP)
         {
-            if (role_button_index > 0)
+            role_button_index--;
+            if (role_button_index < 1)
             {
-                role_button_index--;
+                role_button_index = 3;
             }
         }
-        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_button_index == 0)
+        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_button_index == 1)
         {
             player.role = ROLE_PANDA;
             return MSG_NOPE;
         }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_button_index == 1)
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_button_index == 2)
         {
             player.role = ROLE_KIWI;
             return MSG_NOPE;
         }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_button_index == 2)
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_button_index == 3)
         {
             player.role = ROLE_OTTER;
             return MSG_NOPE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
         {
-            printf("Game Resume\n");
+            printf("Back\n");
         }
     }
 }
