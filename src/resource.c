@@ -31,6 +31,7 @@ void destroy_sound(ALLEGRO_SAMPLE *sp, ALLEGRO_SAMPLE_INSTANCE *spi)
 }
 
 void load_resource()
+// 載入資源
 {
     // Hello
     sample_hello = al_load_sample("./assets/sound/hello.mp3");

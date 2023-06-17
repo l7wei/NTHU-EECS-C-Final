@@ -24,6 +24,8 @@ extern const int SCREEN_WIDTH;
 extern const int SCREEN_HEIGHT;
 extern bool judge_next_window;
 
+// 遊戲狀態
+// 使用 enum 來表示 (依序 index 0, 1, 2, ...)
 enum
 {
     MSG_TERMINATE,

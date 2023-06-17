@@ -2,6 +2,8 @@
 
 // variables for global usage
 const float FPS = 60.0;
+// 窗口大小參數
+// 方便使用相對位置開發
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 

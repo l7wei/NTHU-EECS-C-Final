@@ -22,11 +22,13 @@ int scene_run()
         return MSG_TERMINATE;
     }
 
+    // 處理 scene 的事件
     if (scene_process(event) == MSG_TERMINATE)
     {
         return MSG_TERMINATE;
     }
 
+    // 如果是 timer 事件，就繪製 scene
     if (event.type == ALLEGRO_EVENT_TIMER && event.timer.source == timer)
     {
         scene_draw();
@@ -35,6 +37,12 @@ int scene_run()
 }
 
 int scene_process(ALLEGRO_EVENT event)
+// 處理 scene 的事件
+// 並回傳對應的狀態
+// 在這裡可以看到，我們的程式碼是以 scene 為單位
+// 這樣的好處是，我們可以將不同的 scene 分開處理
+// 這樣就不會有太多的程式碼混在一起
+// 可以在 src\global.h 中看到各個代碼
 {
     int msg;
     if (scene_state == SCENE_MENU)
@@ -101,6 +109,8 @@ int scene_process(ALLEGRO_EVENT event)
 }
 
 void scene_draw()
+// 呼叫各個 scene 的 draw function
+// 然後繪製對應階段的畫面
 {
     if (scene_state == SCENE_MENU)
     {
@@ -149,11 +159,11 @@ void scene_init()
     al_install_mouse();    // install mouse event
     al_install_audio();    // install audio event
 
-    // Create display
+    // 建立視窗
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     al_set_window_position(display, 0, 0);
     al_set_window_title(display, title);
-    // initialize the icon on the display
+    // 初始化視窗 ICON
     // Icon
     ALLEGRO_BITMAP *icon = al_load_bitmap("./assets/image/icon.jpg");
     al_set_display_icon(display, icon);
@@ -172,6 +182,7 @@ void scene_init()
     srand(time(0));
 
     // 初始化文件
+    // src\resource.c
     printf("Loading resources...\n");
     load_resource();
 }
@@ -196,6 +207,7 @@ void scene_begin()
 
 void scene_destroy()
 // 遊戲結束時
+// 釋放資源，清理視窗
 {
     printf("Game Closing...\n");
     // Destroy

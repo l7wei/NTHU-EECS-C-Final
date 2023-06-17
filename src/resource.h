@@ -4,6 +4,9 @@
 extern float bgm_gain;
 extern float se_gain;
 
+// 把所有的資源都放在這裡
+// #include "resource.h" 就可以取用所有資源
+
 // Hello
 extern ALLEGRO_SAMPLE *sample_hello;
 
