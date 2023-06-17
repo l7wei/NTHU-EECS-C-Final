@@ -31,6 +31,12 @@ ALLEGRO_BITMAP *pause_menu_ending;
 // Font
 ALLEGRO_FONT *write_font;
 
+//story
+ALLEGRO_BITMAP *sm_story_1;
+ALLEGRO_BITMAP *sm_story_2;
+ALLEGRO_BITMAP *sm_story_3;
+ALLEGRO_BITMAP *sm_rotate;
+
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
     *sp = al_load_sample(filename);
@@ -70,6 +76,11 @@ void load_resource()
     pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");
     pause_menu_starting = al_load_bitmap("./assets/image/pause_menu/starting.png");
     pause_menu_ending = al_load_bitmap("./assets/image/pause_menu/ending.png");
+    //story
+    sm_story_1 = al_load_bitmap("./assets/image/sm_story&about/sm_story_1.png");
+    sm_story_2 = al_load_bitmap("./assets/image/sm_story&about/sm_story_2.png");
+    sm_story_3 = al_load_bitmap("./assets/image/sm_story&about/sm_story_3.png");
+    sm_rotate = al_load_bitmap("./assets/image/sm_story&about/sm_rotate.png");
 }
 
 void destroy_resource()

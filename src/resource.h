@@ -29,6 +29,12 @@ extern ALLEGRO_BITMAP *pause_menu_restart;
 extern ALLEGRO_BITMAP *pause_menu_starting;
 extern ALLEGRO_BITMAP *pause_menu_ending;
 
+//story
+extern ALLEGRO_BITMAP *sm_story_1;
+extern ALLEGRO_BITMAP *sm_story_2;
+extern ALLEGRO_BITMAP *sm_story_3;
+extern ALLEGRO_BITMAP *sm_rotate;
+
 // Font
 extern ALLEGRO_FONT *write_font;
 
