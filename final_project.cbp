@@ -80,6 +80,14 @@
 		<Unit filename="src/result.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/story.h" />
+		<Unit filename="src/story.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/about.h" />
+		<Unit filename="src/about.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -2,14 +2,6 @@
 #include "resource.h"
 int button_index = 0;
 
-void menu_init()
-{
-}
-
-void menu_destroy()
-{
-}
-
 int menu_process(ALLEGRO_EVENT event)
 {
     menu_draw();
@@ -37,12 +29,12 @@ int menu_process(ALLEGRO_EVENT event)
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 1)
         {
             // al_play_sample_instance(click_se_spi);
-            return MSG_STORY_STORY;
+            return MSG_STORY_START;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 2)
         {
             // al_play_sample_instance(click_se_spi);
-            return MSG_STORY_ABOUT;
+            return MSG_ABOUT_START;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 3)
         {
@@ -79,4 +71,12 @@ void menu_draw()
     {
         al_draw_bitmap(start_menu_exit, 0, 0, 0);
     }
+}
+
+void menu_init()
+{
+}
+
+void menu_destroy()
+{
 }

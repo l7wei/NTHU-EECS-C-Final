@@ -4,6 +4,7 @@
 #include "resource.h"
 #include "result.h"
 #include "setting.h"
+#include "story.h"
 
 int scene_state;
 
@@ -47,10 +48,16 @@ int scene_process(ALLEGRO_EVENT event)
             scene_state = SCENE_GAME;
             game_init();
         }
-        else if (msg == MSG_CHANGE_SETTING)
+        else if (msg == MSG_STORY_START)
         {
             menu_destroy();
-            scene_state = SCENE_SETTING;
+            scene_state = SCENE_STORY;
+            story_init();
+        }
+        else if (msg == MSG_ABOUT_START)
+        {
+            menu_destroy();
+            scene_state = SCENE_ABOUT;
         }
         else if (msg == MSG_TERMINATE)
         {
@@ -65,6 +72,14 @@ int scene_process(ALLEGRO_EVENT event)
             game_destroy();
             scene_state = SCENE_RESULT;
             result_init();
+        }
+    }
+    else if (scene_state == SCENE_STORY)
+    {
+        msg = story_process(event);
+        if (msg == MSG_GAME_OVER)
+        {
+            story_destroy();
         }
     }
     else if (scene_state == SCENE_RESULT)
@@ -109,6 +124,10 @@ void scene_draw()
     else if (scene_state == SCENE_GAME)
     {
         game_draw();
+    }
+    else if (scene_state == SCENE_STORY)
+    {
+        story_draw();
     }
     else if (scene_state == SCENE_RESULT)
     {

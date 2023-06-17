@@ -3,9 +3,6 @@
 #include "menu.h"
 #include "resource.h"
 
-#define SYSTEM_MESSAGE "[系統訊息]"
-#define PLAYER_MESSAGE "[玩家訊息]"
-
 int rollDice()
 {
     return rand() % 6 + 1;
@@ -62,6 +59,21 @@ int game_process(ALLEGRO_EVENT event)
     return MSG_NOPE;
 }
 
+void game_draw()
+{
+    char status_buffer[256];
+    sprintf(status_buffer, "Position:%d Money:%d", player.position, player.money);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, status_buffer);
+
+    char dice_buffer[256];
+    sprintf(dice_buffer, "Dice: %d", dice);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
+
+    char event_buffer[256];
+    sprintf(event_buffer, "Event: %s", game_event.description);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
+}
+
 void game_init()
 {
     printf("Game Init...\n");
@@ -77,19 +89,4 @@ void game_init()
 
 void game_destroy()
 {
-}
-
-void game_draw()
-{
-    char status_buffer[256];
-    sprintf(status_buffer, "Position:%d Money:%d", player.position, player.money);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, status_buffer);
-
-    char dice_buffer[256];
-    sprintf(dice_buffer, "Dice: %d", dice);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
-
-    char event_buffer[256];
-    sprintf(event_buffer, "Event: %s", game_event.description);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
 }
