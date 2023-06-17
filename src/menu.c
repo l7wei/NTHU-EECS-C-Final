@@ -17,7 +17,7 @@ int menu_process(ALLEGRO_EVENT event)
     {
         if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
-            if (button_index <= 2)
+            if (button_index <= 3)
             {
                 button_index++;
             }
@@ -32,17 +32,22 @@ int menu_process(ALLEGRO_EVENT event)
         if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 0)
         {
             // al_play_sample_instance(click_se_spi);
-            return 10;
+            return MSG_GAME_START;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 1)
         {
             // al_play_sample_instance(click_se_spi);
-            return 11;
+            return MSG_STORY_STORY;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 2)
         {
             // al_play_sample_instance(click_se_spi);
-            return 12;
+            return MSG_STORY_ABOUT;
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 3)
+        {
+            // al_play_sample_instance(click_se_spi);
+            return MSG_TERMINATE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
         {
@@ -74,5 +79,4 @@ void menu_draw()
     {
         al_draw_bitmap(start_menu_exit, 0, 0, 0);
     }
-    al_flip_display();
 }

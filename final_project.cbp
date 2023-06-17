@@ -60,10 +60,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/menu.h" />
-		<Unit filename="src/player.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/player.h" />
 		<Extensions />
 		<Unit filename="src/resource.c">
 			<Option compilerVar="CC" />
