@@ -8,14 +8,21 @@ int menu_process(ALLEGRO_EVENT event)
     {
         if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
-            if (menu_button_index <= 3)
+            if (menu_button_index < 3)
             {
                 menu_button_index++;
+            }else if(menu_button_index = 3)
+            {
+                menu_button_index = 0;
             }
+
         }
         if (event.keyboard.keycode == ALLEGRO_KEY_UP)
         {
-            if (menu_button_index > 0)
+            if (menu_button_index = 0)
+            {
+                menu_button_index = 3;
+            }else if(menu_button_index > 0)
             {
                 menu_button_index--;
             }
