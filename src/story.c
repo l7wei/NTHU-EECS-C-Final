@@ -22,20 +22,23 @@ void story_draw()
     }
 }
 
-int story_process(ALLEGRO_EVENT event) 
+int story_process(ALLEGRO_EVENT event)
 {
-    if (event.type == ALLEGRO_EVENT_KEY_DOWN) 
+    if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
-        if (event.keyboard.keycode == ALLEGRO_KEY_DOWN) 
+        if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
             story_button_index++;
-            if (story_button_index > 3) 
+            if (story_button_index >= 3)
             {
-                return 1;  
+                return MSG_GAME_OVER;
             }
-        } else if (event.keyboard.keycode == ALLEGRO_KEY_UP) {
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_UP)
+        {
             story_button_index--;
-            if (story_button_index < 0) {
+            if (story_button_index < 0)
+            {
                 story_button_index = 0;
             }
         }
@@ -43,8 +46,9 @@ int story_process(ALLEGRO_EVENT event)
     return 0;
 }
 
-void pause_story_init()
+void story_init()
 {
+    story_button_index = 0;
 }
 
 void pause_story_destroy()

@@ -52,6 +52,7 @@ int scene_process(ALLEGRO_EVENT event)
         {
             menu_destroy();
             scene_state = SCENE_STORY;
+            story_init();
         }
         else if (msg == MSG_ABOUT_START)
         {
@@ -88,6 +89,7 @@ int scene_process(ALLEGRO_EVENT event)
         if (msg == MSG_GAME_OVER)
         {
             pause_story_destroy();
+            scene_state = SCENE_MENU;
         }
     }
     else if (scene_state == SCENE_RESULT)
