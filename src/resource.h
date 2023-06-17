@@ -20,6 +20,15 @@ extern ALLEGRO_BITMAP *role_menu_panda;
 extern ALLEGRO_BITMAP *role_menu_kiwi;
 extern ALLEGRO_BITMAP *role_menu_otter;
 
+// Credit Menu
+extern ALLEGRO_BITMAP *credit_menu_all;
+
+// Pause Menu
+extern ALLEGRO_BITMAP *pause_menu_all;
+extern ALLEGRO_BITMAP *pause_menu_restart;
+extern ALLEGRO_BITMAP *pause_menu_ending;
+extern ALLEGRO_BITMAP *pause_menu_starting;
+
 // Font
 extern ALLEGRO_FONT *write_font;
 

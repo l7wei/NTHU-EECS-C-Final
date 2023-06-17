@@ -11,6 +11,7 @@ int rollDice()
 typedef struct Player
 {
     int role;             // 0: Panda, 1: Kiwi, 2: Otter
+    int credit;           // 1 ~ 28
     int position;         // 0 ~ 39
     int money;            // Infinite
     char last_event[256]; // Last event description
@@ -37,6 +38,14 @@ int game_process(ALLEGRO_EVENT event)
         printf("Choose role\n");
         select_role_process(event);
         // 選擇角色
+        return MSG_NOPE;
+    }
+    if (!player.credit)
+    {
+        printf("Choose credit\n");
+        select_credit_process(event);
+        // 選擇學分
+        return MSG_NOPE;
     }
     if (player.position < MAP_SIZE)
     {
@@ -79,13 +88,18 @@ void game_draw()
         printf("Draw role selection\n");
         select_role_draw();
         // 繪製角色選擇介面
+        return;
     }
-    else
+    if (!player.credit)
     {
-        printf("Draw game\n");
-        draw_game();
-        // 繪製遊戲介面
+        printf("Draw credit selection\n");
+        select_credit_draw();
+        // 繪製學分選擇介面
+        return;
     }
+    printf("Draw game\n");
+    draw_game();
+    // 繪製遊戲介面
 }
 
 void game_init()
@@ -95,6 +109,7 @@ void game_init()
     // 初始化地圖
     // 初始化玩家
     player.role = NULL;
+    player.credit = NULL;
     player.position = 0;
     player.money = 1000;
     // 初始化事件
@@ -168,6 +183,15 @@ int select_role_process(ALLEGRO_EVENT event)
     }
 }
 
+int select_credit_process(ALLEGRO_EVENT event)
+{
+    if (event.type == ALLEGRO_EVENT_KEY_DOWN)
+    {
+        printf("Game Credit\n");
+        player.credit = 26;
+    }
+}
+
 void select_role_draw()
 {
     printf("role_button_index = %d\n", role_button_index);
@@ -187,4 +211,10 @@ void select_role_draw()
     {
         al_draw_bitmap(role_menu_otter, 0, 0, 0);
     }
+}
+
+void select_credit_draw()
+{
+    // 繪製學分選擇介面
+    al_draw_bitmap(credit_menu_all, 0, 0, 0);
 }
