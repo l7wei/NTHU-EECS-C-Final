@@ -40,7 +40,7 @@ void game_init()
     al_init_acodec_addon();
 
     // Create display
-    display = al_create_display(WIDTH, HEIGHT);
+    display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
 
     // create event queue
     event_queue = al_create_event_queue();

@@ -29,7 +29,7 @@ int game_run()
 
         // 地板
         ALLEGRO_BITMAP *floor = al_load_bitmap("./assets/image/road.png");
-        al_draw_bitmap(floor, 0, HEIGHT - 66, 0);
+        al_draw_bitmap(floor, 0, SCREEN_HEIGHT - 66, 0);
         if (!floor)
         {
             fprintf(stderr, "Could not load 'road.png'.\n");
@@ -42,7 +42,7 @@ int game_run()
         char dice_buffer[256];
         int dice = rollDice();
         sprintf(dice_buffer, "Dice: %d", dice);
-        al_draw_text(font, al_map_rgb(255, 255, 255), WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
+        al_draw_text(font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
         player.position += dice;
 
         if (player.position >= MAP_SIZE)
