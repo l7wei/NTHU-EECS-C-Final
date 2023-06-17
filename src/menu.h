@@ -1,2 +1,2 @@
 #include "global.h"
-menu_init();
+void menu_init();

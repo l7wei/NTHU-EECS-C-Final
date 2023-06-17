@@ -12,7 +12,7 @@ enum MenuItem
 
 const char *menu_items[MENU_ITEM_COUNT] = {"難度", "主選單", "退出遊戲"};
 
-int menu_init()
+void menu_init()
 {
     ALLEGRO_EVENT event;
 
