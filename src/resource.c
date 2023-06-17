@@ -54,6 +54,11 @@ void load_resource()
     // Select Level
     // Font
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
+    //Pause Menu
+    pause_menu_all = al_load_bitmap("./assets/image/pause_menu/pm.all.png");
+    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/pm_restart.png");
+    pause_menu_ending = al_load_bitmap("./assets/image/pause_menu/pm.ending.png");
+    pause_menu_starting = al_load_bitmap("./assets/image/pause_menu/pm.starting.png");
 }
 
 void destroy_resource()
