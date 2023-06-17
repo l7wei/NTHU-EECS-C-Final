@@ -26,8 +26,8 @@ extern ALLEGRO_BITMAP *credit_menu_all;
 // Pause Menu
 extern ALLEGRO_BITMAP *pause_menu_all;
 extern ALLEGRO_BITMAP *pause_menu_restart;
-extern ALLEGRO_BITMAP *pause_menu_ending;
 extern ALLEGRO_BITMAP *pause_menu_starting;
+extern ALLEGRO_BITMAP *pause_menu_ending;
 
 // Font
 extern ALLEGRO_FONT *write_font;

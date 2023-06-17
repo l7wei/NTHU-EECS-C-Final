@@ -74,6 +74,7 @@ int game_process(ALLEGRO_EVENT event)
             {
                 printf("Game Pause\n");
                 // 按下 ESC 時暫停遊戲
+                return MSG_GAME_PAUSE;
             }
         }
     }

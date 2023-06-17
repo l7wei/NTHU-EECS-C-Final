@@ -34,7 +34,8 @@ enum
     MSG_BACK_TO_MENU,
     MSG_CHANGE_SETTING,
     MSG_ABOUT_START,
-    MSG_STORY_START
+    MSG_STORY_START,
+    MSG_GAME_PAUSE
 };
 
 enum
@@ -45,7 +46,8 @@ enum
     SCENE_RESULT,
     SCENE_SETTING,
     SCENE_STORY,
-    SCENE_ABOUT
+    SCENE_ABOUT,
+    SCENE_PAUSE
 };
 
 extern ALLEGRO_EVENT *event;
