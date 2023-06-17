@@ -25,8 +25,8 @@ ALLEGRO_BITMAP *credit_menu_all;
 // Pause Menu
 ALLEGRO_BITMAP *pause_menu_all;
 ALLEGRO_BITMAP *pause_menu_restart;
-ALLEGRO_BITMAP *pause_menu_starting;
-ALLEGRO_BITMAP *pause_menu_ending;
+ALLEGRO_BITMAP *pause_menu_continue;
+ALLEGRO_BITMAP *pause_menu_finish;
 
 // Font
 ALLEGRO_FONT *write_font;
@@ -68,8 +68,8 @@ void load_resource()
     // Pause Menu
     pause_menu_all = al_load_bitmap("./assets/image/pause_menu/all.png");
     pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");
-    pause_menu_starting = al_load_bitmap("./assets/image/pause_menu/starting.png");
-    pause_menu_ending = al_load_bitmap("./assets/image/pause_menu/ending.png");
+    pause_menu_continue = al_load_bitmap("./assets/image/pause_menu/continue.png");
+    pause_menu_finish = al_load_bitmap("./assets/image/pause_menu/finish.png");
 }
 
 void destroy_resource()
