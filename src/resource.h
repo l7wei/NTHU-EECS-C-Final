@@ -14,6 +14,12 @@ extern ALLEGRO_BITMAP *start_menu_story;
 extern ALLEGRO_BITMAP *start_menu_about;
 extern ALLEGRO_BITMAP *start_menu_exit;
 
+// Role Select Menu
+extern ALLEGRO_BITMAP *role_menu_all;
+extern ALLEGRO_BITMAP *role_menu_panda;
+extern ALLEGRO_BITMAP *role_menu_kiwi;
+extern ALLEGRO_BITMAP *role_menu_otter;
+
 // Font
 extern ALLEGRO_FONT *write_font;
 

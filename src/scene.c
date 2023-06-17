@@ -204,7 +204,8 @@ void scene_begin()
     al_reserve_samples(20);
     sample_instance = al_create_sample_instance(sample_hello);
     // Loop the song until the display closes
-    al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
+    // 快點來跟我去旅遊~
+    // al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
     al_restore_default_mixer();
     al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
     // set the volume of instance

@@ -1,42 +1,41 @@
 #include "menu.h"
 #include "resource.h"
-int button_index = 0;
+int menu_button_index = 0;
 
 int menu_process(ALLEGRO_EVENT event)
 {
-    menu_draw();
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
         if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
-            if (button_index <= 3)
+            if (menu_button_index <= 3)
             {
-                button_index++;
+                menu_button_index++;
             }
         }
         if (event.keyboard.keycode == ALLEGRO_KEY_UP)
         {
-            if (button_index > 0)
+            if (menu_button_index > 0)
             {
-                button_index--;
+                menu_button_index--;
             }
         }
-        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 0)
+        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 0)
         {
             // al_play_sample_instance(click_se_spi);
             return MSG_GAME_START;
         }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 1)
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 1)
         {
             // al_play_sample_instance(click_se_spi);
             return MSG_STORY_START;
         }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 2)
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 2)
         {
             // al_play_sample_instance(click_se_spi);
             return MSG_ABOUT_START;
         }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 3)
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 3)
         {
             // al_play_sample_instance(click_se_spi);
             return MSG_TERMINATE;
@@ -50,8 +49,8 @@ int menu_process(ALLEGRO_EVENT event)
 
 void menu_draw()
 {
-    printf("button_index = %d\n", button_index);
-    if (button_index == 0)
+    printf("menu_button_index = %d\n", menu_button_index);
+    if (menu_button_index == 0)
     {
         if (!start_menu_start)
         {
@@ -59,15 +58,15 @@ void menu_draw()
         }
         al_draw_bitmap(start_menu_start, 0, 0, 0);
     }
-    else if (button_index == 1)
+    else if (menu_button_index == 1)
     {
         al_draw_bitmap(start_menu_story, 0, 0, 0);
     }
-    else if (button_index == 2)
+    else if (menu_button_index == 2)
     {
         al_draw_bitmap(start_menu_about, 0, 0, 0);
     }
-    else if (button_index == 3)
+    else if (menu_button_index == 3)
     {
         al_draw_bitmap(start_menu_exit, 0, 0, 0);
     }

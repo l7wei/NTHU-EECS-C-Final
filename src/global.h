@@ -40,6 +40,7 @@ enum
 enum
 {
     SCENE_MENU,
+    SCENE_SELECT_ROLE,
     SCENE_GAME,
     SCENE_RESULT,
     SCENE_SETTING,

@@ -13,6 +13,12 @@ ALLEGRO_BITMAP *start_menu_story;
 ALLEGRO_BITMAP *start_menu_about;
 ALLEGRO_BITMAP *start_menu_exit;
 
+// Role Select Menu
+ALLEGRO_BITMAP *role_menu_all;
+ALLEGRO_BITMAP *role_menu_panda;
+ALLEGRO_BITMAP *role_menu_kiwi;
+ALLEGRO_BITMAP *role_menu_otter;
+
 // Font
 ALLEGRO_FONT *write_font;
 
@@ -40,6 +46,12 @@ void load_resource()
     start_menu_story = al_load_bitmap("./assets/image/start_menu/story.png"); // Game basic Interface
     start_menu_about = al_load_bitmap("./assets/image/start_menu/about.png");
     start_menu_exit = al_load_bitmap("./assets/image/start_menu/exit.png");
+    // Role Select Menu
+    role_menu_all = al_load_bitmap("./assets/image/role_select/all_detailed.png");
+    role_menu_panda = al_load_bitmap("./assets/image/role_select/1_panda.png");
+    role_menu_kiwi = al_load_bitmap("./assets/image/role_select/2_kiwi.png");
+    role_menu_otter = al_load_bitmap("./assets/image/role_select/3_otter.png");
+    // Select Level
     // Font
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
 }
