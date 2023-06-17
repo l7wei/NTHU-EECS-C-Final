@@ -1,93 +1,82 @@
 #include "menu.h"
-#include "interface.h"
-
-#define MENU_ITEM_COUNT 3
-#define FONT_SIZE 32
-
-enum MenuItem
-{
-    ITEM_DIFFICULTY,
-    ITEM_MAIN_MENU,
-    ITEM_EXIT
-};
-
-const char *menu_items[MENU_ITEM_COUNT] = {"難度", "主選單", "退出遊戲"};
+#include "resource.h"
+int button_index = 0;
 
 void menu_init()
 {
+}
 
-    bool done = false, redraw = true;
-    int selected_item = 0;
+void menu_destroy()
+{
+}
 
-    while (!done)
+int menu_process(ALLEGRO_EVENT event)
+{
+    while (1)
     {
-        al_wait_for_event(event_queue, &event);
-        button_process(event);
-        if (key_state[ALLEGRO_KEY_ESCAPE])
+        menu_draw();
+        if (event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
-            done = true;
-        }
-        else if (key_state[ALLEGRO_KEY_UP])
-        {
-            if (selected_item > 0)
+            if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
             {
-                selected_item--;
-                redraw = true;
-            }
-        }
-        else if (key_state[ALLEGRO_KEY_DOWN])
-        {
-            if (selected_item < MENU_ITEM_COUNT - 1)
-            {
-                selected_item++;
-                redraw = true;
-            }
-        }
-        else if (key_state[ALLEGRO_KEY_ENTER])
-        {
-            printf("你選擇了選單項目: %s\n", menu_items[selected_item]);
-            switch (selected_item)
-            {
-            case 0:
-                printf("改變難度\n");
-                // 在這裡調整遊戲的難度
-                break;
-            case 1:
-                printf("返回主選單\n");
-                // 在這裡返回遊戲的主選單
-                break;
-            case 2:
-                printf("退出遊戲\n");
-                done = true;
-                break;
-            }
-        }
-
-        if (redraw && al_is_event_queue_empty(event_queue))
-        {
-            int y;
-            al_clear_to_color(al_map_rgb(0, 0, 0));
-            for (y = 0; y < MENU_ITEM_COUNT; y++)
-            {
-                if (y == selected_item)
+                if (button_index <= 2)
                 {
-                    al_draw_text(font, al_map_rgb(255, 0, 0), SCREEN_WIDTH / 2,
-                                 (SCREEN_HEIGHT / 2 - MENU_ITEM_COUNT / 2 * FONT_SIZE) + y * FONT_SIZE,
-                                 ALLEGRO_ALIGN_CENTRE, menu_items[y]);
-                }
-                else
-                {
-                    al_draw_text(font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2,
-                                 (SCREEN_HEIGHT / 2 - MENU_ITEM_COUNT / 2 * FONT_SIZE) + y * FONT_SIZE,
-                                 ALLEGRO_ALIGN_CENTRE, menu_items[y]);
+                    button_index++;
                 }
             }
-            al_flip_display();
-            redraw = false;
+            if (event.keyboard.keycode == ALLEGRO_KEY_UP)
+            {
+                if (button_index > 0)
+                {
+                    button_index--;
+                }
+            }
+            if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 0)
+            {
+                // al_play_sample_instance(click_se_spi);
+                return 10;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 1)
+            {
+                // al_play_sample_instance(click_se_spi);
+                return 11;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && button_index == 2)
+            {
+                // al_play_sample_instance(click_se_spi);
+                return 12;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
+                printf("Game Resume\n");
+                break;
+            }
         }
     }
+}
 
-    al_destroy_event_queue(event_queue);
-
-    return 0;
+void menu_draw()
+{
+    printf("button_index = %d\n", button_index);
+    if (button_index == 0)
+    {
+        if (!start_menu_start)
+        {
+            printf("Failed to load start_menu_all bitmap!\n");
+        }
+        al_draw_bitmap(start_menu_start, 0, 0, 0);
+    }
+    else if (button_index == 1)
+    {
+        al_draw_bitmap(start_menu_story, 0, 0, 0);
+    }
+    else if (button_index == 2)
+    {
+        al_draw_bitmap(start_menu_about, 0, 0, 0);
+    }
+    else if (button_index == 3)
+    {
+        al_draw_bitmap(start_menu_exit, 0, 0, 0);
+    }
+    al_flip_display();
 }
