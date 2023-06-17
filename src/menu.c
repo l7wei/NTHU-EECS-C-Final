@@ -72,6 +72,7 @@ void menu_draw()
 
 void menu_init()
 {
+    menu_button_index = 0;
 }
 
 void menu_destroy()

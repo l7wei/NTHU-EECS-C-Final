@@ -51,6 +51,6 @@ void story_init()
     story_button_index = 0;
 }
 
-void pause_story_destroy()
+void story_destroy()
 {
 }

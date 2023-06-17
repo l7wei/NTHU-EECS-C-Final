@@ -58,6 +58,7 @@ int scene_process(ALLEGRO_EVENT event)
         {
             menu_destroy();
             scene_state = SCENE_ABOUT;
+            about_init();
         }
         else if (msg == MSG_TERMINATE)
         {
@@ -88,7 +89,16 @@ int scene_process(ALLEGRO_EVENT event)
         msg = story_process(event);
         if (msg == MSG_GAME_OVER)
         {
-            pause_story_destroy();
+            story_destroy();
+            scene_state = SCENE_MENU;
+        }
+    }
+    else if (scene_state == SCENE_ABOUT)
+    {
+        msg = about_process(event);
+        if (msg == MSG_GAME_OVER)
+        {
+            about_destroy();
             scene_state = SCENE_MENU;
         }
     }
@@ -138,6 +148,10 @@ void scene_draw()
     else if (scene_state == SCENE_STORY)
     {
         story_draw();
+    }
+    else if (scene_state == SCENE_ABOUT)
+    {
+        about_draw();
     }
     else if (scene_state == SCENE_RESULT)
     {
