@@ -25,8 +25,11 @@ ALLEGRO_BITMAP *credit_menu_all;
 // Pause Menu
 ALLEGRO_BITMAP *pause_menu_all;
 ALLEGRO_BITMAP *pause_menu_restart;
-ALLEGRO_BITMAP *pause_menu_starting;
-ALLEGRO_BITMAP *pause_menu_ending;
+ALLEGRO_BITMAP *pause_menu_continue;
+ALLEGRO_BITMAP *pause_menu_finish;
+
+// Game Background
+ALLEGRO_BITMAP *game_background;
 
 // Font
 ALLEGRO_FONT *write_font;
@@ -36,6 +39,11 @@ ALLEGRO_BITMAP *sm_story_1;
 ALLEGRO_BITMAP *sm_story_2;
 ALLEGRO_BITMAP *sm_story_3;
 ALLEGRO_BITMAP *sm_rotate;
+
+//about
+ALLEGRO_BITMAP *sm_about_1;
+ALLEGRO_BITMAP *sm_about_2;
+ALLEGRO_BITMAP *sm_about_3;
 
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
@@ -68,19 +76,24 @@ void load_resource()
     role_menu_otter = al_load_bitmap("./assets/image/role_select/3_otter.png");
     // Credit Menu
     credit_menu_all = al_load_bitmap("./assets/image/credits/credits_all.png");
-    // Select Level
+    // Game Background
+    game_background = al_load_bitmap("./assets/image/game/background.png");
     // Font
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
     // Pause Menu
     pause_menu_all = al_load_bitmap("./assets/image/pause_menu/all.png");
-    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");
-    pause_menu_starting = al_load_bitmap("./assets/image/pause_menu/starting.png");
-    pause_menu_ending = al_load_bitmap("./assets/image/pause_menu/ending.png");
+    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");    pause_menu_continue = al_load_bitmap("./assets/image/pause_menu/continue.png");
+    pause_menu_finish = al_load_bitmap("./assets/image/pause_menu/finish.png");
     //story
     sm_story_1 = al_load_bitmap("./assets/image/sm_story&about/sm_story_1.png");
     sm_story_2 = al_load_bitmap("./assets/image/sm_story&about/sm_story_2.png");
     sm_story_3 = al_load_bitmap("./assets/image/sm_story&about/sm_story_3.png");
     sm_rotate = al_load_bitmap("./assets/image/sm_story&about/sm_rotate.png");
+
+    //about
+    sm_about_1 = al_load_bitmap("./assets/image/sm_story&about/sm_about_1.png");
+    sm_about_2 = al_load_bitmap("./assets/image/sm_story&about/sm_about_2.png");
+    sm_about_3 = al_load_bitmap("./assets/image/sm_story&about/sm_about_3.png");
 }
 
 void destroy_resource()

@@ -133,11 +133,11 @@ void pause_menu_draw()
     }
     else if (pause_menu_button_index == 1)
     {
-        al_draw_bitmap(pause_menu_starting, 0, 0, 0);
+        al_draw_bitmap(pause_menu_continue, 0, 0, 0);
     }
     else if (pause_menu_button_index == 2)
     {
-        al_draw_bitmap(pause_menu_ending, 0, 0, 0);
+        al_draw_bitmap(pause_menu_finish, 0, 0, 0);
     }
 }
 
