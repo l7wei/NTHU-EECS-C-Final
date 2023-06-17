@@ -8,7 +8,7 @@ void setting_destroy()
 {
 }
 
-int setting_process(ALLEGRO_EVENT)
+int setting_process(ALLEGRO_EVENT event)
 {
 }
 

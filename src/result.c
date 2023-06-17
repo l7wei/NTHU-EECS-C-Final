@@ -8,7 +8,7 @@ void result_destroy()
 {
 }
 
-int result_process(ALLEGRO_EVENT)
+int result_process(ALLEGRO_EVENT event)
 {
 }
 
