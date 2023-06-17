@@ -1,7 +1,5 @@
 #include "menu.h"
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
 #define MENU_ITEM_COUNT 3
 #define FONT_SIZE 32
 
@@ -14,51 +12,12 @@ enum MenuItem
 
 const char *menu_items[MENU_ITEM_COUNT] = {"難度", "主選單", "退出遊戲"};
 
-int main()
+int menu_init()
 {
-    ALLEGRO_DISPLAY *display = NULL;
-    ALLEGRO_FONT *font = NULL;
-    ALLEGRO_EVENT_QUEUE *event_queue = NULL;
     ALLEGRO_EVENT event;
+
     bool done = false, redraw = true;
     int selected_item = 0;
-
-    if (!al_init())
-    {
-        fprintf(stderr, "failed to initialize allegro!\n");
-        return -1;
-    }
-
-    display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
-    if (!display)
-    {
-        fprintf(stderr, "failed to create display!\n");
-        return -1;
-    }
-
-    if (!al_init_font_addon() || !al_init_ttf_addon())
-    {
-        fprintf(stderr, "failed to initialize font addons!\n");
-        return -1;
-    }
-
-    font = al_load_ttf_font("arial.ttf", FONT_SIZE, 0);
-    if (!font)
-    {
-        fprintf(stderr, "failed to load font!\n");
-        return -1;
-    }
-
-    event_queue = al_create_event_queue();
-    if (!event_queue)
-    {
-        fprintf(stderr, "failed to create event queue!\n");
-        return -1;
-    }
-
-    al_install_keyboard();
-    al_register_event_source(event_queue, al_get_keyboard_event_source());
-    al_clear_to_color(al_map_rgb(0, 0, 0));
 
     while (!done)
     {
@@ -131,9 +90,7 @@ int main()
         }
     }
 
-    al_destroy_font(font);
     al_destroy_event_queue(event_queue);
-    al_destroy_display(display);
 
     return 0;
 }

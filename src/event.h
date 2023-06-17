@@ -4,15 +4,15 @@
 #include "global.h"
 
 // Event struct
-typedef struct Event
+typedef struct Game_event
 {
     const char *description;
     int moneyChange;
-} Event;
+} Game_event;
 
-Event getEvent();
+Game_event getEvent();
 
 // Event array
-extern Event events[MAX_EVENT];
+extern Game_event events[MAX_EVENT];
 
 #endif
