@@ -4,6 +4,9 @@
 extern float bgm_gain;
 extern float se_gain;
 
+// Hello
+extern ALLEGRO_SAMPLE *sample_hello;
+
 // Start Menu
 extern ALLEGRO_BITMAP *start_menu_all;
 extern ALLEGRO_BITMAP *start_menu_start;

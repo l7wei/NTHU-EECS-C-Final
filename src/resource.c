@@ -3,6 +3,9 @@
 float bgm_gain = 1.0f;
 float se_gain = 1.0f;
 
+// Hello
+ALLEGRO_SAMPLE *sample_hello;
+
 // Start Menu
 ALLEGRO_BITMAP *start_menu_all;
 ALLEGRO_BITMAP *start_menu_start;
@@ -29,6 +32,8 @@ void destroy_sound(ALLEGRO_SAMPLE *sp, ALLEGRO_SAMPLE_INSTANCE *spi)
 
 void load_resource()
 {
+    // Hello
+    sample_hello = al_load_sample("./assets/sound/hello.mp3");
     // Start Menu
     start_menu_all = al_load_bitmap("./assets/image/start_menu/all.png");
     start_menu_start = al_load_bitmap("./assets/image/start_menu/start.png");
@@ -38,8 +43,10 @@ void load_resource()
     // Font
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
 }
+
 void destroy_resource()
 {
+    al_destroy_font(write_font); // 清理字體
 }
 
 void set_bgm_gain(float gain)

@@ -1,7 +1,15 @@
 #include "global.h"
 
-void game_init();
-void game_begin();
-void game_destroy();
+void scene_init();
+void scene_begin();
+void scene_destroy();
 
-int game_run();
+enum
+{
+    SCENE_MENU,
+    SCENE_GAME,
+    SCENE_RESULT,
+    SCENE_SETTING
+};
+
+int scene_run();

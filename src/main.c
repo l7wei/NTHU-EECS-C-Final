@@ -1,18 +1,18 @@
+#include "global.h"
 #include "scene.h"
-#define GAME_TERMINATE -1
 int main()
 {
     printf("Hello World!\n");
 
-    game_init();
-    game_begin();
+    scene_init();
+    scene_begin();
     // 建立遊戲
     int msg = 0;
-    while ((msg = game_run()) != GAME_TERMINATE)
+    while ((msg = scene_run()) != MSG_TERMINATE)
     {
         ;
     }
     printf("Game Over\n");
-    game_destroy();
+    scene_destroy();
     return 0;
 }

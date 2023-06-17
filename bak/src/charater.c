@@ -59,7 +59,7 @@ void charater_process(ALLEGRO_EVENT event)
     // process the animation
     if (event.type == ALLEGRO_EVENT_TIMER)
     {
-        if (event.timer.source == fps)
+        if (event.timer.source == timer)
         {
             chara.anime++;
             chara.anime %= chara.anime_time;

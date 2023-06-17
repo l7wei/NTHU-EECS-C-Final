@@ -7,12 +7,6 @@
 #define SYSTEM_MESSAGE "[系統訊息]"
 #define PLAYER_MESSAGE "[玩家訊息]"
 
-void initializePlayer(Player *player)
-{
-    player->position = 0;
-    player->money = 1000;
-}
-
 int rollDice()
 {
     return rand() % 6 + 1;
@@ -20,22 +14,13 @@ int rollDice()
 
 Player player;
 
-int game_run()
+int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
 {
     printf("Game Running...\n");
-    initializePlayer(&player);
-    ALLEGRO_EVENT event;
-    // if the window was closed, then terminate the program
-    while (player.position < MAP_SIZE)
+    if (player.position < MAP_SIZE)
     {
-        al_wait_for_event(event_queue, &event); // 等待事件
         al_clear_to_color(al_map_rgb(0, 0, 0)); // 清除畫布
-
-        if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE && event.display.source == display)
-        {
-            break;
-        }
 
         if (event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
@@ -66,7 +51,6 @@ int game_run()
                                  "恭喜，你已經達到終點，遊戲結束!");
                     al_flip_display();
                     getchar();
-                    break;
                 }
 
                 char event_buffer[256];
@@ -82,7 +66,6 @@ int game_run()
                                  "你的錢已經用完，遊戲結束!");
                     al_flip_display();
                     getchar();
-                    break;
                 }
 
                 al_flip_display();
@@ -100,4 +83,25 @@ int game_run()
         }
     }
     return -1;
+}
+
+void game_init()
+{
+    printf("Game Init...\n");
+    // 初始化遊戲
+    // 初始化地圖
+    // 初始化玩家
+    player.position = 0;
+    player.money = 1000;
+    // 初始化事件
+    // 初始化資源
+    // 初始化遊戲介面
+}
+
+void game_destroy()
+{
+}
+
+void game_draw()
+{
 }
