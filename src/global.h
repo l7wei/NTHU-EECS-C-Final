@@ -12,7 +12,6 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
-
 #include "../lib/algif5/src/algif.h"
 
 // note that you can't assign initial value here!
