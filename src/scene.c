@@ -8,8 +8,6 @@
 
 int scene_state;
 
-const char *title = "Final Project CatOtter";
-
 bool draw = false;
 int window = 1;
 
@@ -163,6 +161,10 @@ void scene_init()
     al_init();
     al_init_primitives_addon();
 
+    // 鍵盤、滑鼠、音效
+    al_install_keyboard(); // install keyboard event
+    al_install_mouse();    // install mouse event
+
     // 初始化 audio
     al_install_audio();
     al_init_acodec_addon();
@@ -179,15 +181,11 @@ void scene_init()
     al_init_acodec_addon(); // initialize acodec addon
 
     printf("Initializing Inputs...\n");
-    // 鍵盤、滑鼠、音效
-    al_install_keyboard(); // install keyboard event
-    al_install_mouse();    // install mouse event
-    al_install_audio();    // install audio event
 
     // Create display
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     al_set_window_position(display, 0, 0);
-    al_set_window_title(display, title);
+    al_set_window_title(display, "Final Project CatOtter");
     // initialize the icon on the display
     // Icon
     ALLEGRO_BITMAP *icon = al_load_bitmap("./assets/image/icon.jpg");
@@ -204,6 +202,7 @@ void scene_init()
     al_init_font_addon(); // 初始化字體插件
     al_init_ttf_addon();  // 初始化 TTF (True Type Font) 插件
 
+    // 設定隨機種子
     srand(time(0));
 
     // 初始化文件
@@ -232,6 +231,7 @@ void start_animation()
     al_draw_bitmap(hello_cover, 0, 0, 0);
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, ALLEGRO_ALIGN_CENTER,
                  "Press enter to start");
+    al_play_sample_instance(menu_hello_spi);
     al_flip_display();
     // 等待用戶輸入
     ALLEGRO_EVENT event;
@@ -240,6 +240,7 @@ void start_animation()
         al_wait_for_event(event_queue, &event);
         if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
         {
+            al_stop_sample_instance(menu_hello_spi);
             break;
         }
     }

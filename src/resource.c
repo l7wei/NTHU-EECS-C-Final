@@ -123,8 +123,9 @@ void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTAN
 {
     *sp = al_load_sample(filename);
     *spi = al_create_sample_instance(*sp);
-    al_set_sample_instance_playmode(*spi, playmode);
-    al_attach_sample_instance_to_mixer(*spi, al_get_default_mixer());
+    al_set_sample_instance_playmode(*spi, playmode);                  // 設定播放模式
+    al_set_sample_instance_gain(*spi, 1);                             // 設定音量
+    al_attach_sample_instance_to_mixer(*spi, al_get_default_mixer()); // 將音效附加到混音器
 }
 
 void destroy_sound(ALLEGRO_SAMPLE *sp, ALLEGRO_SAMPLE_INSTANCE *spi)
@@ -182,7 +183,7 @@ void load_resource()
     dice4 = al_load_bitmap("./assets/image/dice/4.png");
     dice5 = al_load_bitmap("./assets/image/dice/5.png");
     dice6 = al_load_bitmap("./assets/image/dice/6.png");
-    dice_rolling = algif_load_animation("../assets/image/dice/rolling.gif");
+    dice_rolling = algif_load_animation("./assets/image/dice/rolling.gif");
     // ending
     ending_1_1 = al_load_bitmap("./assets/image/ending/level1_1.png");
     ending_1_2 = al_load_bitmap("./assets/image/ending/level1_2.png");
@@ -199,23 +200,23 @@ void load_resource()
     ending_7_1 = al_load_bitmap("./assets/image/ending/level7_1.png");
     ending_7_2 = al_load_bitmap("./assets/image/ending/level7_2.png");
     // sound
-    load_sound("../assets/sound/bgm_bus_road.mp3", &bgm_bus_road_sp, &bgm_bus_road_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/bgm_bus_road.mp3", &bgm_bus_road_sp, &bgm_bus_road_spi, ALLEGRO_PLAYMODE_ONCE);
     printf("Loading sound...\n");
-    load_sound("../assets/sound/bgm_music.mp3", &bgm_music_sp, &bgm_music_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/credit_changing.mp3", &credit_changing_sp, &credit_changing_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/effect_bad.mp3", &effect_bad_sp, &effect_bad_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/effect_fail.mp3", &effect_fail_sp, &effect_fail_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/effect_good.mp3", &effect_good_sp, &effect_good_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/effect_gooddecision.mp3", &effect_gooddecision_sp, &effect_gooddecision_spi,
+    load_sound("./assets/sound/bgm_music.mp3", &bgm_music_sp, &bgm_music_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/credit_changing.mp3", &credit_changing_sp, &credit_changing_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/effect_bad.mp3", &effect_bad_sp, &effect_bad_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/effect_fail.mp3", &effect_fail_sp, &effect_fail_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/effect_good.mp3", &effect_good_sp, &effect_good_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/effect_gooddecision.mp3", &effect_gooddecision_sp, &effect_gooddecision_spi,
                ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/game_start.mp3", &game_start_sp, &game_start_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/game_walking.mp3", &game_walking_sp, &game_walking_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/menu_change_role.mp3", &menu_change_role_sp, &menu_change_role_spi,
+    load_sound("./assets/sound/game_start.mp3", &game_start_sp, &game_start_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/game_walking.mp3", &game_walking_sp, &game_walking_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/menu_change_role.mp3", &menu_change_role_sp, &menu_change_role_spi,
                ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/menu_change_select.mp3", &menu_change_select_sp, &menu_change_select_spi,
+    load_sound("./assets/sound/menu_change_select.mp3", &menu_change_select_sp, &menu_change_select_spi,
                ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/menu_hello.mp3", &menu_hello_sp, &menu_hello_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("../assets/sound/menu_story_open.mp3", &menu_story_open_sp, &menu_story_open_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/menu_hello.mp3", &menu_hello_sp, &menu_hello_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/menu_story_open.mp3", &menu_story_open_sp, &menu_story_open_spi, ALLEGRO_PLAYMODE_ONCE);
     // ...其他 load_sound()
 }
 
