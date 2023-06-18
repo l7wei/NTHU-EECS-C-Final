@@ -236,8 +236,41 @@ void event_process()
     dice = rollDice();
     player.loading -= dice;
 
-    // 錢要變少了
-    player.money += game_event.moneyChange;
+    // 錢要變化了
+    if (strcmp(game_event.moneyOperator, "+") == 0)
+    {
+        player.money += game_event.moneyChange;
+    }
+    else if (strcmp(game_event.moneyOperator, "-") == 0)
+    {
+        player.money -= game_event.moneyChange;
+    }
+    else if (strcmp(game_event.moneyOperator, "*") == 0)
+    {
+        player.money *= game_event.moneyChange;
+    }
+    else if (strcmp(game_event.moneyOperator, "/") == 0)
+    {
+        player.money /= game_event.moneyChange;
+    }
+
+    // Loading 要變化了
+    if (strcmp(game_event.loadingOperator, "+") == 0)
+    {
+        player.loading += game_event.loadingChange;
+    }
+    else if (strcmp(game_event.loadingOperator, "-") == 0)
+    {
+        player.loading -= game_event.loadingChange;
+    }
+    else if (strcmp(game_event.loadingOperator, "*") == 0)
+    {
+        player.loading *= game_event.loadingChange;
+    }
+    else if (strcmp(game_event.loadingOperator, "/") == 0)
+    {
+        player.loading /= game_event.loadingChange;
+    }
 }
 
 int current_background_index = 0;
@@ -434,8 +467,8 @@ int credit_select_process(ALLEGRO_EVENT event)
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
-                
-    al_play_sample_instance(effect_good_spi);
+
+                al_play_sample_instance(effect_good_spi);
                 printf("Game Start\n");
                 GAME_STATUS = MENU_GAME_PLAYING;
             }
