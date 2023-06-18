@@ -25,26 +25,43 @@ void about_draw()
 
 int about_process(ALLEGRO_EVENT event)
 {
+    int MAX_PAGE = 2;
+    // 0, 1, 2
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
-        if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
+        if (event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
-            about_button_index++;
-            if (about_button_index > 2)
+            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
                 return MSG_GAME_OVER;
             }
-        }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_UP)
-        {
-            about_button_index--;
-            if (about_button_index < 0)
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
-                about_button_index = 0;
+                about_button_index++;
+                if (about_button_index > MAX_PAGE)
+                {
+                    return MSG_GAME_OVER;
+                }
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
+            {
+                about_button_index++;
+                if (about_button_index > MAX_PAGE)
+                {
+                    return MSG_GAME_OVER;
+                }
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_UP)
+            {
+                about_button_index--;
+                if (about_button_index < 0)
+                {
+                    about_button_index = 0;
+                }
             }
         }
+        return 0;
     }
-    return 0;
 }
 
 void about_init()
