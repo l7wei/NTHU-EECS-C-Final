@@ -14,10 +14,6 @@
 
 #include "../lib/algif5/src/algif.h"
 
-// Game Settings
-#define MAP_SIZE 100
-#define MAX_EVENT 5
-
 // note that you can't assign initial value here!
 extern const float FPS;
 extern const int SCREEN_WIDTH;
