@@ -17,7 +17,7 @@ typedef struct Player
 {
     int role;             // 0: Panda, 1: Kiwi, 2: Otter
     int loading;          // 1 ~ 28 (x 18)
-    int money;            // Infinite
+    long long money;      // use unsigned long long to prevent overflow (2^64) , llu
     char last_event[256]; // Last event description
 } Player;
 
@@ -68,7 +68,7 @@ int game_process(ALLEGRO_EVENT event)
 
             player.money += game_event.moneyChange;
 
-            if (player.money < 0)
+            if (player.money < -1000000)
             {
                 return MSG_GAME_OVER;
             }
@@ -113,7 +113,7 @@ void game_init()
     // 初始化玩家
     player.role = NULL;
     player.loading = NULL;
-    player.money = 1000;
+    player.money = 0;
     // 初始化事件
     // 初始化資源
     // 初始化遊戲介面
@@ -128,9 +128,13 @@ void draw_game()
     // 繪製背景
     al_draw_bitmap(game_background, 0, 0, 0);
     // 繪製遊戲介面
-    char status_buffer[256];
-    sprintf(status_buffer, "Loading:%d Money:%d", player.loading, player.money);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, status_buffer);
+    char money_buffer[256];
+    sprintf(money_buffer, "Money:%lld", player.money);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, money_buffer);
+
+    char loading_buffer[256];
+    sprintf(loading_buffer, "Loading:%d", player.loading);
+    al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 0, ALLEGRO_ALIGN_LEFT, loading_buffer);
 
     char dice_buffer[256];
     sprintf(dice_buffer, "Dice: %d", dice);
@@ -172,16 +176,19 @@ int select_role_process(ALLEGRO_EVENT event)
         if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_select == ROLE_PANDA)
         {
             player.role = ROLE_PANDA;
+            player.money = -501022;
             return MSG_NOPE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_select == ROLE_KIWI)
         {
             player.role = ROLE_KIWI;
+            player.money = 72400;
             return MSG_NOPE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_select == ROLE_OTTER)
         {
             player.role = ROLE_OTTER;
+            player.money = 100001128;
             return MSG_NOPE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
