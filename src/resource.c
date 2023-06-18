@@ -27,6 +27,7 @@ ALLEGRO_BITMAP *pause_menu_finish;
 
 // Game Background
 ALLEGRO_BITMAP *game_background;
+ALLEGRO_BITMAP *calculate; //計分橫條
 
 // Font
 ALLEGRO_FONT *bit_font;
@@ -81,6 +82,7 @@ void load_resource()
     role_menu_otter = al_load_bitmap("./assets/image/role_select/3_otter.png");
     // Game Background
     game_background = al_load_bitmap("./assets/image/game/background.png");
+    calculate = al_load_bitmap("./assets/image/game/calculate.png");
     // Font
     bit_font = al_load_ttf_font("./assets/font/bit.ttf", 36, 0); // 載入字體
     // Pause Menu
