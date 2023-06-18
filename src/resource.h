@@ -6,8 +6,6 @@ extern float se_gain;
 
 // Hello
 extern ALLEGRO_SAMPLE *sample_hello;
-extern ALLEGRO_BITMAP *hello_cover;
-extern ALGIF_ANIMATION *hello_start;
 
 // Start Menu
 extern ALLEGRO_BITMAP *start_menu_all;

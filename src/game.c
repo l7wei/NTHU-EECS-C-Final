@@ -96,11 +96,11 @@ int game_process(ALLEGRO_EVENT event)
                     return MSG_GAME_OVER;
                 }
             }
-            else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT && player.x > 0)
+            else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT)
             {
                 player.x -= 50;
             }
-            else if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT && player.x < SCREEN_WIDTH - 1)
+            else if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT)
             {
                 player.x += 50;
             }
@@ -233,6 +233,15 @@ void draw_role()
     else
     {
         player.y = 485;
+    }
+    // 超出邊界回到另一邊
+    if (player.x < 0)
+    {
+        player.x = SCREEN_WIDTH;
+    }
+    else if (player.x > SCREEN_WIDTH)
+    {
+        player.x = 0;
     }
     if (player.role == ROLE_PANDA)
     {

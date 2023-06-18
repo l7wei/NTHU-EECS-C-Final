@@ -220,12 +220,11 @@ void scene_begin()
     al_restore_default_mixer();
     al_start_timer(timer);
     printf("Game Started!\n");
-    // start_animation();
+    start_animation();
 }
 
 void start_animation()
 {
-    float wait = 3.0;
     sample_instance = al_create_sample_instance(sample_hello);
     // 快點來跟我去旅遊~
     // al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
@@ -233,13 +232,23 @@ void start_animation()
     //  set the volume of instance
     // al_set_sample_instance_gain(sample_instance, 1);
     // al_play_sample_instance(sample_instance);
-    al_draw_bitmap(algif_get_bitmap(hello_start, wait), 0, 0, 0);
-    al_flip_display();
-    al_rest(wait);
+    // ALGIF_ANIMATION *hello_start = algif_load_animation("../assets/image/hello/start.gif"); // algif 只支援相對路徑
+    ALLEGRO_BITMAP *hello_cover = al_load_bitmap("./assets/image/hello/cover.png");
+    // al_draw_bitmap(algif_get_bitmap(hello_start, 1), 0, 0, 0);
     al_draw_bitmap(hello_cover, 0, 0, 0);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, ALLEGRO_ALIGN_CENTER,
+                 "Press enter to start");
     al_flip_display();
+    // 等待用戶輸入
     ALLEGRO_EVENT event;
-    al_wait_for_event(event_queue, &event);
+    while (true)
+    {
+        al_wait_for_event(event_queue, &event);
+        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
+        {
+            break;
+        }
+    }
 }
 
 void scene_destroy()

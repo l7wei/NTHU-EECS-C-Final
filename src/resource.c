@@ -5,8 +5,6 @@ float se_gain = 1.0f;
 
 // Hello
 ALLEGRO_SAMPLE *sample_hello;
-ALLEGRO_BITMAP *hello_cover;
-ALGIF_ANIMATION *hello_start;
 
 // Start Menu
 ALLEGRO_BITMAP *start_menu_all;
@@ -70,8 +68,6 @@ void load_resource()
 {
     // Hello
     sample_hello = al_load_sample("./assets/sound/hello.mp3");
-    hello_cover = al_load_bitmap("./assets/image/hello/cover.png");
-    hello_start = algif_load_animation("../assets/image/hello/start.gif"); // algif 只支援相對路徑
     // Start Menu
     start_menu_all = al_load_bitmap("./assets/image/start_menu/all.png");
     start_menu_start = al_load_bitmap("./assets/image/start_menu/start.png");
