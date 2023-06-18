@@ -111,6 +111,20 @@ int game_process(ALLEGRO_EVENT event)
                 GAME_STATUS = MENU_GAME_PAUSE;
             }
         }
+        if (event.type == ALLEGRO_EVENT_KEY_CHAR)
+        {
+            switch (event.keyboard.unichar)
+            {
+            case 'a':
+            case 'A':
+                player.x -= 50;
+                break;
+            case 'd':
+            case 'D':
+                player.x += 50;
+                break;
+            }
+        }
     }
     else if (GAME_STATUS == MENU_GAME_PAUSE)
     {
@@ -207,10 +221,29 @@ void draw_game()
     // 繪製資源
 }
 
+int current_background_index = 0;
+
 void draw_background()
 {
     // 繪製背景
-    al_draw_bitmap(game_background, 0, 0, 0);
+    if (player.x < 0)
+    {
+        current_background_index = (current_background_index == 0) ? 1 : 0;
+    }
+    else if (player.x > SCREEN_WIDTH)
+    {
+        current_background_index = (current_background_index == 0) ? 1 : 0;
+    }
+    // 繪製背景
+    switch (current_background_index)
+    {
+    case 0:
+        al_draw_bitmap(game_background_1, 0, 0, 0);
+        break;
+    case 1:
+        al_draw_bitmap(game_background_2, 0, 0, 0);
+        break;
+    }
 }
 
 void draw_role()

@@ -26,7 +26,8 @@ ALLEGRO_BITMAP *pause_menu_continue;
 ALLEGRO_BITMAP *pause_menu_finish;
 
 // Game Background
-ALLEGRO_BITMAP *game_background;
+ALLEGRO_BITMAP *game_background_1;
+ALLEGRO_BITMAP *game_background_2;
 
 // Font
 ALLEGRO_FONT *bit_font;
@@ -80,7 +81,8 @@ void load_resource()
     role_menu_kiwi = al_load_bitmap("./assets/image/role_select/2_kiwi.png");
     role_menu_otter = al_load_bitmap("./assets/image/role_select/3_otter.png");
     // Game Background
-    game_background = al_load_bitmap("./assets/image/game/background.png");
+    game_background_1 = al_load_bitmap("./assets/image/game/background_1.png");
+    game_background_2 = al_load_bitmap("./assets/image/game/background_2.png");
     // Font
     bit_font = al_load_ttf_font("./assets/font/bit.ttf", 36, 0); // 載入字體
     // Pause Menu

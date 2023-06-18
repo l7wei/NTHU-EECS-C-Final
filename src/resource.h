@@ -27,7 +27,8 @@ extern ALLEGRO_BITMAP *pause_menu_continue;
 extern ALLEGRO_BITMAP *pause_menu_finish;
 
 // Game Background
-extern ALLEGRO_BITMAP *game_background;
+extern ALLEGRO_BITMAP *game_background_1;
+extern ALLEGRO_BITMAP *game_background_2;
 
 // story
 extern ALLEGRO_BITMAP *story_1;
