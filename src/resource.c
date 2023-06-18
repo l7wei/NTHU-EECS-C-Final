@@ -104,9 +104,9 @@ void load_resource()
     // Games
     credits_all = al_load_bitmap("./assets/image/credits/credits_all.png");
     // Role
-    role_panda = al_load_bitmap("./assets/image/game/panda.png");
-    role_kiwi = al_load_bitmap("./assets/image/game/kiwi.png");
-    role_otter = al_load_bitmap("./assets/image/game/otter.png");
+    role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
+    role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");
+    role_otter = al_load_bitmap("./assets/image/role/simple/otter.png");
 }
 
 void destroy_resource()

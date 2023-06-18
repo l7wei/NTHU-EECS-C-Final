@@ -189,8 +189,8 @@ void game_init()
     player.role = NULL;
     player.loading = NULL;
     player.money = 0;
-    player.x = 0.4; // 放大要調整
-    player.y = 2.9; // 放大要調整
+    player.x = 0; // 放大要調整
+    player.y = 0; // 放大要調整
     // 初始化事件
     // 初始化資源
     // 初始化遊戲介面
