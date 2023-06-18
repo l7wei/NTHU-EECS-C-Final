@@ -21,9 +21,6 @@ ALLEGRO_BITMAP *role_menu_panda;
 ALLEGRO_BITMAP *role_menu_kiwi;
 ALLEGRO_BITMAP *role_menu_otter;
 
-// Credit Menu
-ALLEGRO_BITMAP *credit_menu_all;
-
 // Pause Menu
 ALLEGRO_BITMAP *pause_menu_all;
 ALLEGRO_BITMAP *pause_menu_restart;
@@ -34,7 +31,7 @@ ALLEGRO_BITMAP *pause_menu_finish;
 ALLEGRO_BITMAP *game_background;
 
 // Font
-ALLEGRO_FONT *write_font;
+ALLEGRO_FONT *bit_font;
 
 // story
 ALLEGRO_BITMAP *story_1;
@@ -46,6 +43,14 @@ ALLEGRO_BITMAP *about_1;
 ALLEGRO_BITMAP *about_2;
 ALLEGRO_BITMAP *about_3;
 ALLEGRO_BITMAP *teams;
+
+// Credits
+ALLEGRO_BITMAP *credits_all;
+
+// role
+ALLEGRO_BITMAP *role_panda;
+ALLEGRO_BITMAP *role_kiwi;
+ALLEGRO_BITMAP *role_otter;
 
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
@@ -78,12 +83,10 @@ void load_resource()
     role_menu_panda = al_load_bitmap("./assets/image/role_select/1_panda.png");
     role_menu_kiwi = al_load_bitmap("./assets/image/role_select/2_kiwi.png");
     role_menu_otter = al_load_bitmap("./assets/image/role_select/3_otter.png");
-    // Credit Menu
-    credit_menu_all = al_load_bitmap("./assets/image/credits/credits_all.png");
     // Game Background
     game_background = al_load_bitmap("./assets/image/game/background.png");
     // Font
-    write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
+    bit_font = al_load_ttf_font("./assets/font/bit.ttf", 36, 0); // 載入字體
     // Pause Menu
     pause_menu_all = al_load_bitmap("./assets/image/pause_menu/all.png");
     pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");
@@ -93,18 +96,22 @@ void load_resource()
     story_1 = al_load_bitmap("./assets/image/start_menu/story/1.png");
     story_2 = al_load_bitmap("./assets/image/start_menu/story/2.png");
     story_3 = al_load_bitmap("./assets/image/start_menu/story/3.png");
-
     // about
     about_1 = al_load_bitmap("./assets/image/start_menu/about/1.png");
     about_2 = al_load_bitmap("./assets/image/start_menu/about/2.png");
     about_3 = al_load_bitmap("./assets/image/start_menu/about/3.png");
     teams = al_load_bitmap("./assets/image/start_menu/teams.png");
-
+    // Games
+    credits_all = al_load_bitmap("./assets/image/credits/credits_all.png");
+    // Role
+    role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
+    role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");
+    role_otter = al_load_bitmap("./assets/image/role/simple/otter.png");
 }
 
 void destroy_resource()
 {
-    al_destroy_font(write_font); // 清理字體
+    al_destroy_font(bit_font); // 清理字體
 }
 
 void set_bgm_gain(float gain)
