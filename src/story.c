@@ -10,19 +10,19 @@ void story_draw()
     printf("story_button_index = %d\n", story_button_index);
     if (story_button_index == 0)
     {
-        al_draw_bitmap(sm_story_1, 0, 0, 0);
+        al_draw_bitmap(story_1, 0, 0, 0);
     }
     else if (story_button_index == 1)
     {
-        al_draw_bitmap(sm_story_2, 0, 0, 0);
+        al_draw_bitmap(story_2, 0, 0, 0);
     }
     else if (story_button_index == 2)
     {
-        al_draw_bitmap(sm_story_3, 0, 0, 0);
+        al_draw_bitmap(story_3, 0, 0, 0);
     }
     else if (story_button_index == 3)
     {
-        al_draw_bitmap(sm_teams, 0, 0, 0);
+        al_draw_bitmap(teams, 0, 0, 0);
     }
 }
 

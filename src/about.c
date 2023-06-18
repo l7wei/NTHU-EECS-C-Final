@@ -11,19 +11,19 @@ void about_draw()
     printf("about_button_index = %d\n", about_button_index);
     if (about_button_index == 0)
     {
-        al_draw_bitmap(sm_about_1, 0, 0, 0);
+        al_draw_bitmap(about_1, 0, 0, 0);
     }
     else if (about_button_index == 1)
     {
-        al_draw_bitmap(sm_about_2, 0, 0, 0);
+        al_draw_bitmap(about_2, 0, 0, 0);
     }
     else if (about_button_index == 2)
     {
-        al_draw_bitmap(sm_about_3, 0, 0, 0);
+        al_draw_bitmap(about_3, 0, 0, 0);
     }    
     else if (about_button_index == 3)
     {
-        al_draw_bitmap(sm_teams, 0, 0, 0);
+        al_draw_bitmap(teams, 0, 0, 0);
     }
 }
 
