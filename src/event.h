@@ -3,7 +3,7 @@
 #include "global.h"
 
 // Game Settings
-#define MAX_EVENT 1
+#define MAX_EVENT 23
 
 // Event struct
 typedef struct Game_event

@@ -6,7 +6,7 @@
 //    int moneyChange;              Money 變化
 //    const char *loadingOperator;  Loading 運算符號
 //    int loadingChange;            Loading 變化
-//    const char *image_path;       圖片路徑 用 ./開頭) 
+//    const char *image_path;       圖片路徑 用 ./開頭)
 
 Game_event events[MAX_EVENT] = {{"土地公", "+", 10000000, "+", 0, "./assets/image/event/1.png"},
                                 {"阿嬤", "+", 30000, "+", 0, "./assets/image/event/2.png"},
@@ -30,9 +30,7 @@ Game_event events[MAX_EVENT] = {{"土地公", "+", 10000000, "+", 0, "./assets/i
                                 {"外系搶課", "+", 0, "-", 0, "./assets/image/event/20.png"},
                                 {"新成功湖", "+", 0, "+", 0, "./assets/image/event/21.png"},
                                 {"鴉片粉圓", "+", 0, "+", 0, "./assets/image/event/22.png"},
-                                {"放煙火", "+", 0, "+", 0, "./assets/image/event/23.png"}
-                                };
-                                
+                                {"放煙火", "+", 0, "+", 0, "./assets/image/event/23.png"}};
 
 Game_event getEvent()
 {

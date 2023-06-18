@@ -11,14 +11,17 @@ void story_draw()
     if (story_button_index == 0)
     {
         al_draw_bitmap(story_1, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }
     else if (story_button_index == 1)
     {
         al_draw_bitmap(story_2, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }
     else if (story_button_index == 2)
     {
         al_draw_bitmap(story_3, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }
 }
 
