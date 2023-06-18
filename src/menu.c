@@ -130,11 +130,11 @@ void pause_menu_draw()
     printf("pause_menu_button_index = %d\n", pause_menu_button_index);
     if (pause_menu_button_index == 0)
     {
-        al_draw_bitmap(pause_menu_restart, 0, 0, 0);
+        al_draw_bitmap(pause_menu_continue, 0, 0, 0);
     }
     else if (pause_menu_button_index == 1)
     {
-        al_draw_bitmap(pause_menu_continue, 0, 0, 0);
+        al_draw_bitmap(pause_menu_restart, 0, 0, 0);
     }
     else if (pause_menu_button_index == 2)
     {
