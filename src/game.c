@@ -42,6 +42,8 @@ enum // 遊戲狀態
     MENU_GAME_ROLE_SELECT,
     MENU_GAME_CREDIT_SELECT,
     MENU_GAME_PLAYING,
+    MENU_GAME_PAUSE,
+    MENU_GAME_TERMINATE
 };
 
 enum // 遊戲訊息
@@ -114,9 +116,33 @@ int game_process(ALLEGRO_EVENT event)
             {
                 printf("Game Pause\n");
                 // 按下 ESC 時暫停遊戲
-                return MSG_GAME_PAUSE;
+                GAME_STATUS = MENU_GAME_PAUSE;
             }
         }
+    }
+    else if (GAME_STATUS == MENU_GAME_PAUSE)
+    {
+        printf("Game Pause\n");
+        // 暫停遊戲
+        if (event.type == ALLEGRO_EVENT_KEY_DOWN)
+        {
+            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
+                printf("Game Resume\n");
+                // 按下 ESC 時繼續遊戲
+                GAME_STATUS = MENU_GAME_PLAYING;
+            }
+            else
+            {
+                process_pause_menu(event);
+            }
+        }
+    }
+    else if (GAME_STATUS == MENU_GAME_TERMINATE)
+    {
+        printf("Game Terminate\n");
+        // 結束遊戲
+        return MSG_GAME_OVER;
     }
     return MSG_NOPE;
 }
@@ -137,10 +163,20 @@ void game_draw()
         printf("Draw credit selection\n");
         select_credit_draw();
     }
-    else
+    else if (GAME_STATUS == MENU_GAME_PLAYING)
     {
+        // 繪製遊戲介面
         printf("Draw game\n");
         draw_game();
+    }
+    else if (GAME_STATUS == MENU_GAME_PAUSE)
+    {
+        // 繪製暫停介面
+        printf("Draw pause\n");
+        draw_pause_menu();
+    }
+    else
+    {
     }
 }
 
@@ -372,4 +408,67 @@ void select_credit_draw()
         al_draw_bitmap(loading_selected, 0, 0, 0);
     }
     return;
+}
+
+int pause_menu_button_index = 0;
+
+int process_pause_menu(ALLEGRO_EVENT event)
+{
+    if (event.type == ALLEGRO_EVENT_KEY_DOWN)
+    {
+        if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
+        {
+            pause_menu_button_index++;
+            if (pause_menu_button_index > 2)
+            {
+                pause_menu_button_index = 0;
+            }
+        }
+        if (event.keyboard.keycode == ALLEGRO_KEY_UP)
+        {
+
+            pause_menu_button_index--;
+            if (pause_menu_button_index < 0)
+            {
+                pause_menu_button_index = 2;
+            }
+        }
+        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && pause_menu_button_index == 0)
+        {
+            // al_play_sample_instance(click_se_spi);
+            GAME_STATUS = MENU_GAME_PLAYING;
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && pause_menu_button_index == 1)
+        {
+            // al_play_sample_instance(click_se_spi);
+            GAME_STATUS = MENU_GAME_ROLE_SELECT;
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && pause_menu_button_index == 2)
+        {
+            // al_play_sample_instance(click_se_spi);
+            GAME_STATUS = MENU_GAME_TERMINATE;
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+        {
+            printf("Game Continue\n");
+            return MSG_GAME_START;
+        }
+    }
+}
+
+void draw_pause_menu()
+{
+    printf("pause_menu_button_index = %d\n", pause_menu_button_index);
+    if (pause_menu_button_index == 0)
+    {
+        al_draw_bitmap(pause_menu_continue, 0, 0, 0);
+    }
+    else if (pause_menu_button_index == 1)
+    {
+        al_draw_bitmap(pause_menu_restart, 0, 0, 0);
+    }
+    else if (pause_menu_button_index == 2)
+    {
+        al_draw_bitmap(pause_menu_finish, 0, 0, 0);
+    }
 }

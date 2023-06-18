@@ -68,21 +68,12 @@ int scene_process(ALLEGRO_EVENT event)
     else if (scene_state == SCENE_GAME)
     {
         msg = game_process(event);
-        if (msg == MSG_GAME_PAUSE)
-        {
-            scene_state = SCENE_PAUSE;
-            pause_menu_init();
-        }
-        else if (msg == MSG_GAME_OVER)
+        if (msg == MSG_GAME_OVER)
         {
             game_destroy();
             scene_state = SCENE_RESULT;
             result_init();
         }
-    }
-    else if (scene_state == SCENE_PAUSE)
-    {
-        msg = pause_menu_process(event);
     }
     else if (scene_state == SCENE_STORY)
     {
@@ -160,10 +151,6 @@ void scene_draw()
     else if (scene_state == SCENE_SETTING)
     {
         setting_draw();
-    }
-    else if (scene_state == SCENE_PAUSE)
-    {
-        pause_menu_draw();
     }
     al_flip_display();
 }
