@@ -25,9 +25,8 @@ Player player;
 Game_event game_event;
 
 int dice;
-int printed_loading_selected = NULL;
 
-enum
+enum // 角色
 {
     ROLE_NULL,
     ROLE_PANDA,
@@ -35,33 +34,38 @@ enum
     ROLE_OTTER,
 };
 
-enum
+enum // 遊戲狀態
 {
-    GAME_NULL,
-    GAME_ROLE_SELECT_MENU,
-    GAME_CREDIT_SELECT_MENU,
-    GAME_PLAYING,
+    MENU_GAME_NULL,
+    MENU_GAME_ROLE_SELECT,
+    MENU_GAME_CREDIT_SELECT,
+    MENU_GAME_PLAYING,
 };
 
-int GAME_STATUS = GAME_ROLE_SELECT_MENU;
+enum // 遊戲訊息
+{
+    GAME_NEW_EVENT,
+};
+
+int GAME_STATUS = MENU_GAME_ROLE_SELECT;
 
 int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
 {
     printf("Game Running...\n");
-    if (GAME_STATUS == GAME_ROLE_SELECT_MENU)
+    if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
         printf("Choose role\n");
         select_role_process(event);
         // 選擇角色
     }
-    else if (GAME_STATUS == GAME_CREDIT_SELECT_MENU)
+    else if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
     {
         printf("Choose credit\n");
         select_credit_process(event);
         // 選擇學分
     }
-    else if (GAME_STATUS == GAME_PLAYING)
+    else if (GAME_STATUS == MENU_GAME_PLAYING)
     {
         if (event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
@@ -98,14 +102,14 @@ int game_process(ALLEGRO_EVENT event)
 void game_draw()
 {
     al_clear_to_color(al_map_rgb(0, 0, 0)); // 清除畫布
-    if (GAME_STATUS == GAME_ROLE_SELECT_MENU)
+    if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
         printf("Draw role selection\n");
         select_role_draw();
         // 繪製角色選擇介面
         return;
     }
-    if (GAME_STATUS == GAME_CREDIT_SELECT_MENU)
+    if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
     {
         printf("Draw credit selection\n");
         select_credit_draw();
@@ -137,8 +141,24 @@ void game_destroy()
 
 void draw_game()
 {
+    draw_background(); // 繪製背景
+    draw_interface();  // 繪製遊戲介面
+    // 繪製地圖
+    // 繪製玩家
+
+    draw_event(); // 繪製事件
+
+    // 繪製資源
+}
+
+void draw_background()
+{
     // 繪製背景
     al_draw_bitmap(game_background, 0, 0, 0);
+}
+
+void draw_interface()
+{
     // 繪製遊戲介面
     char money_buffer[256];
     sprintf(money_buffer, "Money:%lld", player.money);
@@ -155,10 +175,16 @@ void draw_game()
     char event_buffer[256];
     sprintf(event_buffer, "Event: %s", game_event.description);
     al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
-    // 繪製地圖
-    // 繪製玩家
+}
+
+void draw_event()
+{
     // 繪製事件
-    // 繪製資源
+    ALLEGRO_BITMAP *new_event = al_load_bitmap(events->image_path);
+    al_draw_bitmap(new_event, 0, 0, 0);
+
+    al_rest(0.5);
+    al_destroy_bitmap(new_event);
 }
 
 int role_select = 0;
@@ -206,7 +232,7 @@ int select_role_process(ALLEGRO_EVENT event)
                 player.role = ROLE_OTTER;
                 player.money = 100001128;
             }
-            GAME_STATUS = GAME_CREDIT_SELECT_MENU;
+            GAME_STATUS = MENU_GAME_CREDIT_SELECT;
             return MSG_NOPE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
@@ -245,7 +271,7 @@ int select_credit_process(ALLEGRO_EVENT event)
             else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
                 printf("Game Start\n");
-                GAME_STATUS = GAME_PLAYING;
+                GAME_STATUS = MENU_GAME_PLAYING;
             }
         }
     }

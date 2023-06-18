@@ -1,10 +1,14 @@
 #include "event.h"
 #include "global.h"
 
-Game_event events[MAX_EVENT] = {
-    {"你找到了一筆錢，獲得$100!", 100}, {"你被罰款$50!", -50}, {"你被罰款$100!", -100},
-    {"你找到了一筆錢，獲得$50!", 50},   {"沒有事件發生", 0},
-};
+//    const char *description;
+//    const char *operator;
+//    int moneyChange;
+//    const char *image_path;
+
+Game_event events[MAX_EVENT] = {{"土地公有求必應", "+", 10000, "./assets/image/event/15.png"},
+                                {"土地公有求必應", "+", 10000, "./assets/image/event/15.png"},
+                                {"土地公有求必應", "+", 10000, "./assets/image/event/15.png"}};
 
 Game_event getEvent()
 {
