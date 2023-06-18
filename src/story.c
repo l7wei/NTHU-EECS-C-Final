@@ -20,11 +20,15 @@ void story_draw()
     {
         al_draw_bitmap(sm_story_3, 0, 0, 0);
     }
+    else if (story_button_index == 3)
+    {
+        al_draw_bitmap(sm_teams, 0, 0, 0);
+    }
 }
 
 int story_process(ALLEGRO_EVENT event)
 {
-    int MAX_PAGE = 2;
+    int MAX_PAGE = 3;
     // 0, 1, 2
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {

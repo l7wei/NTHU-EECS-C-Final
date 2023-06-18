@@ -47,6 +47,8 @@ extern ALLEGRO_FONT *write_font;
 extern ALLEGRO_BITMAP *sm_about_1;
 extern ALLEGRO_BITMAP *sm_about_2;
 extern ALLEGRO_BITMAP *sm_about_3;
+extern ALLEGRO_BITMAP *sm_teams;
+
 
 void load_resource();
 void destroy_resource();

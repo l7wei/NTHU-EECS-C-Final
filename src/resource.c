@@ -46,6 +46,7 @@ ALLEGRO_BITMAP *sm_rotate;
 ALLEGRO_BITMAP *sm_about_1;
 ALLEGRO_BITMAP *sm_about_2;
 ALLEGRO_BITMAP *sm_about_3;
+ALLEGRO_BITMAP *sm_teams;
 
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
@@ -99,6 +100,8 @@ void load_resource()
     sm_about_1 = al_load_bitmap("./assets/image/sm_story&about/sm_about_1.png");
     sm_about_2 = al_load_bitmap("./assets/image/sm_story&about/sm_about_2.png");
     sm_about_3 = al_load_bitmap("./assets/image/sm_story&about/sm_about_3.png");
+    sm_teams = al_load_bitmap("./assets/image/sm_story&about/sm_teams.png");
+
 }
 
 void destroy_resource()

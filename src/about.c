@@ -20,12 +20,16 @@ void about_draw()
     else if (about_button_index == 2)
     {
         al_draw_bitmap(sm_about_3, 0, 0, 0);
+    }    
+    else if (about_button_index == 3)
+    {
+        al_draw_bitmap(sm_teams, 0, 0, 0);
     }
 }
 
 int about_process(ALLEGRO_EVENT event)
 {
-    int MAX_PAGE = 2;
+    int MAX_PAGE = 3;
     // 0, 1, 2
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
