@@ -56,6 +56,23 @@ extern ALLEGRO_BITMAP *role_panda;
 extern ALLEGRO_BITMAP *role_kiwi;
 extern ALLEGRO_BITMAP *role_otter;
 
+// role_good
+extern ALGIF_ANIMATION *role_good_excited_panda;
+extern ALGIF_ANIMATION *role_good_excited_kiwi;
+extern ALGIF_ANIMATION *role_good_excited_otter;
+extern ALGIF_ANIMATION *role_good_panda;
+extern ALGIF_ANIMATION *role_good_kiwi;
+extern ALGIF_ANIMATION *role_good_otter;
+
+// role_bad
+extern ALGIF_ANIMATION *role_bad_panda;
+extern ALGIF_ANIMATION *role_bad_kiwi;
+extern ALGIF_ANIMATION *role_bad_otter;
+
+// eggs
+extern ALGIF_ANIMATION *egg_panda;
+extern ALGIF_ANIMATION *egg_bad_kiwi;
+
 // dice
 extern ALLEGRO_BITMAP *dice1;
 extern ALLEGRO_BITMAP *dice2;

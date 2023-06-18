@@ -55,6 +55,23 @@ ALLEGRO_BITMAP *role_panda;
 ALLEGRO_BITMAP *role_kiwi;
 ALLEGRO_BITMAP *role_otter;
 
+// role_good
+ALLEGRO_BITMAP *role_good_excited_panda;
+ALLEGRO_BITMAP *role_good_excited_kiwi;
+ALLEGRO_BITMAP *role_good_excited_otter;
+ALLEGRO_BITMAP *role_good_panda;
+ALLEGRO_BITMAP *role_good_kiwi;
+ALLEGRO_BITMAP *role_good_otter;
+
+// role_bad
+ALLEGRO_BITMAP *role_bad_panda;
+ALLEGRO_BITMAP *role_bad_kiwi;
+ALLEGRO_BITMAP *role_bad_otter;
+
+// eggs
+ALLEGRO_BITMAP *egg_panda;
+ALLEGRO_BITMAP *egg_bad_kiwi;
+
 // dice
 ALLEGRO_BITMAP *dice1;
 ALLEGRO_BITMAP *dice2;
@@ -178,6 +195,20 @@ void load_resource()
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");
     role_otter = al_load_bitmap("./assets/image/role/simple/otter.png");
+    // role_good
+    role_good_panda = algif_load_animation("./assets/image/role/good/panda.gif");
+    role_good_kiwi = algif_load_animation("./assets/image/role/good/kiwi.gif");
+    role_good_otter = algif_load_animation("./assets/image/role/good/otter.gif");
+    role_good_excited_panda = algif_load_animation("./assets/image/role/good/excited/panda.gif");
+    role_good_excited_kiwi = algif_load_animation("./assets/image/role/good/excited/kiwi.gif");
+    role_good_excited_otter = algif_load_animation("./assets/image/role/good/excited/otter.gif");
+    // role_bad
+    role_bad_panda = algif_load_animation("./assets/image/role/bad/panda.gif");
+    role_bad_kiwi = algif_load_animation("./assets/image/role/bad/kiwi.gif");
+    role_bad_otter = algif_load_animation("./assets/image/role/bad/otter.gif");
+    // egg
+    egg_panda = algif_load_animation("./assets/image/role/eggs/panda.gif");
+    egg_bad_kiwi = algif_load_animation("./assets/image/role/eggs/kiwi.gif");
     // dice
     dice1 = al_load_bitmap("./assets/image/dice/1.png");
     dice2 = al_load_bitmap("./assets/image/dice/2.png");
