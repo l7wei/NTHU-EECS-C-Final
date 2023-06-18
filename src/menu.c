@@ -4,12 +4,13 @@ int menu_button_index = 0;
 
 int menu_process(ALLEGRO_EVENT event)
 {
+    int MAX_BUTTON = 3;
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
         if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
             menu_button_index++;
-            if (menu_button_index > 3)
+            if (menu_button_index > MAX_BUTTON)
             {
                 menu_button_index = 0;
             }
@@ -19,7 +20,7 @@ int menu_process(ALLEGRO_EVENT event)
             menu_button_index--;
             if (menu_button_index < 0)
             {
-                menu_button_index = 3;
+                menu_button_index = MAX_BUTTON;
             }
         }
         if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 0)
@@ -41,10 +42,6 @@ int menu_process(ALLEGRO_EVENT event)
         {
             // al_play_sample_instance(click_se_spi);
             return MSG_TERMINATE;
-        }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-        {
-            printf("Game Resume\n");
         }
     }
 }
