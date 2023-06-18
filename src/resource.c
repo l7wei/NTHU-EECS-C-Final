@@ -51,6 +51,50 @@ ALLEGRO_BITMAP *role_panda;
 ALLEGRO_BITMAP *role_kiwi;
 ALLEGRO_BITMAP *role_otter;
 
+//dice
+ALLEGRO_BITMAP *dice1;
+ALLEGRO_BITMAP *dice2;
+ALLEGRO_BITMAP *dice3;
+ALLEGRO_BITMAP *dice4;
+ALLEGRO_BITMAP *dice5;
+ALLEGRO_BITMAP *dice6;
+ALGIF_ANIMATION *dice_rolling;
+
+//ending
+ALLEGRO_BITMAP *ending_1_1;
+ALLEGRO_BITMAP *ending_1_2;
+ALLEGRO_BITMAP *ending_2_1;
+ALLEGRO_BITMAP *ending_2_2;
+ALLEGRO_BITMAP *ending_3_1;
+ALLEGRO_BITMAP *ending_3_2;
+ALLEGRO_BITMAP *ending_4_1;
+ALLEGRO_BITMAP *ending_4_2;
+ALLEGRO_BITMAP *ending_5_1;
+ALLEGRO_BITMAP *ending_5_2;
+ALLEGRO_BITMAP *ending_6_1;
+ALLEGRO_BITMAP *ending_6_2;
+ALLEGRO_BITMAP *ending_7_1;
+ALLEGRO_BITMAP *ending_7_2;
+
+//sound
+ALLEGRO_SAMPLE *badthings;
+ALLEGRO_SAMPLE *bus_road;
+ALLEGRO_SAMPLE *changeselect;
+ALLEGRO_SAMPLE *credit_changing;
+ALLEGRO_SAMPLE *decision1;
+ALLEGRO_SAMPLE *failure;
+ALLEGRO_SAMPLE *gamestart;
+ALLEGRO_SAMPLE *role_selectchange;
+ALLEGRO_SAMPLE *story_open;
+ALLEGRO_SAMPLE *treasureget;
+ALLEGRO_SAMPLE *working;
+ALLEGRO_SAMPLE *backgroung;
+
+
+
+
+
+
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
     *sp = al_load_sample(filename);
@@ -105,6 +149,42 @@ void load_resource()
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");
     role_otter = al_load_bitmap("./assets/image/role/simple/otter.png");
+    //dice
+    dice1 = al_load_bitmap("./assets/image/dice/1.png");
+    dice2 = al_load_bitmap("./assets/image/dice/2.png");
+    dice3 = al_load_bitmap("./assets/image/dice/3.png");
+    dice4 = al_load_bitmap("./assets/image/dice/4.png");
+    dice5 = al_load_bitmap("./assets/image/dice/5.png");
+    dice6 = al_load_bitmap("./assets/image/dice/6.png");
+    dice_rolling = algif_load_animation("../assets/image/dice/rolling.gif"); 
+    //ending
+    ending_1_1 = al_load_bitmap("./assets/image/ending/level1_1.png");  
+    ending_1_2 = al_load_bitmap("./assets/image/ending/level1_2.png");
+    ending_2_1 = al_load_bitmap("./assets/image/ending/level2_1.png");
+    ending_2_2 = al_load_bitmap("./assets/image/ending/level2_2.png");
+    ending_3_1 = al_load_bitmap("./assets/image/ending/level3_1.png");
+    ending_3_2 = al_load_bitmap("./assets/image/ending/level3_2.png");
+    ending_4_1 = al_load_bitmap("./assets/image/ending/level4_1.png");
+    ending_4_2 = al_load_bitmap("./assets/image/ending/level4_2.png");
+    ending_5_1 = al_load_bitmap("./assets/image/ending/level5_1.png");
+    ending_5_2 = al_load_bitmap("./assets/image/ending/level5_2.png");
+    ending_6_1 = al_load_bitmap("./assets/image/ending/level6_1.png");
+    ending_6_2 = al_load_bitmap("./assets/image/ending/level6_2.png");
+    ending_7_1 = al_load_bitmap("./assets/image/ending/level7_1.png");
+    ending_7_2 = al_load_bitmap("./assets/image/ending/level7_2.png");
+    //sound
+    badthings = al_load_sample("./assets/sound/badthings.mp3");
+    bus_road = al_load_sample("./assets/sound/bus_road.mp3");
+    changeselect = al_load_sample("./assets/sound/changesele.mp3");
+    credit_changing = al_load_sample("./assets/sound/ctcredit_changing.mp3");
+    decision1 = al_load_sample("./assets/sound/decision1.mp3");
+    failure = al_load_sample("./assets/sound/failure.mp3");
+    gamestart = al_load_sample("./assets/sound/gamestart.mp3");
+    role_selectchange = al_load_sample("./assets/sound/role_selectchange.mp3");
+    story_open = al_load_sample("./assets/sound/story_open.mp3");
+    treasureget = al_load_sample("./assets/sound/treasureget.mp3");
+    working = al_load_sample("./assets/sound/working.mp3");
+    backgroung= al_load_sample("./assets/sound/background.mp3");
 }
 
 void destroy_resource()
