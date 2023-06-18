@@ -24,12 +24,26 @@ void story_draw()
 
 int story_process(ALLEGRO_EVENT event)
 {
+    int MAX_PAGE = 2;
+    // 0, 1, 2
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
-        if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
+        if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+        {
+            return MSG_GAME_OVER;
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
         {
             story_button_index++;
-            if (story_button_index >= 3)
+            if (story_button_index > MAX_PAGE)
+            {
+                return MSG_GAME_OVER;
+            }
+        }
+        else if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
+        {
+            story_button_index++;
+            if (story_button_index > MAX_PAGE)
             {
                 return MSG_GAME_OVER;
             }
