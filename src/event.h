@@ -1,7 +1,9 @@
-#ifndef EVENT_H
-#define EVENT_H
+#pragma once
 
 #include "global.h"
+
+// Game Settings
+#define MAX_EVENT 5
 
 // Event struct
 typedef struct Game_event
@@ -14,5 +16,3 @@ Game_event getEvent();
 
 // Event array
 extern Game_event events[MAX_EVENT];
-
-#endif
