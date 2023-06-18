@@ -83,7 +83,7 @@ ALLEGRO_BITMAP *ending_7_2;
 ALLEGRO_SAMPLE *badthings;
 ALLEGRO_SAMPLE *bus_road;
 ALLEGRO_SAMPLE *changeselect;
-ALLEGRO_SAMPLE *credit_changing;
+// ALLEGRO_SAMPLE *credit_changing;
 ALLEGRO_SAMPLE *decision1;
 ALLEGRO_SAMPLE *failure;
 ALLEGRO_SAMPLE *gamestart;
@@ -91,7 +91,10 @@ ALLEGRO_SAMPLE *role_selectchange;
 ALLEGRO_SAMPLE *story_open;
 ALLEGRO_SAMPLE *treasureget;
 ALLEGRO_SAMPLE *working;
-ALLEGRO_SAMPLE *backgroung;
+ALLEGRO_SAMPLE *backgroung_music;
+
+ALLEGRO_SAMPLE_INSTANCE *credit_changing_spi;
+ALLEGRO_SAMPLE *credit_changing_sp;
 
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
@@ -176,7 +179,7 @@ void load_resource()
     badthings = al_load_sample("./assets/sound/badthings.mp3");
     bus_road = al_load_sample("./assets/sound/bus_road.mp3");
     changeselect = al_load_sample("./assets/sound/changesele.mp3");
-    credit_changing = al_load_sample("./assets/sound/ctcredit_changing.mp3");
+    // credit_changing = al_load_sample("./assets/sound/ctcredit_changing.mp3");
     decision1 = al_load_sample("./assets/sound/decision1.mp3");
     failure = al_load_sample("./assets/sound/failure.mp3");
     gamestart = al_load_sample("./assets/sound/gamestart.mp3");
@@ -184,7 +187,9 @@ void load_resource()
     story_open = al_load_sample("./assets/sound/story_open.mp3");
     treasureget = al_load_sample("./assets/sound/treasureget.mp3");
     working = al_load_sample("./assets/sound/working.mp3");
-    backgroung = al_load_sample("./assets/sound/background.mp3");
+    backgroung_music = al_load_sample("./assets/sound/background.mp3");
+
+    load_sound("../assets/sound/ctcredit_changing.mp3", &credit_changing_sp, &credit_changing_spi, ALLEGRO_PLAYMODE_ONCE);
 }
 
 void destroy_resource()
