@@ -440,6 +440,8 @@ int credit_select_process(ALLEGRO_EVENT event)
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
+                
+    al_play_sample_instance(effect_good_spi);
                 printf("Game Start\n");
                 GAME_STATUS = MENU_GAME_PLAYING;
             }

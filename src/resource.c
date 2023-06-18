@@ -207,14 +207,11 @@ void load_resource()
     load_sound("./assets/sound/effect_bad.mp3", &effect_bad_sp, &effect_bad_spi, ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/effect_fail.mp3", &effect_fail_sp, &effect_fail_spi, ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/effect_good.mp3", &effect_good_sp, &effect_good_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("./assets/sound/effect_gooddecision.mp3", &effect_gooddecision_sp, &effect_gooddecision_spi,
-               ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/effect_gooddecision.mp3", &effect_gooddecision_sp, &effect_gooddecision_spi,ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/game_start.mp3", &game_start_sp, &game_start_spi, ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/game_walking.mp3", &game_walking_sp, &game_walking_spi, ALLEGRO_PLAYMODE_ONCE);
-    load_sound("./assets/sound/menu_change_role.mp3", &menu_change_role_sp, &menu_change_role_spi,
-               ALLEGRO_PLAYMODE_ONCE);
-    load_sound("./assets/sound/menu_change_select.mp3", &menu_change_select_sp, &menu_change_select_spi,
-               ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/menu_change_role.mp3", &menu_change_role_sp, &menu_change_role_spi,ALLEGRO_PLAYMODE_ONCE);
+    load_sound("./assets/sound/menu_change_select.mp3", &menu_change_select_sp, &menu_change_select_spi,ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/menu_hello.mp3", &menu_hello_sp, &menu_hello_spi, ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/menu_story_open.mp3", &menu_story_open_sp, &menu_story_open_spi, ALLEGRO_PLAYMODE_ONCE);
     // ...其他 load_sound()

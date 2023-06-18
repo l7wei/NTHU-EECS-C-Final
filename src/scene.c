@@ -231,7 +231,7 @@ void start_animation()
     al_draw_bitmap(hello_cover, 0, 0, 0);
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, ALLEGRO_ALIGN_CENTER,
                  "Press enter to start");
-    al_play_sample_instance(menu_hello_spi);
+    al_play_sample_instance(bgm_music_spi);
     al_flip_display();
     // 等待用戶輸入
     ALLEGRO_EVENT event;
@@ -240,7 +240,6 @@ void start_animation()
         al_wait_for_event(event_queue, &event);
         if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
         {
-            al_stop_sample_instance(menu_hello_spi);
             break;
         }
     }

@@ -44,6 +44,7 @@ int menu_process(ALLEGRO_EVENT event)
         {
             // al_play_sample_instance(click_se_spi);
             return MSG_TERMINATE;
+                    al_play_sample_instance(menu_change_role_spi);
         }
     }
 }

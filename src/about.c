@@ -12,18 +12,22 @@ void about_draw()
     if (about_button_index == 0)
     {
         al_draw_bitmap(about_1, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }
     else if (about_button_index == 1)
     {
         al_draw_bitmap(about_2, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }
     else if (about_button_index == 2)
     {
         al_draw_bitmap(about_3, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }    
     else if (about_button_index == 3)
     {
         al_draw_bitmap(teams, 0, 0, 0);
+        al_play_sample_instance(effect_gooddecision_spi);
     }
 }
 
