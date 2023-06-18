@@ -9,8 +9,10 @@
 typedef struct Game_event
 {
     const char *description;
-    const char *operator;
+    const char *moneyOperator;
     int moneyChange;
+    const char *loadingOperator;
+    int loadingChange;
     const char *image_path;
 } Game_event;
 
