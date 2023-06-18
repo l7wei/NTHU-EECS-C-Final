@@ -245,19 +245,19 @@ void draw_interface()
     // 繪製遊戲介面
     char money_buffer[256];
     sprintf(money_buffer, "Money:%lld", player.money);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, money_buffer);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), 0, 0, ALLEGRO_ALIGN_LEFT, money_buffer);
 
     char loading_buffer[256];
     sprintf(loading_buffer, "Loading:%d", player.loading);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 0, ALLEGRO_ALIGN_LEFT, loading_buffer);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 0, ALLEGRO_ALIGN_LEFT, loading_buffer);
 
     char dice_buffer[256];
     sprintf(dice_buffer, "Dice: %d", dice);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
 
     char event_buffer[256];
     sprintf(event_buffer, "Event: %s", game_event.description);
-    al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
 }
 
 void event_process(ALLEGRO_EVENT event)

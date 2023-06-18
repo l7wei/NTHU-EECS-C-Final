@@ -37,7 +37,7 @@ extern ALLEGRO_BITMAP *story_2;
 extern ALLEGRO_BITMAP *story_3;
 
 // Font
-extern ALLEGRO_FONT *write_font;
+extern ALLEGRO_FONT *bit_font;
 
 // about
 extern ALLEGRO_BITMAP *about_1;

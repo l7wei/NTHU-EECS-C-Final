@@ -31,7 +31,7 @@ ALLEGRO_BITMAP *pause_menu_finish;
 ALLEGRO_BITMAP *game_background;
 
 // Font
-ALLEGRO_FONT *write_font;
+ALLEGRO_FONT *bit_font;
 
 // story
 ALLEGRO_BITMAP *story_1;
@@ -86,7 +86,7 @@ void load_resource()
     // Game Background
     game_background = al_load_bitmap("./assets/image/game/background.png");
     // Font
-    write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
+    bit_font = al_load_ttf_font("./assets/font/bit.ttf", 36, 0); // 載入字體
     // Pause Menu
     pause_menu_all = al_load_bitmap("./assets/image/pause_menu/all.png");
     pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");
@@ -111,7 +111,7 @@ void load_resource()
 
 void destroy_resource()
 {
-    al_destroy_font(write_font); // 清理字體
+    al_destroy_font(bit_font); // 清理字體
 }
 
 void set_bgm_gain(float gain)
