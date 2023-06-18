@@ -482,9 +482,8 @@ void credit_select_draw()
     if (!player.loading)
     {
         // Credit Menu
-        al_draw_bitmap(credits_all, 0, 0, 0);
-        // ALGIF_ANIMATION *credit_menu_roll = algif_load_animation("./assets/image/credits/credits_roll.gif");
-        // al_draw_bitmap(algif_get_bitmap(credit_menu_roll, al_get_time()), 0, 0, 0);
+        // al_draw_bitmap(credits_all, 0, 0, 0);
+        al_draw_bitmap(algif_get_bitmap(credits_roll, al_get_time()), 0, 0, 0);
     }
     else
     {

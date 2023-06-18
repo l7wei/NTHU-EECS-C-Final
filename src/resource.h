@@ -49,6 +49,7 @@ extern ALLEGRO_BITMAP *teams;
 
 // credits
 extern ALLEGRO_BITMAP *credits_all;
+extern ALGIF_ANIMATION *credits_roll;
 
 // role
 extern ALLEGRO_BITMAP *role_panda;
