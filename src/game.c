@@ -49,16 +49,26 @@ enum // 遊戲狀態
 enum // 遊戲訊息
 {
     MSG_GAME_NULL,
-    MSG_GAME_NEW_EVENT,
+    MSG_GAME_NEW_EVENT
 };
 
 int GAME_STATUS = MENU_GAME_ROLE_SELECT;
-int GAME_MSG = 0;
+int GAME_MSG = MSG_GAME_NULL;
 
 int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
 {
     printf("Game Running...\n");
+    if (player.loading < 0)
+    {
+        GAME_STATUS = MENU_GAME_ROLE_SELECT;
+        return MSG_GAME_OVER;
+    }
+    if (player.money < -1000000)
+    {
+        GAME_STATUS = MENU_GAME_ROLE_SELECT;
+        return MSG_GAME_OVER;
+    }
     if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
         printf("Choose role\n");
@@ -77,26 +87,13 @@ int game_process(ALLEGRO_EVENT event)
         {
             if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
-                if (player.x >= 535 && player.x <= 555)
+                if (GAME_MSG == MSG_GAME_NEW_EVENT)
                 {
-                    printf("Next event\n");
-                    // 進行下一個事件
-                    dice = rollDice();
-                    player.loading -= dice;
-
-                    if (player.loading < 0)
-                    {
-                        return MSG_GAME_OVER;
-                    }
-
-                    game_event = getEvent();
-
-                    player.money += game_event.moneyChange;
-
-                    if (player.money < -1000000)
-                    {
-                        return MSG_GAME_OVER;
-                    }
+                    GAME_MSG = MSG_GAME_NULL;
+                }
+                else if (player.x >= 535 && player.x <= 555)
+                {
+                    event_process();
                 }
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT)
@@ -209,19 +206,38 @@ void game_destroy()
 {
 }
 
+ALLEGRO_BITMAP *new_event;
+
 void draw_game()
 {
-    draw_background(); // 繪製背景
-    draw_interface();  // 繪製遊戲介面
-    // 繪製地圖
-    // 繪製玩家
-    draw_role();
-    // 繪製事件
     if (GAME_MSG == MSG_GAME_NEW_EVENT)
     {
-        event_draw();
+        printf("Draw event\n");
+        // 繪製事件
+        al_draw_bitmap(new_event, 0, 0, 0);
     }
-    // 繪製資源
+    else
+    {
+        draw_background(); // 繪製背景
+        draw_interface();  // 繪製遊戲介面
+        draw_role();       // 繪製玩家
+    }
+}
+
+void event_process()
+{
+    // 進行下一個事件
+    printf("Next event\n");
+    game_event = getEvent();
+    new_event = al_load_bitmap(game_event.image_path);
+    GAME_MSG = MSG_GAME_NEW_EVENT;
+
+    // 擲骰子減少 loading
+    dice = rollDice();
+    player.loading -= dice;
+
+    // 錢要變少了
+    player.money += game_event.moneyChange;
 }
 
 int current_background_index = 0;
@@ -309,31 +325,9 @@ void draw_interface()
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
 
     char event_buffer[256];
-    sprintf(event_buffer, "Event: %s", game_event.description);
-    al_draw_text(bit_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
-
-    char filename[100];
-    sprintf(filename, "./assets/image/dice/%d.jpg", dice);
-    ALLEGRO_BITMAP *loading_selected = al_load_bitmap(filename);
-    al_draw_bitmap(loading_selected, 20, 700, 0);
-}
-
-void event_process(ALLEGRO_EVENT event)
-{
-    if (GAME_MSG == MSG_GAME_NEW_EVENT)
-    {
-        printf("New event\n");
-        // 產生新事件
-        GAME_MSG = MSG_GAME_NULL;
-        return;
-    }
-}
-
-void event_draw()
-{
-    // 繪製事件
-    ALLEGRO_BITMAP *new_event = al_load_bitmap(events->image_path);
-    al_draw_bitmap(new_event, 0, 0, 0);
+    sprintf(event_buffer, "Last Event: %s", game_event.description);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, ALLEGRO_ALIGN_CENTRE,
+                 event_buffer);
 }
 
 int role_select = 0;
