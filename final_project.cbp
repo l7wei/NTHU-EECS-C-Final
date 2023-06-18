@@ -40,6 +40,7 @@
 			<Add option="-std=c17" />
 			<Add option="-fexceptions" />
 			<Add directory="lib/allegro/include" />
+			<Add directory="lib/algif5/include" />
 		</Compiler>
 		<Unit filename="src/event.c">
 			<Option compilerVar="CC" />

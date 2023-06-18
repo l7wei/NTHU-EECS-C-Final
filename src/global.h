@@ -14,6 +14,8 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 
+#include <algif5/algif.h>
+
 // Game Settings
 #define MAP_SIZE 100
 #define MAX_EVENT 5
