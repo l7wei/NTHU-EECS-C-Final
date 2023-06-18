@@ -166,6 +166,7 @@ void scene_init()
     // 初始化 audio
     al_install_audio();
     al_init_acodec_addon();
+    al_restore_default_mixer();
 
     // create event queue
     event_queue = al_create_event_queue();
@@ -225,13 +226,6 @@ void scene_begin()
 
 void start_animation()
 {
-    sample_instance = al_create_sample_instance(sample_hello);
-    // 快點來跟我去旅遊~
-    // al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
-    // al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
-    //  set the volume of instance
-    // al_set_sample_instance_gain(sample_instance, 1);
-    // al_play_sample_instance(sample_instance);
     // ALGIF_ANIMATION *hello_start = algif_load_animation("../assets/image/hello/start.gif"); // algif 只支援相對路徑
     ALLEGRO_BITMAP *hello_cover = al_load_bitmap("./assets/image/hello/cover.png");
     // al_draw_bitmap(algif_get_bitmap(hello_start, 1), 0, 0, 0);

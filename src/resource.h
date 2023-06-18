@@ -81,21 +81,19 @@ extern ALLEGRO_BITMAP *ending_7_1;
 extern ALLEGRO_BITMAP *ending_7_2;
 
 // sound
-extern ALLEGRO_SAMPLE *badthings;
-extern ALLEGRO_SAMPLE *bus_road;
-extern ALLEGRO_SAMPLE *changeselect;
-// extern ALLEGRO_SAMPLE *credit_changing;
-extern ALLEGRO_SAMPLE *decision1;
-extern ALLEGRO_SAMPLE *failure;
-extern ALLEGRO_SAMPLE *gamestart;
-extern ALLEGRO_SAMPLE *role_selectchange;
-extern ALLEGRO_SAMPLE *story_open;
-extern ALLEGRO_SAMPLE *treasureget;
-extern ALLEGRO_SAMPLE *working;
-extern ALLEGRO_SAMPLE *backgroung_music;
-
+extern ALLEGRO_SAMPLE_INSTANCE *bgm_bus_road_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *bgm_music_spi;
 extern ALLEGRO_SAMPLE_INSTANCE *credit_changing_spi;
-
+extern ALLEGRO_SAMPLE_INSTANCE *effect_bad_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *effect_fail_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *effect_good_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *effect_gooddecision_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *game_start_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *game_walking_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *menu_change_role_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *menu_change_select_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *menu_hello_spi;
+extern ALLEGRO_SAMPLE_INSTANCE *menu_story_open_spi;
 
 void load_resource();
 void destroy_resource();

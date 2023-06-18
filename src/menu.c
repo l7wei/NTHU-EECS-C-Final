@@ -9,6 +9,7 @@ int menu_process(ALLEGRO_EVENT event)
     {
         if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
         {
+            al_play_sample_instance(menu_change_select_spi);
             menu_button_index++;
             if (menu_button_index > MAX_BUTTON)
             {
@@ -17,6 +18,7 @@ int menu_process(ALLEGRO_EVENT event)
         }
         if (event.keyboard.keycode == ALLEGRO_KEY_UP)
         {
+            al_play_sample_instance(menu_change_select_spi);
             menu_button_index--;
             if (menu_button_index < 0)
             {

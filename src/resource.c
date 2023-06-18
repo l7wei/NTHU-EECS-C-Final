@@ -82,8 +82,7 @@ ALLEGRO_BITMAP *ending_7_2;
 // sound
 ALLEGRO_SAMPLE *badthings;
 ALLEGRO_SAMPLE *bus_road;
-ALLEGRO_SAMPLE *changeselect;
-// ALLEGRO_SAMPLE *credit_changing;
+ALLEGRO_SAMPLE *credit_changing;
 ALLEGRO_SAMPLE *decision1;
 ALLEGRO_SAMPLE *failure;
 ALLEGRO_SAMPLE *gamestart;
@@ -93,8 +92,32 @@ ALLEGRO_SAMPLE *treasureget;
 ALLEGRO_SAMPLE *working;
 ALLEGRO_SAMPLE *backgroung_music;
 
-ALLEGRO_SAMPLE_INSTANCE *credit_changing_spi;
+ALLEGRO_SAMPLE *bgm_bus_road_sp;
+ALLEGRO_SAMPLE_INSTANCE *bgm_bus_road_spi;
+ALLEGRO_SAMPLE *bgm_music_sp;
+ALLEGRO_SAMPLE_INSTANCE *bgm_music_spi;
 ALLEGRO_SAMPLE *credit_changing_sp;
+ALLEGRO_SAMPLE_INSTANCE *credit_changing_spi;
+ALLEGRO_SAMPLE *effect_bad_sp;
+ALLEGRO_SAMPLE_INSTANCE *effect_bad_spi;
+ALLEGRO_SAMPLE *effect_fail_sp;
+ALLEGRO_SAMPLE_INSTANCE *effect_fail_spi;
+ALLEGRO_SAMPLE *effect_good_sp;
+ALLEGRO_SAMPLE_INSTANCE *effect_good_spi;
+ALLEGRO_SAMPLE *effect_gooddecision_sp;
+ALLEGRO_SAMPLE_INSTANCE *effect_gooddecision_spi;
+ALLEGRO_SAMPLE *game_start_sp;
+ALLEGRO_SAMPLE_INSTANCE *game_start_spi;
+ALLEGRO_SAMPLE *game_walking_sp;
+ALLEGRO_SAMPLE_INSTANCE *game_walking_spi;
+ALLEGRO_SAMPLE *menu_change_role_sp;
+ALLEGRO_SAMPLE_INSTANCE *menu_change_role_spi;
+ALLEGRO_SAMPLE *menu_change_select_sp;
+ALLEGRO_SAMPLE_INSTANCE *menu_change_select_spi;
+ALLEGRO_SAMPLE *menu_hello_sp;
+ALLEGRO_SAMPLE_INSTANCE *menu_hello_spi;
+ALLEGRO_SAMPLE *menu_story_open_sp;
+ALLEGRO_SAMPLE_INSTANCE *menu_story_open_spi;
 
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
@@ -113,7 +136,7 @@ void destroy_sound(ALLEGRO_SAMPLE *sp, ALLEGRO_SAMPLE_INSTANCE *spi)
 void load_resource()
 {
     // Hello
-    sample_hello = al_load_sample("./assets/sound/hello.mp3");
+    sample_hello = al_load_sample("./assets/sound/menu_hello.mp3");
     // Start Menu
     start_menu_all = al_load_bitmap("./assets/image/start_menu/all.png");
     start_menu_start = al_load_bitmap("./assets/image/start_menu/start.png");
@@ -176,20 +199,24 @@ void load_resource()
     ending_7_1 = al_load_bitmap("./assets/image/ending/level7_1.png");
     ending_7_2 = al_load_bitmap("./assets/image/ending/level7_2.png");
     // sound
-    badthings = al_load_sample("./assets/sound/badthings.mp3");
-    bus_road = al_load_sample("./assets/sound/bus_road.mp3");
-    changeselect = al_load_sample("./assets/sound/changesele.mp3");
-    // credit_changing = al_load_sample("./assets/sound/ctcredit_changing.mp3");
-    decision1 = al_load_sample("./assets/sound/decision1.mp3");
-    failure = al_load_sample("./assets/sound/failure.mp3");
-    gamestart = al_load_sample("./assets/sound/gamestart.mp3");
-    role_selectchange = al_load_sample("./assets/sound/role_selectchange.mp3");
-    story_open = al_load_sample("./assets/sound/story_open.mp3");
-    treasureget = al_load_sample("./assets/sound/treasureget.mp3");
-    working = al_load_sample("./assets/sound/working.mp3");
-    backgroung_music = al_load_sample("./assets/sound/background.mp3");
-
-    load_sound("../assets/sound/ctcredit_changing.mp3", &credit_changing_sp, &credit_changing_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/bgm_bus_road.mp3", &bgm_bus_road_sp, &bgm_bus_road_spi, ALLEGRO_PLAYMODE_ONCE);
+    printf("Loading sound...\n");
+    load_sound("../assets/sound/bgm_music.mp3", &bgm_music_sp, &bgm_music_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/credit_changing.mp3", &credit_changing_sp, &credit_changing_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/effect_bad.mp3", &effect_bad_sp, &effect_bad_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/effect_fail.mp3", &effect_fail_sp, &effect_fail_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/effect_good.mp3", &effect_good_sp, &effect_good_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/effect_gooddecision.mp3", &effect_gooddecision_sp, &effect_gooddecision_spi,
+               ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/game_start.mp3", &game_start_sp, &game_start_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/game_walking.mp3", &game_walking_sp, &game_walking_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/menu_change_role.mp3", &menu_change_role_sp, &menu_change_role_spi,
+               ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/menu_change_select.mp3", &menu_change_select_sp, &menu_change_select_spi,
+               ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/menu_hello.mp3", &menu_hello_sp, &menu_hello_spi, ALLEGRO_PLAYMODE_ONCE);
+    load_sound("../assets/sound/menu_story_open.mp3", &menu_story_open_sp, &menu_story_open_spi, ALLEGRO_PLAYMODE_ONCE);
+    // ...其他 load_sound()
 }
 
 void destroy_resource()

@@ -26,7 +26,7 @@ typedef struct Player
 Player player;
 Game_event game_event;
 
-int dice;
+int dice = 1;
 
 enum // 角色
 {
@@ -77,23 +77,26 @@ int game_process(ALLEGRO_EVENT event)
         {
             if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
-                printf("Next event\n");
-                // 進行下一個事件
-                dice = rollDice();
-                player.loading -= dice;
-
-                if (player.loading < 0)
+                if (player.x >= 535 && player.x <= 555)
                 {
-                    return MSG_GAME_OVER;
-                }
+                    printf("Next event\n");
+                    // 進行下一個事件
+                    dice = rollDice();
+                    player.loading -= dice;
 
-                game_event = getEvent();
+                    if (player.loading < 0)
+                    {
+                        return MSG_GAME_OVER;
+                    }
 
-                player.money += game_event.moneyChange;
+                    game_event = getEvent();
 
-                if (player.money < -1000000)
-                {
-                    return MSG_GAME_OVER;
+                    player.money += game_event.moneyChange;
+
+                    if (player.money < -1000000)
+                    {
+                        return MSG_GAME_OVER;
+                    }
                 }
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT)
@@ -308,6 +311,11 @@ void draw_interface()
     char event_buffer[256];
     sprintf(event_buffer, "Event: %s", game_event.description);
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
+
+    char filename[100];
+    sprintf(filename, "./assets/image/dice/%d.jpg", dice);
+    ALLEGRO_BITMAP *loading_selected = al_load_bitmap(filename);
+    al_draw_bitmap(loading_selected, 20, 700, 0);
 }
 
 void event_process(ALLEGRO_EVENT event)
