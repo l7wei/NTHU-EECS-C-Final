@@ -25,6 +25,7 @@ Player player;
 Game_event game_event;
 
 int dice;
+int printed_loading_selected = NULL;
 
 enum
 {
@@ -34,50 +35,61 @@ enum
     ROLE_OTTER,
 };
 
+enum
+{
+    GAME_NULL,
+    GAME_ROLE_SELECT_MENU,
+    GAME_CREDIT_SELECT_MENU,
+    GAME_PLAYING,
+};
+
+int GAME_STATUS = GAME_ROLE_SELECT_MENU;
+
 int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
 {
     printf("Game Running...\n");
-    if (!player.role)
+    if (GAME_STATUS == GAME_ROLE_SELECT_MENU)
     {
         printf("Choose role\n");
         select_role_process(event);
         // 選擇角色
-        return MSG_NOPE;
     }
-    if (!player.loading)
+    else if (GAME_STATUS == GAME_CREDIT_SELECT_MENU)
     {
         printf("Choose credit\n");
         select_credit_process(event);
         // 選擇學分
-        return MSG_NOPE;
     }
-    if (event.type == ALLEGRO_EVENT_KEY_DOWN)
+    else if (GAME_STATUS == GAME_PLAYING)
     {
-        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
+        if (event.type == ALLEGRO_EVENT_KEY_DOWN)
         {
-            dice = rollDice();
-            player.loading -= dice;
-
-            if (player.loading < 0)
+            if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
-                return MSG_GAME_OVER;
+                dice = rollDice();
+                player.loading -= dice;
+
+                if (player.loading < 0)
+                {
+                    return MSG_GAME_OVER;
+                }
+
+                game_event = getEvent();
+
+                player.money += game_event.moneyChange;
+
+                if (player.money < -1000000)
+                {
+                    return MSG_GAME_OVER;
+                }
             }
-
-            game_event = getEvent();
-
-            player.money += game_event.moneyChange;
-
-            if (player.money < -1000000)
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
-                return MSG_GAME_OVER;
+                printf("Game Pause\n");
+                // 按下 ESC 時暫停遊戲
+                return MSG_GAME_PAUSE;
             }
-        }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
-        {
-            printf("Game Pause\n");
-            // 按下 ESC 時暫停遊戲
-            return MSG_GAME_PAUSE;
         }
     }
     return MSG_NOPE;
@@ -86,14 +98,14 @@ int game_process(ALLEGRO_EVENT event)
 void game_draw()
 {
     al_clear_to_color(al_map_rgb(0, 0, 0)); // 清除畫布
-    if (!player.role)
+    if (GAME_STATUS == GAME_ROLE_SELECT_MENU)
     {
         printf("Draw role selection\n");
         select_role_draw();
         // 繪製角色選擇介面
         return;
     }
-    if (!player.loading)
+    if (GAME_STATUS == GAME_CREDIT_SELECT_MENU)
     {
         printf("Draw credit selection\n");
         select_credit_draw();
@@ -173,22 +185,28 @@ int select_role_process(ALLEGRO_EVENT event)
                 role_select = ROLE_MAX;
             }
         }
-        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_select == ROLE_PANDA)
+        if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
         {
-            player.role = ROLE_PANDA;
-            player.money = -501022;
-            return MSG_NOPE;
-        }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_select == ROLE_KIWI)
-        {
-            player.role = ROLE_KIWI;
-            player.money = 72400;
-            return MSG_NOPE;
-        }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && role_select == ROLE_OTTER)
-        {
-            player.role = ROLE_OTTER;
-            player.money = 100001128;
+            if (role_select == ROLE_NULL)
+            {
+                return MSG_NOPE;
+            }
+            else if (role_select == ROLE_PANDA)
+            {
+                player.role = ROLE_PANDA;
+                player.money = -501022;
+            }
+            else if (role_select == ROLE_KIWI)
+            {
+                player.role = ROLE_KIWI;
+                player.money = 72400;
+            }
+            else if (role_select == ROLE_OTTER)
+            {
+                player.role = ROLE_OTTER;
+                player.money = 100001128;
+            }
+            GAME_STATUS = GAME_CREDIT_SELECT_MENU;
             return MSG_NOPE;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
@@ -202,17 +220,33 @@ int select_credit_process(ALLEGRO_EVENT event)
 {
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
-        if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+        if (!player.loading)
         {
-            printf("Back\n");
-            player.loading = NULL;
-            player.role = NULL;
-        }
-        else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
+            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
+                printf("Back\n");
+                player.loading = NULL;
+                player.role = NULL;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
+            {
+                printf("Game Credit\n");
+                player.loading = rollCredit() * 18;
+                printf("Loading: %d\n", player.loading);
+            }
+        }    // 未選擇學分
+        else // 已選擇學分
         {
-            printf("Game Credit\n");
-            player.loading = rollCredit() * 18;
-            printf("Loading: %d\n", player.loading);
+            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            {
+                printf("Back\n");
+                player.loading = NULL;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
+            {
+                printf("Game Start\n");
+                GAME_STATUS = GAME_PLAYING;
+            }
         }
     }
 }
@@ -241,5 +275,17 @@ void select_role_draw()
 void select_credit_draw()
 {
     // 繪製學分選擇介面
-    al_draw_bitmap(credit_menu_all, 0, 0, 0);
+    if (!player.loading)
+    {
+        al_draw_bitmap(credit_menu_all, 0, 0, 0);
+    }
+    else
+    {
+        int credit = player.loading / 18;
+        char filename[100];
+        sprintf(filename, "./assets/image/credits/numbers/%d.jpg", credit);
+        printf("Print %d loading selection, %s\n", credit, filename);
+        ALLEGRO_BITMAP *loading_selected = al_load_bitmap(filename);
+        al_draw_bitmap(loading_selected, 0, 0, 0);
+    }
 }
