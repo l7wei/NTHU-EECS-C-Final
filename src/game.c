@@ -15,8 +15,8 @@ int rollCredit()
 
 typedef struct Player
 {
-    float x;
-    float y;              // x, y 為角色在地圖上的位置
+    int x;
+    int y;                // x, y 為角色在地圖上的位置
     int role;             // 0: Panda, 1: Kiwi, 2: Otter
     int loading;          // 1 ~ 28 (x 18)
     long long money;      // use unsigned long long to prevent overflow (2^64) , llu
@@ -62,13 +62,13 @@ int game_process(ALLEGRO_EVENT event)
     if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
         printf("Choose role\n");
-        select_role_process(event);
+        role_select_process(event);
         // 選擇角色
     }
     else if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
     {
         printf("Choose credit\n");
-        select_credit_process(event);
+        credit_select_process(event);
         // 選擇學分
     }
     else if (GAME_STATUS == MENU_GAME_PLAYING)
@@ -96,21 +96,13 @@ int game_process(ALLEGRO_EVENT event)
                     return MSG_GAME_OVER;
                 }
             }
-            else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT && player.x > 1.3)
+            else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT && player.x > 0)
             {
-                player.x--;
+                player.x -= 50;
             }
-            else if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT && player.x < 7)
+            else if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT && player.x < SCREEN_WIDTH - 1)
             {
-                player.x++;
-            }
-            else if (event.keyboard.keycode == ALLEGRO_KEY_UP && player.y > 1.3)
-            {
-                player.y--;
-            }
-            else if (event.keyboard.keycode == ALLEGRO_KEY_DOWN && player.y < 7)
-            {
-                player.y++;
+                player.x += 50;
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
@@ -134,7 +126,7 @@ int game_process(ALLEGRO_EVENT event)
             }
             else
             {
-                process_pause_menu(event);
+                pause_menu_process(event);
             }
         }
     }
@@ -155,13 +147,13 @@ void game_draw()
     {
         // 繪製角色選擇介面
         printf("Draw role selection\n");
-        select_role_draw();
+        role_select_draw();
     }
     else if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
     {
         // 繪製學分選擇介面
         printf("Draw credit selection\n");
-        select_credit_draw();
+        credit_select_draw();
     }
     else if (GAME_STATUS == MENU_GAME_PLAYING)
     {
@@ -173,7 +165,7 @@ void game_draw()
     {
         // 繪製暫停介面
         printf("Draw pause\n");
-        draw_pause_menu();
+        pause_menu_draw();
     }
     else
     {
@@ -189,8 +181,8 @@ void game_init()
     player.role = NULL;
     player.loading = NULL;
     player.money = 0;
-    player.x = 0; // 放大要調整
-    player.y = 0; // 放大要調整
+    player.x = 555; // 放大要調整
+    player.y = 495; // 放大要調整
     // 初始化事件
     // 初始化資源
     // 初始化遊戲介面
@@ -210,7 +202,7 @@ void draw_game()
     // 繪製事件
     if (GAME_MSG == MSG_GAME_NEW_EVENT)
     {
-        draw_event();
+        event_draw();
     }
     // 繪製資源
 }
@@ -223,20 +215,36 @@ void draw_background()
 
 void draw_role()
 {
-    float unit = SCREEN_WIDTH / 8 - 8.8; // 如果調視窗大小，要重調
     // 繪製玩家
     char role_path[256];
+    if (player.x >= 535 && player.x <= 555)
+    {
+        static int direction = 1; // 跳躍方向，1 表示向下，-1 表示向上
+        player.y += direction;    // 因為左上角 是 (0,0)，所以 y 越大越往下
+        if (player.y >= 485)      // 到達底部
+        {
+            direction = -1; // 改為向上跳
+        }
+        else if (player.y <= 460) // 到達頂點
+        {
+            direction = 1; // 改為向下跳
+        }
+    }
+    else
+    {
+        player.y = 485;
+    }
     if (player.role == ROLE_PANDA)
     {
-        al_draw_bitmap(role_panda, player.x * unit, player.y * unit, 0);
+        al_draw_bitmap(role_panda, player.x, player.y, 0);
     }
     else if (player.role == ROLE_KIWI)
     {
-        al_draw_bitmap(role_kiwi, player.x * unit, player.y * unit, 0);
+        al_draw_bitmap(role_kiwi, player.x, player.y, 0);
     }
     else if (player.role == ROLE_OTTER)
     {
-        al_draw_bitmap(role_otter, player.x * unit, player.y * unit, 0);
+        al_draw_bitmap(role_otter, player.x, player.y, 0);
     }
 }
 
@@ -271,7 +279,7 @@ void event_process(ALLEGRO_EVENT event)
     }
 }
 
-void draw_event()
+void event_draw()
 {
     // 繪製事件
     ALLEGRO_BITMAP *new_event = al_load_bitmap(events->image_path);
@@ -280,7 +288,7 @@ void draw_event()
 
 int role_select = 0;
 
-int select_role_process(ALLEGRO_EVENT event)
+int role_select_process(ALLEGRO_EVENT event)
 {
     int ROLE_MAX = 3;
     int ROLE_MIN = 1;
@@ -333,7 +341,7 @@ int select_role_process(ALLEGRO_EVENT event)
     }
 }
 
-void select_role_draw()
+void role_select_draw()
 {
     printf("role_select = %d\n", role_select);
     if (role_select == 0)
@@ -354,7 +362,7 @@ void select_role_draw()
     }
 }
 
-int select_credit_process(ALLEGRO_EVENT event)
+int credit_select_process(ALLEGRO_EVENT event)
 {
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
@@ -389,7 +397,7 @@ int select_credit_process(ALLEGRO_EVENT event)
     }
 }
 
-void select_credit_draw()
+void credit_select_draw()
 {
     // 繪製學分選擇介面
     if (!player.loading)
@@ -412,7 +420,7 @@ void select_credit_draw()
 
 int pause_menu_button_index = 0;
 
-int process_pause_menu(ALLEGRO_EVENT event)
+int pause_menu_process(ALLEGRO_EVENT event)
 {
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
     {
@@ -456,7 +464,7 @@ int process_pause_menu(ALLEGRO_EVENT event)
     }
 }
 
-void draw_pause_menu()
+void pause_menu_draw()
 {
     printf("pause_menu_button_index = %d\n", pause_menu_button_index);
     if (pause_menu_button_index == 0)
