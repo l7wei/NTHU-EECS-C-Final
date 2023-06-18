@@ -1,6 +1,4 @@
 #pragma once
-#ifndef GLOBAL_H_INCLUDED
-#define GLOBAL_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +12,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 
-#include <algif5/algif.h>
+#include "../lib/algif5/src/algif.h"
 
 // Game Settings
 #define MAP_SIZE 100
@@ -60,5 +58,3 @@ extern ALLEGRO_TIMER *timer;
 
 extern ALLEGRO_SAMPLE *song;
 extern ALLEGRO_SAMPLE_INSTANCE *sample_instance;
-
-#endif

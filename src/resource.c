@@ -5,6 +5,8 @@ float se_gain = 1.0f;
 
 // Hello
 ALLEGRO_SAMPLE *sample_hello;
+ALLEGRO_BITMAP *hello_cover;
+ALGIF_ANIMATION *hello_start;
 
 // Start Menu
 ALLEGRO_BITMAP *start_menu_all;
@@ -34,13 +36,13 @@ ALLEGRO_BITMAP *game_background;
 // Font
 ALLEGRO_FONT *write_font;
 
-//story
+// story
 ALLEGRO_BITMAP *sm_story_1;
 ALLEGRO_BITMAP *sm_story_2;
 ALLEGRO_BITMAP *sm_story_3;
 ALLEGRO_BITMAP *sm_rotate;
 
-//about
+// about
 ALLEGRO_BITMAP *sm_about_1;
 ALLEGRO_BITMAP *sm_about_2;
 ALLEGRO_BITMAP *sm_about_3;
@@ -63,6 +65,8 @@ void load_resource()
 {
     // Hello
     sample_hello = al_load_sample("./assets/sound/hello.mp3");
+    hello_cover = al_load_bitmap("./assets/image/hello/cover.png");
+    hello_start = algif_load_animation("../assets/image/hello/start.gif"); // algif 只支援相對路徑
     // Start Menu
     start_menu_all = al_load_bitmap("./assets/image/start_menu/all.png");
     start_menu_start = al_load_bitmap("./assets/image/start_menu/start.png");
@@ -82,16 +86,16 @@ void load_resource()
     write_font = al_load_ttf_font("./assets/font/write.ttf", 36, 0); // 載入字體
     // Pause Menu
     pause_menu_all = al_load_bitmap("./assets/image/pause_menu/all.png");
-    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");   
+    pause_menu_restart = al_load_bitmap("./assets/image/pause_menu/restart.png");
     pause_menu_continue = al_load_bitmap("./assets/image/pause_menu/continue.png");
     pause_menu_finish = al_load_bitmap("./assets/image/pause_menu/finish.png");
-    //story
+    // story
     sm_story_1 = al_load_bitmap("./assets/image/sm_story&about/sm_story_1.png");
     sm_story_2 = al_load_bitmap("./assets/image/sm_story&about/sm_story_2.png");
     sm_story_3 = al_load_bitmap("./assets/image/sm_story&about/sm_story_3.png");
     sm_rotate = al_load_bitmap("./assets/image/sm_story&about/sm_rotate.png");
 
-    //about
+    // about
     sm_about_1 = al_load_bitmap("./assets/image/sm_story&about/sm_about_1.png");
     sm_about_2 = al_load_bitmap("./assets/image/sm_story&about/sm_about_2.png");
     sm_about_3 = al_load_bitmap("./assets/image/sm_story&about/sm_about_3.png");

@@ -6,6 +6,8 @@ extern float se_gain;
 
 // Hello
 extern ALLEGRO_SAMPLE *sample_hello;
+extern ALLEGRO_BITMAP *hello_cover;
+extern ALGIF_ANIMATION *hello_start;
 
 // Start Menu
 extern ALLEGRO_BITMAP *start_menu_all;
@@ -32,7 +34,7 @@ extern ALLEGRO_BITMAP *pause_menu_finish;
 // Game Background
 extern ALLEGRO_BITMAP *game_background;
 
-//story
+// story
 extern ALLEGRO_BITMAP *sm_story_1;
 extern ALLEGRO_BITMAP *sm_story_2;
 extern ALLEGRO_BITMAP *sm_story_3;
@@ -41,7 +43,7 @@ extern ALLEGRO_BITMAP *sm_rotate;
 // Font
 extern ALLEGRO_FONT *write_font;
 
-//about
+// about
 extern ALLEGRO_BITMAP *sm_about_1;
 extern ALLEGRO_BITMAP *sm_about_2;
 extern ALLEGRO_BITMAP *sm_about_3;

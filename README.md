@@ -42,6 +42,15 @@ Introduction to programming 1 final project
 .   .
 ```
 
+### Code Structure
+`xxx_process(event)` 會被 `scene_process(ALLEGRO_EVENT event)` 呼叫，進行事件的觸發和運算。
+
+例如：`menu_process(event)` 會被 `scene_process(ALLEGRO_EVENT event)` 呼叫，進行選單的運算。
+
+最後回傳 `MSG` 給 `scene_process(ALLEGRO_EVENT event)`，讓 `scene_process(ALLEGRO_EVENT event)` 知道目前的狀態，並進行場景的切換。
+
+`xxx_draw()` 會被 `scene_draw()` 呼叫，進行畫面的繪製。
+
 ### Scene Control
 在 `main.c` 中，透過 `while` 迴圈控制遊戲，並透過 `scene` 變數控制場景，我們使用 `enum` 來定義場景，並在 `scene.c` 中透過 `if - else` 來傳遞訊息和控制場景（`switch` 會更好）。
 

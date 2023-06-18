@@ -42,6 +42,19 @@
 			<Add directory="lib/allegro/include" />
 			<Add directory="lib/algif5/include" />
 		</Compiler>
+		<Unit filename="lib/algif5/src/algif.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/algif5/src/algif.h" />
+		<Unit filename="lib/algif5/src/bitmap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/algif5/src/gif.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lib/algif5/src/lzw.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/event.c">
 			<Option compilerVar="CC" />
 		</Unit>

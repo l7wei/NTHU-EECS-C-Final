@@ -231,15 +231,28 @@ void scene_begin()
     // Load sound
     al_reserve_samples(20);
     al_restore_default_mixer();
+    al_start_timer(timer);
+    printf("Game Started!\n");
+    // start_animation();
+}
+
+void start_animation()
+{
+    float wait = 3.0;
     sample_instance = al_create_sample_instance(sample_hello);
-    // Loop the song until the display closes
     // 快點來跟我去旅遊~
     // al_set_sample_instance_playmode(sample_instance, ALLEGRO_PLAYMODE_LOOP);
     // al_attach_sample_instance_to_mixer(sample_instance, al_get_default_mixer());
     //  set the volume of instance
     // al_set_sample_instance_gain(sample_instance, 1);
     // al_play_sample_instance(sample_instance);
-    al_start_timer(timer);
+    al_draw_bitmap(algif_get_bitmap(hello_start, wait), 0, 0, 0);
+    al_flip_display();
+    al_rest(wait);
+    al_draw_bitmap(hello_cover, 0, 0, 0);
+    al_flip_display();
+    ALLEGRO_EVENT event;
+    al_wait_for_event(event_queue, &event);
 }
 
 void scene_destroy()
