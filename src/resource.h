@@ -22,9 +22,6 @@ extern ALLEGRO_BITMAP *role_menu_panda;
 extern ALLEGRO_BITMAP *role_menu_kiwi;
 extern ALLEGRO_BITMAP *role_menu_otter;
 
-// Credit Menu
-extern ALLEGRO_BITMAP *credit_menu_all;
-
 // Pause Menu
 extern ALLEGRO_BITMAP *pause_menu_all;
 extern ALLEGRO_BITMAP *pause_menu_restart;
@@ -48,6 +45,13 @@ extern ALLEGRO_BITMAP *about_2;
 extern ALLEGRO_BITMAP *about_3;
 extern ALLEGRO_BITMAP *teams;
 
+// credits
+extern ALLEGRO_BITMAP *credits_all;
+
+// role
+extern ALLEGRO_BITMAP *role_panda;
+extern ALLEGRO_BITMAP *role_kiwi;
+extern ALLEGRO_BITMAP *role_otter;
 
 void load_resource();
 void destroy_resource();

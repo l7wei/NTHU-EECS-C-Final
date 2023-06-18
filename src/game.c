@@ -15,6 +15,8 @@ int rollCredit()
 
 typedef struct Player
 {
+    float x;
+    float y;              // x, y 為角色在地圖上的位置
     int role;             // 0: Panda, 1: Kiwi, 2: Otter
     int loading;          // 1 ~ 28 (x 18)
     long long money;      // use unsigned long long to prevent overflow (2^64) , llu
@@ -44,10 +46,12 @@ enum // 遊戲狀態
 
 enum // 遊戲訊息
 {
-    GAME_NEW_EVENT,
+    MSG_GAME_NULL,
+    MSG_GAME_NEW_EVENT,
 };
 
 int GAME_STATUS = MENU_GAME_ROLE_SELECT;
+int GAME_MSG = 0;
 
 int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
@@ -71,6 +75,8 @@ int game_process(ALLEGRO_EVENT event)
         {
             if (event.keyboard.keycode == ALLEGRO_KEY_ENTER)
             {
+                printf("Next event\n");
+                // 進行下一個事件
                 dice = rollDice();
                 player.loading -= dice;
 
@@ -88,6 +94,22 @@ int game_process(ALLEGRO_EVENT event)
                     return MSG_GAME_OVER;
                 }
             }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT && player.x > 1.3)
+            {
+                player.x--;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT && player.x < 7)
+            {
+                player.x++;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_UP && player.y > 1.3)
+            {
+                player.y--;
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_DOWN && player.y < 7)
+            {
+                player.y++;
+            }
             else if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
             {
                 printf("Game Pause\n");
@@ -101,24 +123,25 @@ int game_process(ALLEGRO_EVENT event)
 
 void game_draw()
 {
-    al_clear_to_color(al_map_rgb(0, 0, 0)); // 清除畫布
+    // 清除畫布
+    al_clear_to_color(al_map_rgb(0, 0, 0));
     if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
+        // 繪製角色選擇介面
         printf("Draw role selection\n");
         select_role_draw();
-        // 繪製角色選擇介面
-        return;
     }
-    if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
+    else if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
     {
+        // 繪製學分選擇介面
         printf("Draw credit selection\n");
         select_credit_draw();
-        // 繪製學分選擇介面
-        return;
     }
-    printf("Draw game\n");
-    draw_game();
-    // 繪製遊戲介面
+    else
+    {
+        printf("Draw game\n");
+        draw_game();
+    }
 }
 
 void game_init()
@@ -130,6 +153,8 @@ void game_init()
     player.role = NULL;
     player.loading = NULL;
     player.money = 0;
+    player.x = 0.4; // 放大要調整
+    player.y = 2.9; // 放大要調整
     // 初始化事件
     // 初始化資源
     // 初始化遊戲介面
@@ -145,9 +170,12 @@ void draw_game()
     draw_interface();  // 繪製遊戲介面
     // 繪製地圖
     // 繪製玩家
-
-    draw_event(); // 繪製事件
-
+    draw_role();
+    // 繪製事件
+    if (GAME_MSG == MSG_GAME_NEW_EVENT)
+    {
+        draw_event();
+    }
     // 繪製資源
 }
 
@@ -155,6 +183,25 @@ void draw_background()
 {
     // 繪製背景
     al_draw_bitmap(game_background, 0, 0, 0);
+}
+
+void draw_role()
+{
+    float unit = SCREEN_WIDTH / 8 - 8.8; // 如果調視窗大小，要重調
+    // 繪製玩家
+    char role_path[256];
+    if (player.role == ROLE_PANDA)
+    {
+        al_draw_bitmap(role_panda, player.x * unit, player.y * unit, 0);
+    }
+    else if (player.role == ROLE_KIWI)
+    {
+        al_draw_bitmap(role_kiwi, player.x * unit, player.y * unit, 0);
+    }
+    else if (player.role == ROLE_OTTER)
+    {
+        al_draw_bitmap(role_otter, player.x * unit, player.y * unit, 0);
+    }
 }
 
 void draw_interface()
@@ -177,14 +224,22 @@ void draw_interface()
     al_draw_text(write_font, al_map_rgb(255, 255, 255), 640, 360, ALLEGRO_ALIGN_CENTRE, event_buffer);
 }
 
+void event_process(ALLEGRO_EVENT event)
+{
+    if (GAME_MSG == MSG_GAME_NEW_EVENT)
+    {
+        printf("New event\n");
+        // 產生新事件
+        GAME_MSG = MSG_GAME_NULL;
+        return;
+    }
+}
+
 void draw_event()
 {
     // 繪製事件
     ALLEGRO_BITMAP *new_event = al_load_bitmap(events->image_path);
     al_draw_bitmap(new_event, 0, 0, 0);
-
-    al_rest(0.5);
-    al_destroy_bitmap(new_event);
 }
 
 int role_select = 0;
@@ -242,6 +297,27 @@ int select_role_process(ALLEGRO_EVENT event)
     }
 }
 
+void select_role_draw()
+{
+    printf("role_select = %d\n", role_select);
+    if (role_select == 0)
+    {
+        al_draw_bitmap(role_menu_all, 0, 0, 0);
+    }
+    else if (role_select == ROLE_PANDA)
+    {
+        al_draw_bitmap(role_menu_panda, 0, 0, 0);
+    }
+    else if (role_select == ROLE_KIWI)
+    {
+        al_draw_bitmap(role_menu_kiwi, 0, 0, 0);
+    }
+    else if (role_select == ROLE_OTTER)
+    {
+        al_draw_bitmap(role_menu_otter, 0, 0, 0);
+    }
+}
+
 int select_credit_process(ALLEGRO_EVENT event)
 {
     if (event.type == ALLEGRO_EVENT_KEY_DOWN)
@@ -277,41 +353,23 @@ int select_credit_process(ALLEGRO_EVENT event)
     }
 }
 
-void select_role_draw()
-{
-    printf("role_select = %d\n", role_select);
-    if (role_select == 0)
-    {
-        al_draw_bitmap(role_menu_all, 0, 0, 0);
-    }
-    else if (role_select == ROLE_PANDA)
-    {
-        al_draw_bitmap(role_menu_panda, 0, 0, 0);
-    }
-    else if (role_select == ROLE_KIWI)
-    {
-        al_draw_bitmap(role_menu_kiwi, 0, 0, 0);
-    }
-    else if (role_select == ROLE_OTTER)
-    {
-        al_draw_bitmap(role_menu_otter, 0, 0, 0);
-    }
-}
-
 void select_credit_draw()
 {
     // 繪製學分選擇介面
     if (!player.loading)
     {
-        al_draw_bitmap(credit_menu_all, 0, 0, 0);
+        // Credit Menu
+        al_draw_bitmap(credits_all, 0, 0, 0);
+        // ALGIF_ANIMATION *credit_menu_roll = algif_load_animation("./assets/image/credits/credits_roll.gif");
+        // al_draw_bitmap(algif_get_bitmap(credit_menu_roll, al_get_time()), 0, 0, 0);
     }
     else
     {
         int credit = player.loading / 18;
         char filename[100];
         sprintf(filename, "./assets/image/credits/numbers/%d.jpg", credit);
-        printf("Print %d loading selection, %s\n", credit, filename);
         ALLEGRO_BITMAP *loading_selected = al_load_bitmap(filename);
         al_draw_bitmap(loading_selected, 0, 0, 0);
     }
+    return;
 }
