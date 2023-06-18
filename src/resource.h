@@ -35,19 +35,18 @@ extern ALLEGRO_BITMAP *pause_menu_finish;
 extern ALLEGRO_BITMAP *game_background;
 
 // story
-extern ALLEGRO_BITMAP *sm_story_1;
-extern ALLEGRO_BITMAP *sm_story_2;
-extern ALLEGRO_BITMAP *sm_story_3;
-extern ALLEGRO_BITMAP *sm_rotate;
+extern ALLEGRO_BITMAP *story_1;
+extern ALLEGRO_BITMAP *story_2;
+extern ALLEGRO_BITMAP *story_3;
 
 // Font
 extern ALLEGRO_FONT *write_font;
 
 // about
-extern ALLEGRO_BITMAP *sm_about_1;
-extern ALLEGRO_BITMAP *sm_about_2;
-extern ALLEGRO_BITMAP *sm_about_3;
-extern ALLEGRO_BITMAP *sm_teams;
+extern ALLEGRO_BITMAP *about_1;
+extern ALLEGRO_BITMAP *about_2;
+extern ALLEGRO_BITMAP *about_3;
+extern ALLEGRO_BITMAP *teams;
 
 
 void load_resource();

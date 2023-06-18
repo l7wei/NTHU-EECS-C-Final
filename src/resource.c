@@ -37,16 +37,15 @@ ALLEGRO_BITMAP *game_background;
 ALLEGRO_FONT *write_font;
 
 // story
-ALLEGRO_BITMAP *sm_story_1;
-ALLEGRO_BITMAP *sm_story_2;
-ALLEGRO_BITMAP *sm_story_3;
-ALLEGRO_BITMAP *sm_rotate;
+ALLEGRO_BITMAP *story_1;
+ALLEGRO_BITMAP *story_2;
+ALLEGRO_BITMAP *story_3;
 
 // about
-ALLEGRO_BITMAP *sm_about_1;
-ALLEGRO_BITMAP *sm_about_2;
-ALLEGRO_BITMAP *sm_about_3;
-ALLEGRO_BITMAP *sm_teams;
+ALLEGRO_BITMAP *about_1;
+ALLEGRO_BITMAP *about_2;
+ALLEGRO_BITMAP *about_3;
+ALLEGRO_BITMAP *teams;
 
 void load_sound(const char *filename, ALLEGRO_SAMPLE **sp, ALLEGRO_SAMPLE_INSTANCE **spi, ALLEGRO_PLAYMODE playmode)
 {
@@ -91,16 +90,15 @@ void load_resource()
     pause_menu_continue = al_load_bitmap("./assets/image/pause_menu/continue.png");
     pause_menu_finish = al_load_bitmap("./assets/image/pause_menu/finish.png");
     // story
-    sm_story_1 = al_load_bitmap("./assets/image/sm_story&about/sm_story_1.png");
-    sm_story_2 = al_load_bitmap("./assets/image/sm_story&about/sm_story_2.png");
-    sm_story_3 = al_load_bitmap("./assets/image/sm_story&about/sm_story_3.png");
-    sm_rotate = al_load_bitmap("./assets/image/sm_story&about/sm_rotate.png");
+    story_1 = al_load_bitmap("./assets/image/start_menu/story/1.png");
+    story_2 = al_load_bitmap("./assets/image/start_menu/story/2.png");
+    story_3 = al_load_bitmap("./assets/image/start_menu/story/3.png");
 
     // about
-    sm_about_1 = al_load_bitmap("./assets/image/sm_story&about/sm_about_1.png");
-    sm_about_2 = al_load_bitmap("./assets/image/sm_story&about/sm_about_2.png");
-    sm_about_3 = al_load_bitmap("./assets/image/sm_story&about/sm_about_3.png");
-    sm_teams = al_load_bitmap("./assets/image/sm_story&about/sm_teams.png");
+    about_1 = al_load_bitmap("./assets/image/start_menu/about/1.png");
+    about_2 = al_load_bitmap("./assets/image/start_menu/about/2.png");
+    about_3 = al_load_bitmap("./assets/image/start_menu/about/3.png");
+    teams = al_load_bitmap("./assets/image/start_menu/teams.png");
 
 }
 
