@@ -48,7 +48,7 @@ ALLEGRO_BITMAP *teams;
 
 // Credits
 ALLEGRO_BITMAP *credits_all;
-ALGIF_ANIMATION *credits_roll;
+ALGIF_ANIMATION *easter_egg;
 
 // role
 ALLEGRO_BITMAP *role_panda;
@@ -173,7 +173,7 @@ void load_resource()
     teams = al_load_bitmap("./assets/image/start_menu/teams.png");
     // Games
     credits_all = al_load_bitmap("./assets/image/credits/credits_all.png");
-    credits_roll = algif_load_animation("./assets/image/dice/rolling.gif");
+    easter_egg = algif_load_animation("./assets/image/egg.gif");
     // Role
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");

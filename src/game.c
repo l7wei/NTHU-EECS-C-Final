@@ -26,7 +26,7 @@ typedef struct Player
 Player player;
 Game_event game_event;
 
-int dice = 1;
+int dice = 0;
 
 enum // 角色
 {
@@ -49,11 +49,15 @@ enum // 遊戲狀態
 enum // 遊戲訊息
 {
     MSG_GAME_NULL,
-    MSG_GAME_NEW_EVENT
+    MSG_GAME_NEW_EVENT,
 };
 
 int GAME_STATUS = MENU_GAME_ROLE_SELECT;
 int GAME_MSG = MSG_GAME_NULL;
+int MSG_ESATER_EGG = false;
+
+ALLEGRO_BITMAP *new_event;
+ALLEGRO_BITMAP *new_dice;
 
 int game_process(ALLEGRO_EVENT event)
 // 遊戲執行中
@@ -91,10 +95,20 @@ int game_process(ALLEGRO_EVENT event)
                 {
                     GAME_MSG = MSG_GAME_NULL;
                 }
-                else if (player.x >= 535 && player.x <= 555)
+                else if (player.x >= 535 && player.x <= 555 && dice != 0)
                 {
                     event_process();
+                    dice = 0;
                 }
+            }
+            else if (event.keyboard.keycode == ALLEGRO_KEY_Q)
+            {
+                // 擲骰子減少 loading
+                dice = rollDice();
+                char filenametmp[100];
+                sprintf(filenametmp, "./assets/image/dice/%d.png", dice);
+                new_dice = al_load_bitmap(filenametmp);
+                player.loading -= dice;
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT)
             {
@@ -109,6 +123,19 @@ int game_process(ALLEGRO_EVENT event)
                 printf("Game Pause\n");
                 // 按下 ESC 時暫停遊戲
                 GAME_STATUS = MENU_GAME_PAUSE;
+            }
+            else if (player.role == ROLE_PANDA) // 角色是貓熊
+            {
+                if (event.keyboard.keycode == ALLEGRO_KEY_E)
+                {
+                    // 彩蛋觸發
+                    MSG_ESATER_EGG = true;
+                }
+                else if (event.keyboard.keycode == ALLEGRO_KEY_R)
+                {
+                    // 彩蛋關閉
+                    MSG_ESATER_EGG = false;
+                }
             }
         }
         if (event.type == ALLEGRO_EVENT_KEY_CHAR)
@@ -157,7 +184,12 @@ void game_draw()
 {
     // 清除畫布
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
+    if (MSG_ESATER_EGG == true)
+    {
+        // 繪製彩蛋
+        al_draw_bitmap(algif_get_bitmap(easter_egg, al_get_time()), 0, 0, 0);
+    }
+    else if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
         // 繪製角色選擇介面
         printf("Draw role selection\n");
@@ -181,13 +213,7 @@ void game_draw()
         printf("Draw pause\n");
         pause_menu_draw();
     }
-    else
-    {
-    }
 }
-
-ALLEGRO_BITMAP *new_event;
-ALLEGRO_BITMAP *new_dice;
 
 void game_init()
 {
@@ -233,13 +259,6 @@ void event_process()
     game_event = getEvent();
     new_event = al_load_bitmap(game_event.image_path);
     GAME_MSG = MSG_GAME_NEW_EVENT;
-
-    // 擲骰子減少 loading
-    dice = rollDice();
-    char filenametmp[100];
-    sprintf(filenametmp, "./assets/image/dice/%d.png", dice);
-    new_dice = al_load_bitmap(filenametmp);
-    player.loading -= dice;
 
     // 錢要變化了
     if (strcmp(game_event.moneyOperator, "+") == 0)
@@ -359,8 +378,14 @@ void draw_interface()
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 0, ALLEGRO_ALIGN_LEFT, loading_buffer);
 
     // 繪製骰子
-    al_draw_bitmap(algif_get_bitmap(credits_roll, al_get_time()), SCREEN_WIDTH - 200, 10, 0);
-    // al_draw_bitmap(new_dice, SCREEN_WIDTH - 200, 10, 0);
+    if (dice > 0)
+    {
+        al_draw_bitmap(new_dice, SCREEN_WIDTH - 200, 10, 0);
+    }
+    else if (dice == 0)
+    {
+        al_draw_bitmap(algif_get_bitmap(dice_rolling, al_get_time()), SCREEN_WIDTH - 200, 10, 0);
+    }
 
     char event_buffer[256];
     sprintf(event_buffer, "Last Event: %s", game_event.description);
@@ -489,7 +514,7 @@ void credit_select_draw()
         // Credit Menu
         al_draw_bitmap(credits_all, 0, 0, 0);
         // al_clear_to_color(al_map_rgb(255, 255, 255));
-        // al_draw_bitmap(algif_get_bitmap(credits_roll, al_get_time()), 0, 0, 0);
+        // al_draw_bitmap(algif_get_bitmap(easter_egg, al_get_time()), 0, 0, 0);
     }
     else
     {
