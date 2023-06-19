@@ -27,24 +27,23 @@ int menu_process(ALLEGRO_EVENT event)
         }
         if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 0)
         {
-            // al_play_sample_instance(click_se_spi);
+            al_play_sample_instance(menu_change_role_spi);
             return MSG_GAME_START;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 1)
         {
-            // al_play_sample_instance(click_se_spi);
+            al_play_sample_instance(menu_change_role_spi);
             return MSG_STORY_START;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 2)
         {
-            // al_play_sample_instance(click_se_spi);
+            al_play_sample_instance(menu_change_role_spi);
             return MSG_ABOUT_START;
         }
         else if (event.keyboard.keycode == ALLEGRO_KEY_ENTER && menu_button_index == 3)
         {
-            // al_play_sample_instance(click_se_spi);
+            al_play_sample_instance(menu_change_role_spi);
             return MSG_TERMINATE;
-                    al_play_sample_instance(menu_change_role_spi);
         }
     }
 }
