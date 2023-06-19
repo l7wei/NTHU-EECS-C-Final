@@ -130,6 +130,9 @@ int game_process(ALLEGRO_EVENT event)
                 {
                     // 彩蛋觸發
                     MSG_ESATER_EGG = true;
+                    al_stop_sample_instance(bgm_music_spi);
+                    al_stop_sample_instance(menu_hello_spi);
+                    al_play_sample_instance(effect_bad_spi);
                 }
                 else if (event.keyboard.keycode == ALLEGRO_KEY_R)
                 {
@@ -193,6 +196,8 @@ void game_draw()
     {
         // 繪製角色選擇介面
         printf("Draw role selection\n");
+        al_play_sample_instance(bgm_music_spi);
+        al_stop_sample_instance(menu_hello_spi);
         role_select_draw();
     }
     else if (GAME_STATUS == MENU_GAME_CREDIT_SELECT)
