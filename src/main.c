@@ -1,5 +1,7 @@
 #include "global.h"
 #include "scene.h"
+//#include "algif5/src/algif.h"
+
 int main()
 {
     printf("Hello World!\n");
