@@ -282,18 +282,22 @@ void event_process()
     if (strcmp(game_event.loadingOperator, "+") == 0)
     {
         player.loading += game_event.loadingChange;
+        al_play_sample_instance(effect_good_spi);
     }
     else if (strcmp(game_event.loadingOperator, "-") == 0)
     {
         player.loading -= game_event.loadingChange;
+        al_play_sample_instance(effect_good_spi);
     }
     else if (strcmp(game_event.loadingOperator, "*") == 0)
     {
         player.loading *= game_event.loadingChange;
+        al_play_sample_instance(effect_good_spi);
     }
     else if (strcmp(game_event.loadingOperator, "/") == 0)
     {
         player.loading /= game_event.loadingChange;
+        al_play_sample_instance(effect_good_spi);
     }
 }
 
