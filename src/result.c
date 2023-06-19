@@ -26,5 +26,7 @@ int result_process(ALLEGRO_EVENT event)
 
 void result_draw()
 {
+    al_stop_sample_instance(bgm_music_spi);
+    al_play_sample_instance(menu_hello_spi);
     al_draw_bitmap(ending_1_1, 0, 0, 0);
 }
