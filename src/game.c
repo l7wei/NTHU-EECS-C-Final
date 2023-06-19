@@ -104,6 +104,8 @@ int game_process(ALLEGRO_EVENT event)
                     {
                         MSG_EVENT_ANIMATION = false;
                         GAME_MSG = MSG_GAME_NEW_EVENT;
+                        player.loading -= dice;
+                        dice = 0;
                     }
                 }
             }
@@ -114,7 +116,6 @@ int game_process(ALLEGRO_EVENT event)
                 char filenametmp[100];
                 sprintf(filenametmp, "./assets/image/dice/%d.png", dice);
                 new_dice = al_load_bitmap(filenametmp);
-                player.loading -= dice;
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_LEFT)
             {
@@ -289,6 +290,7 @@ void game_init()
     // 初始化資源
     // 初始化遊戲介面
     new_dice = al_load_bitmap("./assets/image/dice/1.png");
+    GAME_STATUS = MENU_GAME_ROLE_SELECT;
 }
 
 void game_destroy()
@@ -323,21 +325,25 @@ void event_process()
     {
         player.good_bad = 0;
         player.money += game_event.moneyChange;
+        al_play_sample_instance(effect_good_spi);
     }
     else if (strcmp(game_event.moneyOperator, "-") == 0)
     {
         player.good_bad = 1;
         player.money -= game_event.moneyChange;
+        al_play_sample_instance(effect_good_spi);
     }
     else if (strcmp(game_event.moneyOperator, "*") == 0)
     {
         player.good_bad = 0;
         player.money *= game_event.moneyChange;
+        al_play_sample_instance(effect_good_spi);
     }
     else if (strcmp(game_event.moneyOperator, "/") == 0)
     {
         player.good_bad = 1;
         player.money /= game_event.moneyChange;
+        al_play_sample_instance(effect_good_spi);
     }
 
     // Loading 要變化了
