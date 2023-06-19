@@ -64,6 +64,9 @@ ALLEGRO_BITMAP *dice5;
 ALLEGRO_BITMAP *dice6;
 ALGIF_ANIMATION *dice_rolling;
 
+// test
+ALGIF_ANIMATION *test_gif;
+
 // ending
 ALLEGRO_BITMAP *ending_1_1;
 ALLEGRO_BITMAP *ending_1_2;
@@ -174,6 +177,8 @@ void load_resource()
     // Games
     credits_all = al_load_bitmap("./assets/image/credits/credits_all.png");
     easter_egg = algif_load_animation("./assets/image/egg.gif");
+    // Test
+    test_gif = algif_load_animation("./assets/image/test.gif");
     // Role
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");

@@ -514,7 +514,7 @@ void credit_select_draw()
         // Credit Menu
         al_draw_bitmap(credits_all, 0, 0, 0);
         // al_clear_to_color(al_map_rgb(255, 255, 255));
-        // al_draw_bitmap(algif_get_bitmap(easter_egg, al_get_time()), 0, 0, 0);
+        // al_draw_bitmap(algif_get_bitmap(test_gif, al_get_time()), 0, 0, 0);
     }
     else
     {

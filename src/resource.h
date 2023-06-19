@@ -41,6 +41,9 @@ extern ALLEGRO_BITMAP *story_1;
 extern ALLEGRO_BITMAP *story_2;
 extern ALLEGRO_BITMAP *story_3;
 
+// test
+extern ALGIF_ANIMATION *test_gif;
+
 // about
 extern ALLEGRO_BITMAP *about_1;
 extern ALLEGRO_BITMAP *about_2;
