@@ -173,7 +173,7 @@ void load_resource()
     teams = al_load_bitmap("./assets/image/start_menu/teams.png");
     // Games
     credits_all = al_load_bitmap("./assets/image/credits/credits_all.png");
-    credits_roll = algif_load_animation("./assets/image/credits/credits_roll.gif");
+    credits_roll = algif_load_animation("./assets/image/dice/rolling.gif");
     // Role
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");

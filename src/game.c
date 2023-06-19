@@ -186,6 +186,9 @@ void game_draw()
     }
 }
 
+ALLEGRO_BITMAP *new_event;
+ALLEGRO_BITMAP *new_dice;
+
 void game_init()
 {
     printf("Game Init...\n");
@@ -200,13 +203,12 @@ void game_init()
     // 初始化事件
     // 初始化資源
     // 初始化遊戲介面
+    new_dice = al_load_bitmap("./assets/image/dice/1.png");
 }
 
 void game_destroy()
 {
 }
-
-ALLEGRO_BITMAP *new_event;
 
 void draw_game()
 {
@@ -234,6 +236,9 @@ void event_process()
 
     // 擲骰子減少 loading
     dice = rollDice();
+    char filenametmp[100];
+    sprintf(filenametmp, "./assets/image/dice/%d.png", dice);
+    new_dice = al_load_bitmap(filenametmp);
     player.loading -= dice;
 
     // 錢要變化了
@@ -353,9 +358,9 @@ void draw_interface()
     sprintf(loading_buffer, "Loading:%d", player.loading);
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, 0, ALLEGRO_ALIGN_LEFT, loading_buffer);
 
-    char dice_buffer[256];
-    sprintf(dice_buffer, "Dice: %d", dice);
-    al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH, 0, ALLEGRO_ALIGN_RIGHT, dice_buffer);
+    // 繪製骰子
+    al_draw_bitmap(algif_get_bitmap(credits_roll, al_get_time()), SCREEN_WIDTH - 200, 10, 0);
+    // al_draw_bitmap(new_dice, SCREEN_WIDTH - 200, 10, 0);
 
     char event_buffer[256];
     sprintf(event_buffer, "Last Event: %s", game_event.description);
@@ -482,8 +487,9 @@ void credit_select_draw()
     if (!player.loading)
     {
         // Credit Menu
-        // al_draw_bitmap(credits_all, 0, 0, 0);
-        al_draw_bitmap(algif_get_bitmap(credits_roll, al_get_time()), 0, 0, 0);
+        al_draw_bitmap(credits_all, 0, 0, 0);
+        // al_clear_to_color(al_map_rgb(255, 255, 255));
+        // al_draw_bitmap(algif_get_bitmap(credits_roll, al_get_time()), 0, 0, 0);
     }
     else
     {
