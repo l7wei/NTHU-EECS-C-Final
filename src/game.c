@@ -21,6 +21,7 @@ typedef struct Player
     int loading;          // 1 ~ 28 (x 18)
     long long money;      // use unsigned long long to prevent overflow (2^64) , llu
     char last_event[256]; // Last event description
+    int good_bad;         // 0: good, 1: bad
 } Player;
 
 Player player;
@@ -55,6 +56,7 @@ enum // 遊戲訊息
 int GAME_STATUS = MENU_GAME_ROLE_SELECT;
 int GAME_MSG = MSG_GAME_NULL;
 int MSG_ESATER_EGG = false;
+int MSG_EVENT_ANIMATION = false;
 
 ALLEGRO_BITMAP *new_event;
 ALLEGRO_BITMAP *new_dice;
@@ -64,11 +66,6 @@ int game_process(ALLEGRO_EVENT event)
 {
     printf("Game Running...\n");
     if (player.loading < 0)
-    {
-        GAME_STATUS = MENU_GAME_ROLE_SELECT;
-        return MSG_GAME_OVER;
-    }
-    if (player.money < -1000000)
     {
         GAME_STATUS = MENU_GAME_ROLE_SELECT;
         return MSG_GAME_OVER;
@@ -98,7 +95,16 @@ int game_process(ALLEGRO_EVENT event)
                 else if (player.x >= 535 && player.x <= 555 && dice != 0)
                 {
                     event_process();
-                    dice = 0;
+                    // 彩蛋關閉
+                    if (MSG_EVENT_ANIMATION == false)
+                    {
+                        MSG_EVENT_ANIMATION = true;
+                    }
+                    else if (MSG_EVENT_ANIMATION == true)
+                    {
+                        MSG_EVENT_ANIMATION = false;
+                        GAME_MSG = MSG_GAME_NEW_EVENT;
+                    }
                 }
             }
             else if (event.keyboard.keycode == ALLEGRO_KEY_Q)
@@ -124,24 +130,25 @@ int game_process(ALLEGRO_EVENT event)
                 // 按下 ESC 時暫停遊戲
                 GAME_STATUS = MENU_GAME_PAUSE;
             }
-            else if (player.role == ROLE_PANDA) // 角色是貓熊
+            else if (event.keyboard.keycode == ALLEGRO_KEY_E)
             {
-                if (event.keyboard.keycode == ALLEGRO_KEY_E)
+                // 彩蛋觸發
+                if (MSG_ESATER_EGG == false)
                 {
-                    // 彩蛋觸發
                     MSG_ESATER_EGG = true;
                     al_stop_sample_instance(bgm_music_spi);
                     al_stop_sample_instance(menu_hello_spi);
                     al_play_sample_instance(effect_bad_spi);
                 }
-                else if (event.keyboard.keycode == ALLEGRO_KEY_R)
+                else if (MSG_ESATER_EGG == true)
                 {
-                    // 彩蛋關閉
                     MSG_ESATER_EGG = false;
+                    al_stop_sample_instance(effect_bad_spi);
+                    al_play_sample_instance(bgm_music_spi);
                 }
             }
         }
-        if (event.type == ALLEGRO_EVENT_KEY_CHAR)
+        else if (event.type == ALLEGRO_EVENT_KEY_CHAR)
         {
             switch (event.keyboard.unichar)
             {
@@ -190,7 +197,54 @@ void game_draw()
     if (MSG_ESATER_EGG == true)
     {
         // 繪製彩蛋
-        al_draw_bitmap(algif_get_bitmap(easter_egg, al_get_time()), 0, 0, 0);
+        printf("Easter Egg\n");
+        if (player.role == ROLE_KIWI)
+        {
+            al_draw_bitmap(algif_get_bitmap(easter_egg_kiwi, al_get_time()), 0, 0, 0);
+        }
+        else if (player.role == ROLE_PANDA)
+        {
+            al_draw_bitmap(algif_get_bitmap(easter_egg_panda, al_get_time()), 0, 0, 0);
+        }
+        else if (player.role == ROLE_OTTER)
+        {
+            al_draw_bitmap(algif_get_bitmap(easter_egg_otter, al_get_time()), 0, 0, 0);
+        }
+    }
+    else if (MSG_EVENT_ANIMATION == true)
+    {
+        // 繪製動畫
+        printf("Event Animation\n");
+        if (player.good_bad == 0)
+        {
+            if (player.role == ROLE_KIWI)
+            {
+                al_draw_bitmap(algif_get_bitmap(role_good_kiwi, al_get_time()), 0, 0, 0);
+            }
+            else if (player.role == ROLE_PANDA)
+            {
+                al_draw_bitmap(algif_get_bitmap(role_good_panda, al_get_time()), 0, 0, 0);
+            }
+            else if (player.role == ROLE_OTTER)
+            {
+                al_draw_bitmap(algif_get_bitmap(role_good_otter, al_get_time()), 0, 0, 0);
+            }
+        }
+        else if (player.good_bad == 1)
+        {
+            if (player.role == ROLE_KIWI)
+            {
+                al_draw_bitmap(algif_get_bitmap(role_bad_kiwi, al_get_time()), 0, 0, 0);
+            }
+            else if (player.role == ROLE_PANDA)
+            {
+                al_draw_bitmap(algif_get_bitmap(role_bad_panda, al_get_time()), 0, 0, 0);
+            }
+            else if (player.role == ROLE_OTTER)
+            {
+                al_draw_bitmap(algif_get_bitmap(role_bad_otter, al_get_time()), 0, 0, 0);
+            }
+        }
     }
     else if (GAME_STATUS == MENU_GAME_ROLE_SELECT)
     {
@@ -263,23 +317,26 @@ void event_process()
     printf("Next event\n");
     game_event = getEvent();
     new_event = al_load_bitmap(game_event.image_path);
-    GAME_MSG = MSG_GAME_NEW_EVENT;
 
     // 錢要變化了
     if (strcmp(game_event.moneyOperator, "+") == 0)
     {
+        player.good_bad = 0;
         player.money += game_event.moneyChange;
     }
     else if (strcmp(game_event.moneyOperator, "-") == 0)
     {
+        player.good_bad = 1;
         player.money -= game_event.moneyChange;
     }
     else if (strcmp(game_event.moneyOperator, "*") == 0)
     {
+        player.good_bad = 0;
         player.money *= game_event.moneyChange;
     }
     else if (strcmp(game_event.moneyOperator, "/") == 0)
     {
+        player.good_bad = 1;
         player.money /= game_event.moneyChange;
     }
 

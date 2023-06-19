@@ -55,6 +55,17 @@ ALLEGRO_BITMAP *role_panda;
 ALLEGRO_BITMAP *role_kiwi;
 ALLEGRO_BITMAP *role_otter;
 
+// role animation
+ALGIF_ANIMATION *easter_egg_kiwi;
+ALGIF_ANIMATION *easter_egg_panda;
+ALGIF_ANIMATION *easter_egg_otter;
+ALGIF_ANIMATION *role_good_panda;
+ALGIF_ANIMATION *role_good_kiwi;
+ALGIF_ANIMATION *role_good_otter;
+ALGIF_ANIMATION *role_bad_panda;
+ALGIF_ANIMATION *role_bad_kiwi;
+ALGIF_ANIMATION *role_bad_otter;
+
 // dice
 ALLEGRO_BITMAP *dice1;
 ALLEGRO_BITMAP *dice2;
@@ -183,7 +194,8 @@ void load_resource()
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");
     role_otter = al_load_bitmap("./assets/image/role/simple/otter.png");
-    // dice
+    //  dice
+    printf("Loading Dice...\n");
     dice1 = al_load_bitmap("./assets/image/dice/1.png");
     dice2 = al_load_bitmap("./assets/image/dice/2.png");
     dice3 = al_load_bitmap("./assets/image/dice/3.png");
@@ -225,6 +237,29 @@ void load_resource()
     load_sound("./assets/sound/menu_hello.mp3", &menu_hello_sp, &menu_hello_spi, ALLEGRO_PLAYMODE_ONCE);
     load_sound("./assets/sound/menu_story_open.mp3", &menu_story_open_sp, &menu_story_open_spi, ALLEGRO_PLAYMODE_ONCE);
     // ...其他 load_sound()
+}
+
+void load_animation()
+{
+    // Role Animation
+    printf("Loading Role Animation (1/9)...\n");
+    easter_egg_kiwi = algif_load_animation("./assets/image/role/eggs/kiwi.gif");
+    printf("Loading Role Animation (2/9)...\n");
+    easter_egg_panda = algif_load_animation("./assets/image/role/eggs/panda.gif");
+    printf("Loading Role Animation (3/9)...\n");
+    easter_egg_otter = algif_load_animation("./assets/image/role/eggs/otter.gif");
+    printf("Loading Role Animation (4/9)...\n");
+    role_good_panda = algif_load_animation("./assets/image/role/good/panda.gif");
+    printf("Loading Role Animation (5/9)...\n");
+    role_good_kiwi = algif_load_animation("./assets/image/role/good/kiwi.gif");
+    printf("Loading Role Animation (6/9)...\n");
+    role_good_otter = algif_load_animation("./assets/image/role/good/otter.gif");
+    printf("Loading Role Animation (7/9)...\n");
+    role_bad_panda = algif_load_animation("./assets/image/role/bad/panda.gif");
+    printf("Loading Role Animation (8/9)...\n");
+    role_bad_kiwi = algif_load_animation("./assets/image/role/bad/kiwi.gif");
+    printf("Loading Role Animation (9/9)...\n");
+    role_bad_otter = algif_load_animation("./assets/image/role/bad/otter.gif");
 }
 
 void destroy_resource()

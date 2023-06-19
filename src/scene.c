@@ -230,8 +230,13 @@ void start_animation()
     // al_draw_bitmap(algif_get_bitmap(hello_start, 1), 0, 0, 0);
     al_draw_bitmap(hello_cover, 0, 0, 0);
     al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, ALLEGRO_ALIGN_CENTER,
-                 "Press enter to start");
+                 "Loading...");
+    al_flip_display();
     al_play_sample_instance(bgm_music_spi);
+    load_animation();
+    al_draw_bitmap(hello_cover, 0, 0, 0);
+    al_draw_text(bit_font, al_map_rgb(255, 255, 255), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, ALLEGRO_ALIGN_CENTER,
+                 "Press enter to start");
     al_flip_display();
     // 等待用戶輸入
     ALLEGRO_EVENT event;
