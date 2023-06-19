@@ -48,12 +48,21 @@ ALLEGRO_BITMAP *teams;
 
 // Credits
 ALLEGRO_BITMAP *credits_all;
-ALGIF_ANIMATION *easter_egg;
+//ALGIF_ANIMATION *easter_egg;
 
 // role
 ALLEGRO_BITMAP *role_panda;
 ALLEGRO_BITMAP *role_kiwi;
 ALLEGRO_BITMAP *role_otter;
+ALGIF_ANIMATION *easter_egg_kiwi;
+ALGIF_ANIMATION *easter_egg_panda;
+ALGIF_ANIMATION *easter_egg_otter;
+ALGIF_ANIMATION *role_good_panda;
+ALGIF_ANIMATION *role_good_kiwi;
+ALGIF_ANIMATION *role_good_otter;
+ALGIF_ANIMATION *role_bad_panda;
+ALGIF_ANIMATION *role_bad_kiwi;
+ALGIF_ANIMATION *role_bad_otter;
 
 // dice
 ALLEGRO_BITMAP *dice1;
@@ -142,12 +151,15 @@ void load_resource()
 {
     // Hello
     sample_hello = al_load_sample("./assets/sound/menu_hello.mp3");
+    hello_start = algif_load_animation("./assets/image/hello/hello_start.gif");
+
     // Start Menu
     start_menu_all = al_load_bitmap("./assets/image/start_menu/all.png");
     start_menu_start = al_load_bitmap("./assets/image/start_menu/start.png");
     start_menu_story = al_load_bitmap("./assets/image/start_menu/story.png"); // Game basic Interface
     start_menu_about = al_load_bitmap("./assets/image/start_menu/about.png");
     start_menu_exit = al_load_bitmap("./assets/image/start_menu/exit.png");
+
     // Role Select Menu
     role_menu_all = al_load_bitmap("./assets/image/role_select/all_detailed.png");
     role_menu_panda = al_load_bitmap("./assets/image/role_select/1_panda.png");
@@ -174,15 +186,27 @@ void load_resource()
     about_2 = al_load_bitmap("./assets/image/start_menu/about/2.png");
     about_3 = al_load_bitmap("./assets/image/start_menu/about/3.png");
     teams = al_load_bitmap("./assets/image/start_menu/teams.png");
+
     // Games
     credits_all = al_load_bitmap("./assets/image/credits/credits_all.png");
-    easter_egg = algif_load_animation("./assets/image/egg.gif");
+
     // Test
     test_gif = algif_load_animation("./assets/image/test.gif");
+
     // Role
     role_panda = al_load_bitmap("./assets/image/role/simple/panda.png");
     role_kiwi = al_load_bitmap("./assets/image/role/simple/kiwi.png");
     role_otter = al_load_bitmap("./assets/image/role/simple/otter.png");
+    easter_egg_kiwi = algif_load_animation("./assets/image/role/eggs/kiwi.gif");
+    easter_egg_panda = algif_load_animation("./assets/image/role/eggs/panda.gif");
+    easter_egg_otter = algif_load_animation("./assets/image/role/eggs/otter.gif");
+    role_good_panda = algif_load_animation("./assets/image/role/good/panda.gif");
+    role_good_kiwi = algif_load_animation("./assets/image/role/good/kiwi.gif");
+    role_good_otter = algif_load_animation("./assets/image/role/good/otter.gif");
+    role_bad_panda = algif_load_animation("./assets/image/role/bad/panda.gif");
+    role_bad_kiwi = algif_load_animation("./assets/image/role/bad/kiwi.gif");
+    role_gbad_otter = algif_load_animation("./assets/image/role/bad/otter.gif");
+
     // dice
     dice1 = al_load_bitmap("./assets/image/dice/1.png");
     dice2 = al_load_bitmap("./assets/image/dice/2.png");
@@ -191,6 +215,7 @@ void load_resource()
     dice5 = al_load_bitmap("./assets/image/dice/5.png");
     dice6 = al_load_bitmap("./assets/image/dice/6.png");
     dice_rolling = algif_load_animation("./assets/image/dice/rolling.gif");
+
     // ending
     ending_1_1 = al_load_bitmap("./assets/image/ending/level1_1.png");
     ending_1_2 = al_load_bitmap("./assets/image/ending/level1_2.png");
